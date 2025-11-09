@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreeUniTools - Herramientas Gratis Online</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <!-- Logo -->
+            <div class="logo-container">
+                <img src="logo.png" alt="FreeUniTools Logo" class="logo" id="logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <div class="logo-placeholder" style="display: none; font-size: 1.5rem; font-weight: 700; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">FreeUniTools</div>
+            </div>
+
+            <!-- Categorías -->
+            <div class="nav-categories">
+                <a href="#image-tools" class="nav-link" data-category="image">Image Tools</a>
+                <a href="#text-tools" class="nav-link" data-category="text">Text Tools</a>
+                <a href="#number-tools" class="nav-link" data-category="number">Number Tools</a>
+            </div>
+
+            <!-- Controles -->
+            <div class="nav-controls">
+                <button class="control-btn" id="language-btn" aria-label="Cambiar idioma">
+                    <span class="btn-icon">🌐</span>
+                    <span class="btn-text">ES</span>
+                </button>
+                <button class="control-btn" id="theme-btn" aria-label="Cambiar tema">
+                    <span class="btn-icon">🌙</span>
+                    <span class="btn-text">Dark</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <main class="main-content">
+        <section class="hero-section">
+            <h1 class="hero-title" data-i18n="hero-title">Herramientas Gratis Online</h1>
+            <p class="hero-subtitle" data-i18n="hero-subtitle">Convierte, edita y transforma tus archivos con nuestras herramientas gratuitas</p>
+        </section>
+
+        <!-- Sección de herramientas -->
+        <section class="tools-section" id="image-tools">
+            <h2 class="section-title" data-i18n="image-tools-title">Image Tools</h2>
+            <div class="tools-grid">
+                <!-- Las herramientas se agregarán aquí -->
+            </div>
+        </section>
+
+        <section class="tools-section" id="text-tools">
+            <h2 class="section-title" data-i18n="text-tools-title">Text Tools</h2>
+            <div class="tools-grid">
+                <!-- Las herramientas se agregarán aquí -->
+            </div>
+        </section>
+
+        <section class="tools-section" id="number-tools">
+            <h2 class="section-title" data-i18n="number-tools-title">Number Tools</h2>
+            <div class="tools-grid">
+                <!-- Las herramientas se agregarán aquí -->
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
