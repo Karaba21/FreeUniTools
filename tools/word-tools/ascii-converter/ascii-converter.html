@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASCII Converter - FreeUniTools</title>
+    <link rel="stylesheet" href="../../../styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/figlet@1.7.0/lib/figlet.js"></script>
+    <style>
+        /* Estilos específicos para la herramienta */
+        .tool-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .tool-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .tool-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tool-description {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Tabs */
+        .tabs-container {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .tab-button {
+            padding: 0.875rem 1.5rem;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+            position: relative;
+        }
+
+        .tab-button:hover {
+            color: var(--accent-primary);
+        }
+
+        .tab-button.active {
+            color: var(--accent-primary);
+            border-bottom-color: var(--accent-primary);
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .converter-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .converter-box {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .converter-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .converter-input {
+            width: 100%;
+            min-height: 200px;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-family: 'Courier New', monospace;
+            resize: vertical;
+            transition: all 0.3s ease;
+        }
+
+        .converter-input:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+        }
+
+        .converter-input::placeholder {
+            color: var(--text-secondary);
+            opacity: 0.5;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--accent-gradient);
+            color: white;
+            border: none;
+            padding: 0.875rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn-secondary {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            padding: 0.875rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+        }
+
+        /* ASCII Art Section */
+        .ascii-art-section {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ascii-art-controls {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .control-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .control-input {
+            padding: 0.75rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .control-input:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+        }
+
+        .ascii-art-output {
+            width: 100%;
+            min-height: 300px;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Courier New', 'Courier', 'Lucida Console', 'Monaco', 'Consolas', monospace;
+            font-size: 0.875rem;
+            line-height: 1.2;
+            white-space: pre;
+            overflow-x: auto;
+            overflow-y: auto;
+            max-height: 600px;
+            letter-spacing: 0;
+            word-spacing: 0;
+            tab-size: 8;
+            -moz-tab-size: 8;
+            margin: 0;
+            font-variant-ligatures: none;
+            font-feature-settings: normal;
+            text-rendering: optimizeSpeed;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .converter-section {
+                grid-template-columns: 1fr;
+            }
+
+            .ascii-art-controls {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .tool-container {
+                padding: 1rem;
+            }
+
+            .tool-title {
+                font-size: 2rem;
+            }
+
+            .tab-content {
+                padding: 1.5rem;
+            }
+
+            .tabs-container {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .tab-button {
+                white-space: nowrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <!-- Logo -->
+            <div class="logo-container">
+                <a href="../../../index.html" style="text-decoration: none; display: flex; align-items: center;">
+                    <img src="../../../logo.png" alt="FreeUniTools Logo" class="logo" id="logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="logo-placeholder" style="display: none; font-size: 1.5rem; font-weight: 700; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">FreeUniTools</div>
+                </a>
+            </div>
+
+            <!-- Categorías -->
+            <div class="nav-categories">
+                <!-- Image Tools Dropdown -->
+                <div class="dropdown-container">
+                    <a href="../../../index.html#image-tools" class="nav-link" data-category="image">
+                        Image Tools
+                        <span class="dropdown-arrow">▼</span>
+                    </a>
+                    <div class="dropdown-menu" data-dropdown="image">
+                        <a href="../../image-tools/image-compressor/image-compressor.html" class="dropdown-item">Image Compressor</a>
+                        <a href="../../image-tools/image-converter/image-converter.html" class="dropdown-item">Image Converter</a>
+                        <a href="../../image-tools/image-scaling/image-scaling.html" class="dropdown-item">Image Scaling</a>
+                        <a href="../../image-tools/metadata-finder/metadata-finder.html" class="dropdown-item">EXIF Metadata Detector</a>
+                        <a href="../../image-tools/favicon-generator/favicon-generator.html" class="dropdown-item">Favicon Generator</a>
+                    </div>
+                </div>
+
+                <!-- Text Tools Dropdown -->
+                <div class="dropdown-container">
+                    <a href="../../../index.html#text-tools" class="nav-link" data-category="text">
+                        Text Tools
+                        <span class="dropdown-arrow">▼</span>
+                    </a>
+                    <div class="dropdown-menu" data-dropdown="text">
+                        <a href="../word-tools.html" class="dropdown-item">Word Counter</a>
+                        <a href="ascii-converter.html" class="dropdown-item">ASCII</a>
+                    </div>
+                </div>
+
+                <!-- Number Tools Dropdown -->
+                <div class="dropdown-container">
+                    <a href="../../../index.html#number-tools" class="nav-link" data-category="number">
+                        Number Tools
+                        <span class="dropdown-arrow">▼</span>
+                    </a>
+                    <div class="dropdown-menu" data-dropdown="number">
+                        <a href="../../number-tools/bmi-calculator/bmi-calculator.html" class="dropdown-item">BMI Calculator</a>
+                        <a href="../../number-tools/date-calculator/date-calculator.html" class="dropdown-item">Date Calculator</a>
+                        <a href="../../number-tools/interest-calculator/interest-calculator.html" class="dropdown-item">Interests Calculator</a>
+                    </div>
+                </div>
+
+                <a href="../../qr-tools/qr-tools.html" class="nav-link" data-category="qr-generator">
+                    QR Generator
+                </a>
+            </div>
+
+            <!-- Controles -->
+            <div class="nav-controls">
+                <button class="control-btn" id="language-btn" aria-label="Cambiar idioma">
+                    <span class="btn-icon">🌐</span>
+                    <span class="btn-text">ES</span>
+                </button>
+                <button class="control-btn" id="theme-btn" aria-label="Cambiar tema">
+                    <span class="btn-icon">🌙</span>
+                    <span class="btn-text">Dark</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="tool-container">
+            <div class="tool-header">
+                <h1 class="tool-title">ASCII Converter</h1>
+                <p class="tool-description">Convierte entre texto, códigos ASCII, binario y crea arte ASCII estilo terminal.</p>
+            </div>
+
+            <!-- Tabs -->
+            <div class="tabs-container">
+                <button class="tab-button active" data-tab="ascii-codes">ASCII Codes</button>
+                <button class="tab-button" data-tab="binary">Binary</button>
+                <button class="tab-button" data-tab="ascii-art">ASCII Art</button>
+            </div>
+
+            <!-- ASCII Codes Tab -->
+            <div class="tab-content active" id="ascii-codes-tab">
+                <div class="converter-section">
+                    <div class="converter-box">
+                        <label class="converter-label">Texto → Códigos ASCII</label>
+                        <textarea 
+                            id="text-to-ascii-input" 
+                            class="converter-input" 
+                            placeholder="Escribe tu texto aquí..."
+                        ></textarea>
+                    </div>
+                    <div class="converter-box">
+                        <label class="converter-label">Códigos ASCII → Texto</label>
+                        <textarea 
+                            id="ascii-to-text-input" 
+                            class="converter-input" 
+                            placeholder="Escribe los códigos ASCII separados por espacios (ej: 72 101 108 108 111)..."
+                        ></textarea>
+                    </div>
+                </div>
+                <div class="action-buttons">
+                    <button class="btn-primary" id="convert-text-to-ascii">Convertir Texto → ASCII</button>
+                    <button class="btn-primary" id="convert-ascii-to-text">Convertir ASCII → Texto</button>
+                    <button class="btn-secondary" id="clear-ascii">Limpiar</button>
+                </div>
+            </div>
+
+            <!-- Binary Tab -->
+            <div class="tab-content" id="binary-tab">
+                <div class="converter-section">
+                    <div class="converter-box">
+                        <label class="converter-label">Texto → Binario</label>
+                        <textarea 
+                            id="text-to-binary-input" 
+                            class="converter-input" 
+                            placeholder="Escribe tu texto aquí..."
+                        ></textarea>
+                    </div>
+                    <div class="converter-box">
+                        <label class="converter-label">Binario → Texto</label>
+                        <textarea 
+                            id="binary-to-text-input" 
+                            class="converter-input" 
+                            placeholder="Escribe el binario separado por espacios (ej: 01001000 01100101 01101100 01101100 01101111)..."
+                        ></textarea>
+                    </div>
+                </div>
+                <div class="action-buttons">
+                    <button class="btn-primary" id="convert-text-to-binary">Convertir Texto → Binario</button>
+                    <button class="btn-primary" id="convert-binary-to-text">Convertir Binario → Texto</button>
+                    <button class="btn-secondary" id="clear-binary">Limpiar</button>
+                </div>
+            </div>
+
+            <!-- ASCII Art Tab -->
+            <div class="tab-content" id="ascii-art-tab">
+                <div class="ascii-art-section">
+                    <div class="ascii-art-controls">
+                        <div class="control-group">
+                            <label class="control-label">Texto</label>
+                            <input 
+                                type="text" 
+                                id="ascii-art-text" 
+                                class="control-input" 
+                                placeholder="Escribe el texto para convertir a ASCII art..."
+                                value="Hello"
+                            >
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Fuente</label>
+                            <select id="ascii-art-font" class="control-input">
+                                <option value="Standard">Standard</option>
+                                <option value="3D-ASCII">3D-ASCII</option>
+                                <option value="3x5">3x5</option>
+                                <option value="5lineoblique">5lineoblique</option>
+                                <option value="Banner">Banner</option>
+                                <option value="Big">Big</option>
+                                <option value="Block">Block</option>
+                                <option value="Bubble">Bubble</option>
+                                <option value="Digital">Digital</option>
+                                <option value="Doom">Doom</option>
+                                <option value="Epic">Epic</option>
+                                <option value="Graffiti">Graffiti</option>
+                                <option value="Isometric1">Isometric1</option>
+                                <option value="Larry 3D">Larry 3D</option>
+                                <option value="Slant">Slant</option>
+                                <option value="Small">Small</option>
+                                <option value="Speed">Speed</option>
+                                <option value="Star Wars">Star Wars</option>
+                                <option value="Stop">Stop</option>
+                                <option value="Sub-Zero">Sub-Zero</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn-primary" id="generate-ascii-art">Generar ASCII Art</button>
+                        <button class="btn-secondary" id="copy-ascii-art">Copiar</button>
+                        <button class="btn-secondary" id="clear-ascii-art">Limpiar</button>
+                    </div>
+                    <label class="converter-label" style="margin-top: 1.5rem; margin-bottom: 0.75rem;">Resultado</label>
+                    <div style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+                        💡 Para que se vea correcto al pegar, usa un editor con fuente monospace (VS Code, Notepad, Terminal, etc.)
+                    </div>
+                    <pre id="ascii-art-output" class="ascii-art-output"></pre>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../../../script.js"></script>
+    <script src="ascii-converter.js"></script>
+</body>
+</html>
+

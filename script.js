@@ -1,24 +1,52 @@
 // Configuración de idiomas
 const translations = {
     es: {
-        'hero-title': 'Herramientas Gratis Online',
+        'hero-title': 'Free Uni Tools',
         'hero-subtitle': 'Convierte, edita y transforma tus archivos con nuestras herramientas gratuitas',
-        'image-tools-title': 'Image Tools',
-        'text-tools-title': 'Text Tools',
-        'number-tools-title': 'Number Tools',
+        'image-tools-title': 'Herramientas de Imágenes',
+        'text-tools-title': 'Herramientas de Texto',
+        'number-tools-title': 'Herramientas de Números',
         'language-btn': 'ES',
         'theme-btn-light': 'Claro',
-        'theme-btn-dark': 'Oscuro'
+        'theme-btn-dark': 'Oscuro',
+        'popular-tools-title': 'Herramientas Populares',
+        'stats-title': 'Counting and growing',
+        'tools-label': 'Herramientas Disponibles',
+        'users-label': 'Usuarios Mensuales',
+        'contribute-title': 'Contribuye al Proyecto',
+        'contribute-donate': 'Donar con PayPal',
+        'footer-description': 'Herramientas gratuitas para hacer tu trabajo más fácil.',
+        'footer-tools-title': 'Herramientas',
+        'footer-about-title': 'Acerca de',
+        'footer-contribute': 'Contribuir',
+        'footer-github': 'GitHub',
+        'footer-privacy': 'Privacidad',
+        'footer-terms': 'Términos',
+        'footer-copyright': '© 2025 FreeUniTools. Todos los derechos reservados.',
     },
     en: {
-        'hero-title': 'Free Online Tools',
-        'hero-subtitle': 'Convert, edit and transform your files with our free tools',
+        'hero-title': 'Free Uni Tools',
+        'hero-subtitle': 'FreeUniTools was born with one goal: to make digital tools accessible for everyone — students, freelancers, developers, and creators. No sign-ups. No paywalls. Just knowledge and productivity.',
         'image-tools-title': 'Image Tools',
         'text-tools-title': 'Text Tools',
         'number-tools-title': 'Number Tools',
         'language-btn': 'EN',
         'theme-btn-light': 'Light',
-        'theme-btn-dark': 'Dark'
+        'theme-btn-dark': 'Dark',
+        'popular-tools-title': 'Popular Tools',
+        'stats-title': 'Counting and growing',
+        'tools-label': 'Available Tools',
+        'users-label': 'Monthly Users',
+        'contribute-title': 'Contribute to the Project',
+        'contribute-description': 'Do you have an idea for a new tool or want to improve existing ones? Join our community and help make FreeUniTools even better!',
+        'contribute-donate': 'Donate with PayPal',
+        'footer-description': 'Free and open source tools to make your work easier.',
+        'footer-tools-title': 'Tools',
+        'footer-about-title': 'About',
+        'footer-contribute': 'Contribute',
+        'footer-privacy': 'Privacy',
+        'footer-terms': 'Terms',
+        'footer-copyright': '© 2025 FreeUniTools. All rights reserved.',
     }
 };
 
@@ -43,6 +71,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Aplicar idioma inicial
     applyLanguage();
+    
+    // Inicializar contadores
+    initCounters();
 });
 
 // Cargar preferencias del localStorage
@@ -269,4 +300,73 @@ document.querySelectorAll('.nav-link').forEach(link => {
         }
     });
 });
+
+// Función para animar contadores
+function animateCounter(element, target, duration = 2000) {
+    const start = 0;
+    const increment = target / (duration / 16); // 60fps
+    let current = start;
+    
+    const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+            current = target;
+            clearInterval(timer);
+        }
+        
+        // Formatear número con separadores de miles
+        const formatted = Math.floor(current).toLocaleString('es-ES');
+        element.textContent = formatted;
+    }, 16);
+}
+
+// Inicializar contadores
+function initCounters() {
+    const toolsCountElement = document.getElementById('tools-count');
+    const usersCountElement = document.getElementById('users-count');
+    
+    if (!toolsCountElement || !usersCountElement) {
+        return;
+    }
+    
+    // Contar herramientas disponibles
+    // Image Tools: 5 herramientas
+    // Text Tools: 2 herramientas
+    // Number Tools: 3 herramientas
+    // QR Generator: 1 herramienta
+    const totalTools = 11;
+    
+    // Número ficticio de usuarios mensuales
+    const monthlyUsers = 12500;
+    
+    // Usar Intersection Observer para animar cuando la sección sea visible
+    const observerOptions = {
+        threshold: 0.5,
+        rootMargin: '0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Animar contador de herramientas
+                if (toolsCountElement.textContent === '0') {
+                    animateCounter(toolsCountElement, totalTools, 1500);
+                }
+                
+                // Animar contador de usuarios
+                if (usersCountElement.textContent === '0') {
+                    animateCounter(usersCountElement, monthlyUsers, 2000);
+                }
+                
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+    
+    // Observar la sección de estadísticas
+    const statsSection = document.querySelector('.stats-section-wrapper');
+    if (statsSection) {
+        observer.observe(statsSection);
+    }
+}
 

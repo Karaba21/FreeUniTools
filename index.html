@@ -40,9 +40,8 @@
                         <span class="dropdown-arrow">▼</span>
                     </a>
                     <div class="dropdown-menu" data-dropdown="text">
-                        <a href="#word-counter" class="dropdown-item">Word Counter</a>
-                        <a href="#capital-detection" class="dropdown-item">Capital Detection</a>
-                        <a href="#ascii" class="dropdown-item">ASCII</a>
+                        <a href="./tools/word-tools/word-tools.html" class="dropdown-item">Word Counter</a>
+                        <a href="./tools/word-tools/ascii-converter/ascii-converter.html" class="dropdown-item">ASCII</a>
                     </div>
                 </div>
 
@@ -64,9 +63,6 @@
                 </a>
             </div>
 
-            
-
-
             <!-- Controles -->
             <div class="nav-controls">
                 <button class="control-btn" id="language-btn" aria-label="Cambiar idioma">
@@ -84,32 +80,112 @@
     <!-- Hero Section -->
     <main class="main-content">
         <section class="hero-section">
-            <h1 class="hero-title" data-i18n="hero-title">Herramientas Gratis Online</h1>
-            <p class="hero-subtitle" data-i18n="hero-subtitle">Convierte, edita y transforma tus archivos con nuestras herramientas gratuitas</p>
-        </section>
+            <h1 class="hero-title" data-i18n="hero-title">Free Uni Tools</h1>
+            <p class="hero-subtitle" data-i18n="hero-subtitle">FreeUniTools was born with one goal: to make digital tools accessible for everyone — students, freelancers, developers, and creators.
+                No sign-ups. No paywalls. Just knowledge and productivity.</p>
+            
+            <!-- Popular Tools Section -->
+            <div class="popular-tools-section">
+                <h2 class="section-title-small" data-i18n="popular-tools-title">Herramientas Populares</h2>
+                <div class="popular-tools-grid">
+                    <a href="./tools/qr-tools/qr-tools.html" class="popular-tool-card">
+                        <div class="tool-icon">📱</div>
+                        <h3 class="tool-name">QR Generator</h3>
+                        <p class="tool-description">Genera códigos QR personalizados</p>
+                    </a>
+                    <a href="./tools/image-tools/image-converter/image-converter.html" class="popular-tool-card">
+                        <div class="tool-icon">🔄</div>
+                        <h3 class="tool-name">Image Converter</h3>
+                        <p class="tool-description">Convierte imágenes entre formatos</p>
+                    </a>
+                    <a href="./tools/word-tools/word-tools.html" class="popular-tool-card">
+                        <div class="tool-icon">📝</div>
+                        <h3 class="tool-name">Word Counter</h3>
+                        <p class="tool-description">Cuenta palabras y caracteres</p>
+                    </a>
+                </div>
+            </div>
 
-        <!-- Sección de herramientas -->
-        <section class="tools-section" id="image-tools">
-            <h2 class="section-title" data-i18n="image-tools-title">Image Tools</h2>
-            <div class="tools-grid">
-                <!-- Las herramientas se agregarán aquí -->
+            <!-- Stats Section -->
+            <div class="stats-section-wrapper">
+                <h2 class="section-title-small" data-i18n="stats-title">Counting and growing</h2>
+                <div class="stats-section">
+                    <div class="stat-card">
+                        <div class="stat-icon">🛠️</div>
+                        <div class="stat-number" id="tools-count">0</div>
+                        <div class="stat-label" data-i18n="tools-label">Herramientas Disponibles</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-number" id="users-count">0</div>
+                        <div class="stat-label" data-i18n="users-label">Usuarios Mensuales</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contribute Section -->
+            <div id="contribute" class="contribute-section">
+                <h2 class="section-title-small" data-i18n="contribute-title">Contribuye al Proyecto</h2>
+                <p class="contribute-description" data-i18n="contribute-description">
+                    Free Uni Tools es completamente gratuito y open source. Sentite libre de contribuir, con el 
+                    fin de hacer de este proyecto mejor.
+                </p>
+                <div class="contribute-buttons">
+                    <a href="https://www.paypal.com/donate" class="contribute-btn" target="_blank" rel="noopener noreferrer">
+                        <span class="btn-icon">💳</span>
+                        <span data-i18n="contribute-donate">Donar con PayPal</span>
+                    </a>
+                </div>
             </div>
         </section>
 
-        <section class="tools-section" id="text-tools">
-            <h2 class="section-title" data-i18n="text-tools-title">Text Tools</h2>
-            <div class="tools-grid">
-                <!-- Las herramientas se agregarán aquí -->
-            </div>
-        </section>
-
-        <section class="tools-section" id="number-tools">
-            <h2 class="section-title" data-i18n="number-tools-title">Number Tools</h2>
-            <div class="tools-grid">
-                <!-- Las herramientas se agregarán aquí -->
-            </div>
-        </section>
+        
     </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <!-- Brand Section -->
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <div class="logo-text">FreeUniTools</div>
+                    </div>
+                    <p class="footer-description" data-i18n="footer-description">
+                        Herramientas gratuitas para hacer tu trabajo más fácil.
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="footer-links">
+                    <h3 class="footer-title" data-i18n="footer-tools-title">Herramientas</h3>
+                    <ul class="footer-list">
+                        <li><a href="./tools/image-tools/image-compressor/image-compressor.html" class="footer-link">Image Compressor</a></li>
+                        <li><a href="./tools/qr-tools/qr-tools.html" class="footer-link">QR Generator</a></li>
+                        <li><a href="./tools/word-tools/word-tools.html" class="footer-link">Word Counter</a></li>
+                        <li><a href="./tools/image-tools/image-converter/image-converter.html" class="footer-link">Image Converter</a></li>
+                    </ul>
+                </div>
+
+                <!-- About Section -->
+                <div class="footer-about">
+                    <h3 class="footer-title" data-i18n="footer-about-title">Acerca de</h3>
+                    <ul class="footer-list">
+                        <li><a href="#contribute" class="footer-link" data-i18n="footer-contribute">Contribuir</a></li>
+                        <li><a href="#" class="footer-link" data-i18n="footer-privacy">Privacidad</a></li>
+                        <li><a href="#" class="footer-link" data-i18n="footer-terms">Términos</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <p class="footer-copyright" data-i18n="footer-copyright">
+                    © 2025 FreeUniTools. Todos los derechos reservados.
+                </p>
+            </div>
+        </div>
+    </footer>
 
     <script src="script.js"></script>
 </body>
