@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Generator - FreeUniTools</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <style>
+        /* Estilos específicos para la herramienta */
+        .tool-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .tool-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .tool-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tool-description {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .input-section {
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 0.875rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+        }
+
+        textarea.input-field {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .customization-section {
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+        }
+
+        .control-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .control-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .control-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .slider-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .slider {
+            flex: 1;
+            height: 8px;
+            border-radius: 4px;
+            background: var(--border-color);
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            cursor: pointer;
+        }
+
+        .slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            cursor: pointer;
+            border: none;
+        }
+
+        .slider-value {
+            min-width: 60px;
+            text-align: right;
+            font-weight: 600;
+            color: var(--accent-primary);
+        }
+
+        .color-input-container {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .color-input {
+            width: 60px;
+            height: 40px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            background: var(--bg-primary);
+        }
+
+        .color-input::-webkit-color-swatch-wrapper {
+            padding: 0;
+        }
+
+        .color-input::-webkit-color-swatch {
+            border: none;
+            border-radius: 7px;
+        }
+
+        .quality-select {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quality-select:hover {
+            border-color: var(--accent-primary);
+        }
+
+        .quality-select:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+        }
+
+        .btn-primary {
+            background: var(--accent-gradient);
+            color: white;
+            border: none;
+            padding: 0.875rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .preview-section {
+            display: none;
+            margin-top: 2rem;
+        }
+
+        .preview-section.active {
+            display: block;
+        }
+
+        .preview-card {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .preview-card-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .qr-code-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 12px;
+            margin: 0 auto;
+            max-width: 500px;
+            min-height: 300px;
+        }
+
+        .qr-code-container canvas {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-secondary {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            padding: 0.875rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-primary);
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+        }
+
+        .quick-actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+
+        .quick-action-btn {
+            padding: 0.5rem 1rem;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 0.875rem;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quick-action-btn:hover {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+        }
+
+        @media (max-width: 768px) {
+            .tool-container {
+                padding: 1rem;
+            }
+
+            .tool-title {
+                font-size: 2rem;
+            }
+
+            .input-section,
+            .customization-section {
+                padding: 1.5rem;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+            }
+
+            .color-input-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <!-- Logo -->
+            <div class="logo-container">
+                <a href="../../index.html" style="text-decoration: none; display: flex; align-items: center;">
+                    <img src="../../logo.png" alt="FreeUniTools Logo" class="logo" id="logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="logo-placeholder" style="display: none; font-size: 1.5rem; font-weight: 700; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">FreeUniTools</div>
+                </a>
+            </div>
+
+            <!-- Categorías -->
+            <div class="nav-categories">
+                <!-- Image Tools Dropdown -->
+                <div class="dropdown-container">
+                    <a href="../../index.html#image-tools" class="nav-link" data-category="image">
+                        Image Tools
+                        <span class="dropdown-arrow">▼</span>
+                    </a>
+                    <div class="dropdown-menu" data-dropdown="image">
+                        <a href="../image-tools/image-compressor/image-compressor.html" class="dropdown-item">Image Compressor</a>
+                        <a href="../image-tools/image-converter/image-converter.html" class="dropdown-item">Image Converter</a>
+                        <a href="../image-tools/image-scaling/image-scaling.html" class="dropdown-item">Image Scaling</a>
+                        <a href="../image-tools/metadata-finder/metadata-finder.html" class="dropdown-item">EXIF Metadata Detector</a>
+                    </div>
+                </div>
+
+                <!-- Text Tools Dropdown -->
+                <div class="dropdown-container">
+                    <a href="../../index.html#text-tools" class="nav-link" data-category="text">
+                        Text Tools
+                        <span class="dropdown-arrow">▼</span>
+                    </a>
+                    <div class="dropdown-menu" data-dropdown="text">
+                        <a href="../../index.html#word-counter" class="dropdown-item">Word Counter</a>
+                        <a href="../../index.html#capital-detection" class="dropdown-item">Capital Detection</a>
+                        <a href="../../index.html#ascii" class="dropdown-item">ASCII</a>
+                    </div>
+                </div>
+
+                <!-- Number Tools Dropdown -->
+                <div class="dropdown-container">
+                    <a href="../../index.html#number-tools" class="nav-link" data-category="number">
+                        Number Tools
+                        <span class="dropdown-arrow">▼</span>
+                    </a>
+                    <div class="dropdown-menu" data-dropdown="number">
+                        <a href="../number-tools/bmi-calculator/bmi-calculator.html" class="dropdown-item">BMI Calculator</a>
+                        <a href="../number-tools/date-calculator/date-calculator.html" class="dropdown-item">Date Calculator</a>
+                        <a href="../number-tools/interest-calculator/interest-calculator.html" class="dropdown-item">Interests Calculator</a>
+                    </div>
+                </div>
+
+                <a href="./qr-tools.html" class="nav-link" data-category="qr-generator">
+                    QR Generator
+                </a>
+            </div>
+
+            <!-- Controles -->
+            <div class="nav-controls">
+                <button class="control-btn" id="language-btn" aria-label="Change language">
+                    <span class="btn-icon">🌐</span>
+                    <span class="btn-text">EN</span>
+                </button>
+                <button class="control-btn" id="theme-btn" aria-label="Change theme">
+                    <span class="btn-icon">🌙</span>
+                    <span class="btn-text">Dark</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="tool-container">
+            <div class="tool-header">
+                <h1 class="tool-title">QR Generator</h1>
+                <p class="tool-description">Generate custom QR codes for URLs, text, phone numbers, emails, and more. Download as PNG or SVG.</p>
+            </div>
+
+            <!-- Input Section -->
+            <div class="input-section">
+                <div class="input-group">
+                    <label class="input-label">QR Code Content</label>
+                    <textarea 
+                        id="qr-content" 
+                        class="input-field" 
+                        placeholder="Enter the text, URL, email, phone number, etc. that you want to convert into a QR code..."
+                    ></textarea>
+                    <div class="quick-actions">
+                        <button class="quick-action-btn" data-action="url">URL</button>
+                        <button class="quick-action-btn" data-action="email">Email</button>
+                        <button class="quick-action-btn" data-action="phone">Phone</button>
+                        <button class="quick-action-btn" data-action="wifi">WiFi</button>
+                        <button class="quick-action-btn" data-action="sms">SMS</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Customization Section -->
+            <div class="customization-section">
+                <div class="control-group">
+                    <label class="control-label">Code Size</label>
+                    <div class="slider-container">
+                        <input type="range" id="size-slider" class="slider" min="200" max="1000" step="50" value="400">
+                        <span class="slider-value" id="size-value">400px</span>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">Error Correction Level</label>
+                    <select id="error-level-select" class="quality-select">
+                        <option value="L">Low (L) - ~7%</option>
+                        <option value="M" selected>Medium (M) - ~15%</option>
+                        <option value="Q">High (Q) - ~25%</option>
+                        <option value="H">Very High (H) - ~30%</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">Code Color</label>
+                    <div class="color-input-container">
+                        <input type="color" id="foreground-color" class="color-input" value="#000000">
+                        <span style="color: var(--text-primary);">QR Code Color</span>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">Background Color</label>
+                    <div class="color-input-container">
+                        <input type="color" id="background-color" class="color-input" value="#ffffff">
+                        <span style="color: var(--text-primary);">Background Color</span>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">Margin</label>
+                    <div class="slider-container">
+                        <input type="range" id="margin-slider" class="slider" min="0" max="4" step="1" value="4">
+                        <span class="slider-value" id="margin-value">4</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Generate Button -->
+            <button class="btn-primary" id="generate-btn">Generate QR Code</button>
+
+            <!-- Preview Section -->
+            <div class="preview-section" id="preview-section">
+                <div class="preview-card">
+                    <div class="preview-card-title">Your QR Code</div>
+                    <div class="qr-code-container" id="qr-code-container">
+                        <canvas id="qr-code-canvas"></canvas>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button class="btn-primary" id="download-png-btn">Download PNG</button>
+                    <button class="btn-secondary" id="download-svg-btn">Download SVG</button>
+                    <button class="btn-secondary" id="reset-btn">Generate New</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+    <script src="../../script.js"></script>
+    <script src="qr-tools.js"></script>
+</body>
+</html>
+

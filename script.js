@@ -239,6 +239,26 @@ document.querySelectorAll('.nav-link').forEach(link => {
         // Solo si no está dentro de un dropdown-container
         if (!link.closest('.dropdown-container')) {
             const href = link.getAttribute('href');
+            
+            // Detectar si el enlace apunta a la página actual
+            if (href && !href.startsWith('#')) {
+                try {
+                    const currentPath = window.location.pathname;
+                    const currentFile = currentPath.split('/').pop() || 'index.html';
+                    const hrefResolved = new URL(href, window.location.href);
+                    const hrefPath = hrefResolved.pathname;
+                    const hrefFile = hrefPath.split('/').pop() || 'index.html';
+                    
+                    // Si el enlace apunta a la página actual (mismo archivo), prevenir navegación
+                    if (hrefFile === currentFile || hrefPath === currentPath) {
+                        e.preventDefault();
+                        return;
+                    }
+                } catch (error) {
+                    // Si hay error al parsear la URL, continuar con el comportamiento normal
+                }
+            }
+            
             if (href && href.startsWith('#')) {
                 e.preventDefault();
                 const target = document.querySelector(href);
