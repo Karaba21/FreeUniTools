@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Converter - FreeUniTools</title>
+    <link rel="stylesheet" href="../../../styles.css">
+    <style>
+        /* Estilos específicos para la herramienta */
+        .tool-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .tool-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .tool-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tool-description {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .upload-area {
+            border: 2px dashed var(--border-color);
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            text-align: center;
+            background: var(--bg-secondary);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin-bottom: 2rem;
+        }
+
+        .upload-area:hover {
+            border-color: var(--accent-primary);
+            background: var(--bg-primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .upload-area.dragover {
+            border-color: var(--accent-primary);
+            background: var(--bg-primary);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .upload-text {
+            font-size: 1.125rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .upload-hint {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        #file-input {
+            display: none;
+        }
+
+        .btn-primary {
+            background: var(--accent-gradient);
+            color: white;
+            border: none;
+            padding: 0.875rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .preview-section {
+            display: none;
+            margin-top: 2rem;
+        }
+
+        .preview-section.active {
+            display: block;
+        }
+
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .preview-card {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .preview-card-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .preview-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            max-height: 400px;
+            object-fit: contain;
+        }
+
+        .image-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .info-label {
+            font-weight: 500;
+        }
+
+        .info-value {
+            color: var(--text-primary);
+        }
+
+        .conversion-controls {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+        }
+
+        .control-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .control-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .control-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .slider-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .slider {
+            flex: 1;
+            height: 8px;
+            border-radius: 4px;
+            background: var(--border-color);
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            cursor: pointer;
+        }
+
+        .slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            cursor: pointer;
+            border: none;
+        }
+
+        .slider-value {
+            min-width: 50px;
+            text-align: right;
+            font-weight: 600;
+            color: var(--accent-primary);
+        }
+
+        .format-select {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .format-select:hover {
+            border-color: var(--accent-primary);
+        }
+
+        .format-select:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-secondary {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            padding: 0.875rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-primary);
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--border-color);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .progress-bar.active {
+            display: block;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--accent-gradient);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .format-info {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .format-info-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .format-info-text {
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .tool-container {
+                padding: 1rem;
+            }
+
+            .tool-title {
+                font-size: 2rem;
+            }
+
+            .preview-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <!-- Logo -->
+            <div class="logo-container">
+                <a href="../../../index.html" style="text-decoration: none; display: flex; align-items: center;">
+                    <img src="../../../logo.png" alt="FreeUniTools Logo" class="logo" id="logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="logo-placeholder" style="display: none; font-size: 1.5rem; font-weight: 700; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">FreeUniTools</div>
+                </a>
+            </div>
+
+            <!-- Categorías -->
+            <div class="nav-categories">
+                <!-- Image Tools Dropdown -->
+                <div class="dropdown-container">
+                    <a href="../../../index.html#image-tools" class="nav-link" data-category="image">
+                        Image Tools
+                        <span class="dropdown-arrow">▼</span>
+                    </a>
+                    <div class="dropdown-menu" data-dropdown="image">
+                        <a href="../image-compressor/image-compressor.html" class="dropdown-item">Image Compressor</a>
+                        <a href="image-converter.html" class="dropdown-item">Image Converter</a>
+                        <a href="../image-scaling/image-scaling.html" class="dropdown-item">Image Scaling</a>
+                        <a href="../metadata-finder/metadata-finder.html" class="dropdown-item">EXIF Metadata Detector</a>
+                    </div>
+                </div>
+
+                <!-- Text Tools Dropdown -->
+                <div class="dropdown-container">
+                    <a href="../../../index.html#text-tools" class="nav-link" data-category="text">
+                        Text Tools
+                        <span class="dropdown-arrow">▼</span>
+                    </a>
+                    <div class="dropdown-menu" data-dropdown="text">
+                        <a href="../../../index.html#word-counter" class="dropdown-item">Word Counter</a>
+                        <a href="../../../index.html#capital-detection" class="dropdown-item">Capital Detection</a>
+                        <a href="../../../index.html#ascii" class="dropdown-item">ASCII</a>
+                    </div>
+                </div>
+
+                <!-- Number Tools Dropdown -->
+                <div class="dropdown-container">
+                    <a href="../../../index.html#number-tools" class="nav-link" data-category="number">
+                        Number Tools
+                        <span class="dropdown-arrow">▼</span>
+                    </a>
+                    <div class="dropdown-menu" data-dropdown="number">
+                        <a href="../../number-tools/bmi-calculator/bmi-calculator.html" class="dropdown-item">BMI Calculator</a>
+                        <a href="../../number-tools/date-calculator/date-calculator.html" class="dropdown-item">Date Calculator</a>
+                        <a href="../../number-tools/interest-calculator/interest-calculator.html" class="dropdown-item">Interests Calculator</a>
+                    </div>
+                </div>
+
+                <div class="dropdown-container">
+                    <a href="../../../index.html#qr-generator" class="nav-link" data-category="qr-generator">
+                        QR Generator
+                    </a>
+                </div>
+            </div>
+
+            <!-- Controles -->
+            <div class="nav-controls">
+                <button class="control-btn" id="language-btn" aria-label="Cambiar idioma">
+                    <span class="btn-icon">🌐</span>
+                    <span class="btn-text">ES</span>
+                </button>
+                <button class="control-btn" id="theme-btn" aria-label="Cambiar tema">
+                    <span class="btn-icon">🌙</span>
+                    <span class="btn-text">Dark</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="tool-container">
+            <div class="tool-header">
+                <h1 class="tool-title">Image Converter</h1>
+                <p class="tool-description">Convierte tus imágenes entre diferentes formatos. Soporta JPEG, PNG, WebP y más formatos populares.</p>
+            </div>
+
+            <!-- Upload Area -->
+            <div class="upload-area" id="upload-area">
+                <div class="upload-icon">🔄</div>
+                <div class="upload-text">Arrastra y suelta tu imagen aquí</div>
+                <div class="upload-hint">o haz clic para seleccionar un archivo</div>
+                <input type="file" id="file-input" accept="image/*">
+            </div>
+
+            <!-- Conversion Controls -->
+            <div class="conversion-controls" id="conversion-controls" style="display: none;">
+                <div class="control-group">
+                    <label class="control-label">Formato de salida</label>
+                    <select id="format-select" class="format-select">
+                        <option value="jpeg">JPEG</option>
+                        <option value="png">PNG</option>
+                        <option value="webp">WebP</option>
+                    </select>
+                    <div class="format-info">
+                        <div class="format-info-title" id="format-info-title">Información del formato</div>
+                        <div class="format-info-text" id="format-info-text">Selecciona un formato para ver información</div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Calidad (solo para JPEG y WebP)</label>
+                    <div class="slider-container">
+                        <input type="range" id="quality-slider" class="slider" min="0.1" max="1" step="0.05" value="0.9">
+                        <span class="slider-value" id="quality-value">90%</span>
+                    </div>
+                </div>
+                <div class="progress-bar" id="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+            </div>
+
+            <!-- Preview Section -->
+            <div class="preview-section" id="preview-section">
+                <div class="preview-grid">
+                    <!-- Original Image -->
+                    <div class="preview-card">
+                        <div class="preview-card-title">Imagen Original</div>
+                        <img id="original-image" class="preview-image" alt="Original">
+                        <div class="image-info">
+                            <div class="info-item">
+                                <span class="info-label">Tamaño:</span>
+                                <span class="info-value" id="original-size">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Dimensiones:</span>
+                                <span class="info-value" id="original-dimensions">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Formato:</span>
+                                <span class="info-value" id="original-format">-</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Converted Image -->
+                    <div class="preview-card">
+                        <div class="preview-card-title">Imagen Convertida</div>
+                        <img id="converted-image" class="preview-image" alt="Convertida">
+                        <div class="image-info">
+                            <div class="info-item">
+                                <span class="info-label">Tamaño:</span>
+                                <span class="info-value" id="converted-size">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Dimensiones:</span>
+                                <span class="info-value" id="converted-dimensions">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Formato:</span>
+                                <span class="info-value" id="converted-format">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button class="btn-primary" id="download-btn">Descargar Imagen Convertida</button>
+                    <button class="btn-secondary" id="reset-btn">Nueva Imagen</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../../../script.js"></script>
+    <script src="image-converter.js"></script>
+</body>
+</html>
+
