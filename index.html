@@ -18,10 +18,55 @@
 
             <!-- Categorías -->
             <div class="nav-categories">
-                <a href="#image-tools" class="nav-link" data-category="image">Image Tools</a>
-                <a href="#text-tools" class="nav-link" data-category="text">Text Tools</a>
-                <a href="#number-tools" class="nav-link" data-category="number">Number Tools</a>
+                <!-- Image Tools Dropdown -->
+                <div class="dropdown-container">
+                    <a href="#image-tools" class="nav-link" data-category="image">
+                        Image Tools
+                        <span class="dropdown-arrow">▼</span>
+                    </a>
+                    <div class="dropdown-menu" data-dropdown="image">
+                        <a href="#image-compressor" class="dropdown-item">Image Compressor</a>
+                        <a href="#image-converter" class="dropdown-item">Image Converter</a>
+                        <a href="#image-scaling" class="dropdown-item">Image Scaling</a>
+                        <a href="#exif-detector" class="dropdown-item">EXIF Metadata Detector</a>
+                    </div>
+                </div>
+
+                <!-- Text Tools Dropdown -->
+                <div class="dropdown-container">
+                    <a href="#text-tools" class="nav-link" data-category="text">
+                        Text Tools
+                        <span class="dropdown-arrow">▼</span>
+                    </a>
+                    <div class="dropdown-menu" data-dropdown="text">
+                        <a href="#word-counter" class="dropdown-item">Word Counter</a>
+                        <a href="#capital-detection" class="dropdown-item">Capital Detection</a>
+                        <a href="#ascii" class="dropdown-item">ASCII</a>
+                    </div>
+                </div>
+
+                <!-- Number Tools Dropdown -->
+                <div class="dropdown-container">
+                    <a href="#number-tools" class="nav-link" data-category="number">
+                        Number Tools
+                        <span class="dropdown-arrow">▼</span>
+                    </a>
+                    <div class="dropdown-menu" data-dropdown="number">
+                        <a href="#bmi-calculator" class="dropdown-item">BMI Calculator</a>
+                        <a href="#date-calculator" class="dropdown-item">Date Calculator</a>
+                        <a href="#interests-calculator" class="dropdown-item">Interests Calculator</a>
+                    </div>
+                </div>
+
+                <div class="dropdown-container">
+                    <a href="#qr-generator" class="nav-link" data-category="qr-generator">
+                        QR Generator
+                    </a>
+                </div>
             </div>
+
+            
+
 
             <!-- Controles -->
             <div class="nav-controls">

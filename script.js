@@ -35,6 +35,9 @@ document.addEventListener('DOMContentLoaded', () => {
     setupLanguageButton();
     setupThemeButton();
     
+    // Configurar dropdowns
+    setupDropdowns();
+    
     // Aplicar tema inicial
     applyTheme();
     
@@ -131,15 +134,117 @@ function applyLanguage() {
     }
 }
 
-// Manejar scroll suave para los enlaces del navbar
+// Configurar dropdowns
+function setupDropdowns() {
+    const dropdownContainers = document.querySelectorAll('.dropdown-container');
+    
+    dropdownContainers.forEach(container => {
+        const navLink = container.querySelector('.nav-link');
+        const dropdownMenu = container.querySelector('.dropdown-menu');
+        
+        // Mantener el dropdown abierto cuando el mouse está sobre el menú (solo desktop)
+        if (dropdownMenu) {
+            dropdownMenu.addEventListener('mouseenter', () => {
+                if (window.innerWidth > 768) {
+                    container.classList.add('hover-active');
+                }
+            });
+            
+            dropdownMenu.addEventListener('mouseleave', () => {
+                if (window.innerWidth > 768) {
+                    container.classList.remove('hover-active');
+                }
+            });
+        }
+        
+        // Para móviles: toggle con click
+        navLink.addEventListener('click', (e) => {
+            const isMobile = window.innerWidth <= 768;
+            
+            if (isMobile) {
+                // En móviles, siempre toggle
+                e.preventDefault();
+                e.stopPropagation();
+                
+                // Cerrar otros dropdowns
+                dropdownContainers.forEach(other => {
+                    if (other !== container) {
+                        other.classList.remove('active');
+                    }
+                });
+                
+                // Toggle del dropdown actual
+                container.classList.toggle('active');
+            } else {
+                // En desktop, solo navegar si no hay hover (click directo)
+                // El hover maneja el dropdown en desktop
+            }
+        });
+        
+        // Manejar clicks en items del dropdown
+        const dropdownItems = container.querySelectorAll('.dropdown-item');
+        dropdownItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                // Scroll suave al destino
+                const href = item.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+                
+                // Cerrar dropdown después de un pequeño delay para permitir la navegación
+                setTimeout(() => {
+                    container.classList.remove('active');
+                }, 200);
+            });
+        });
+    });
+    
+    // Cerrar dropdowns al hacer click fuera
+    document.addEventListener('click', (e) => {
+        // No cerrar si el click fue en un item del dropdown (el item maneja su propio cierre)
+        if (e.target.closest('.dropdown-item')) {
+            return;
+        }
+        
+        // Verificar si el click fue dentro de algún dropdown-container
+        const clickedInsideDropdown = e.target.closest('.dropdown-container');
+        
+        // Solo cerrar si el click NO fue dentro de ningún dropdown
+        if (!clickedInsideDropdown) {
+            dropdownContainers.forEach(container => {
+                container.classList.remove('active');
+            });
+        }
+    });
+    
+    // Cerrar dropdowns al hacer scroll
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+            dropdownContainers.forEach(container => {
+                container.classList.remove('active');
+            });
+        }, 100);
+    });
+}
+
+// Manejar scroll suave para los enlaces del navbar (sin dropdown)
 document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', (e) => {
-        const href = link.getAttribute('href');
-        if (href.startsWith('#')) {
-            e.preventDefault();
-            const target = document.querySelector(href);
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Solo si no está dentro de un dropdown-container
+        if (!link.closest('.dropdown-container')) {
+            const href = link.getAttribute('href');
+            if (href && href.startsWith('#')) {
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
             }
         }
     });
