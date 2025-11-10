@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculador de Fechas - FreeUniTools</title>
+    <link rel="stylesheet" href="../../../styles.css">
+    <style>
+        /* Estilos específicos para la herramienta */
+        .tool-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .tool-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .tool-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tool-description {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .calculator-section {
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .input-group {
+            margin-bottom: 2rem;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+        }
+
+        .result-section {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: var(--bg-primary);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            display: none;
+        }
+
+        .result-section.show {
+            display: block;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .result-status {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .result-status.future {
+            color: #10b981;
+        }
+
+        .result-status.past {
+            color: #3b82f6;
+        }
+
+        .countdown-container {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .time-unit {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 1.5rem 1rem;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease;
+        }
+
+        .time-unit:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .time-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .time-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .date-display {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .date-display strong {
+            color: var(--text-primary);
+        }
+
+        .error-message {
+            color: #ef4444;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .countdown-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .tool-container {
+                padding: 1rem;
+            }
+
+            .tool-title {
+                font-size: 2rem;
+            }
+
+            .calculator-section {
+                padding: 1.5rem;
+            }
+
+            .countdown-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .time-value {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .countdown-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .time-value {
+                font-size: 1.75rem;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <!-- Logo -->
+            <div class="logo-container">
+                <a href="../../../index.html" style="text-decoration: none; display: flex; align-items: center;">
+                    <img src="../../../logo.png" alt="FreeUniTools Logo" class="logo" id="logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="logo-placeholder" style="display: none; font-size: 1.5rem; font-weight: 700; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">FreeUniTools</div>
+                </a>
+            </div>
+
+            <!-- Categorías -->
+            <div class="nav-categories">
+                <!-- Image Tools Dropdown -->
+                <div class="dropdown-container">
+                    <a href="../../../index.html#image-tools" class="nav-link" data-category="image">
+                        Image Tools
+                        <span class="dropdown-arrow">▼</span>
+                    </a>
+                    <div class="dropdown-menu" data-dropdown="image">
+                        <a href="../../image-tools/image-compressor/image-compressor.html" class="dropdown-item">Image Compressor</a>
+                        <a href="../../image-tools/image-converter/image-converter.html" class="dropdown-item">Image Converter</a>
+                        <a href="../../image-tools/image-scaling/image-scaling.html" class="dropdown-item">Image Scaling</a>
+                        <a href="../../image-tools/metadata-finder/metadata-finder.html" class="dropdown-item">EXIF Metadata Detector</a>
+                        <a href="../../image-tools/favicon-generator/favicon-generator.html" class="dropdown-item">Favicon Generator</a>
+                    </div>
+                </div>
+
+                <!-- Text Tools Dropdown -->
+                <div class="dropdown-container">
+                    <a href="../../../index.html#text-tools" class="nav-link" data-category="text">
+                        Text Tools
+                        <span class="dropdown-arrow">▼</span>
+                    </a>
+                    <div class="dropdown-menu" data-dropdown="text">
+                        <a href="../../word-tools/word-tools.html" class="dropdown-item">Word Counter</a>
+                        <a href="../../word-tools/ascii-converter/ascii-converter.html" class="dropdown-item">ASCII</a>
+                    </div>
+                </div>
+
+                <!-- Number Tools Dropdown -->
+                <div class="dropdown-container">
+                    <a href="../../../index.html#number-tools" class="nav-link" data-category="number">
+                        Number Tools
+                        <span class="dropdown-arrow">▼</span>
+                    </a>
+                    <div class="dropdown-menu" data-dropdown="number">
+                        <a href="../bmi-calculator/bmi-calculator.html" class="dropdown-item">BMI Calculator</a>
+                        <a href="date-calculator.html" class="dropdown-item">Date Calculator</a>
+                        <a href="../interest-calculator/interest-calculator.html" class="dropdown-item">Interests Calculator</a>
+                    </div>
+                </div>
+
+                <a href="../../qr-tools/qr-tools.html" class="nav-link" data-category="qr-generator">
+                    QR Generator
+                </a>
+            </div>
+
+            <!-- Controles -->
+            <div class="nav-controls">
+                <button class="control-btn" id="language-btn" aria-label="Cambiar idioma">
+                    <span class="btn-icon">🌐</span>
+                    <span class="btn-text">ES</span>
+                </button>
+                <button class="control-btn" id="theme-btn" aria-label="Cambiar tema">
+                    <span class="btn-icon">🌙</span>
+                    <span class="btn-text">Dark</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="tool-container">
+            <div class="tool-header">
+                <h1 class="tool-title">Calculador de Fechas</h1>
+                <p class="tool-description">Calcula cuánto tiempo falta para una fecha futura o cuánto tiempo ha pasado desde una fecha pasada.</p>
+            </div>
+
+            <div class="calculator-section">
+                <div class="input-group">
+                    <label class="input-label" for="target-date">Selecciona una fecha</label>
+                    <input 
+                        type="datetime-local" 
+                        id="target-date" 
+                        class="input-field"
+                    >
+                    <div class="error-message" id="date-error">Por favor selecciona una fecha válida</div>
+                </div>
+
+                <!-- Result Section -->
+                <div class="result-section" id="result-section">
+                    <div class="result-status" id="result-status"></div>
+                    
+                    <div class="countdown-container">
+                        <div class="time-unit">
+                            <div class="time-value" id="years">0</div>
+                            <div class="time-label">Años</div>
+                        </div>
+                        <div class="time-unit">
+                            <div class="time-value" id="months">0</div>
+                            <div class="time-label">Meses</div>
+                        </div>
+                        <div class="time-unit">
+                            <div class="time-value" id="days">0</div>
+                            <div class="time-label">Días</div>
+                        </div>
+                        <div class="time-unit">
+                            <div class="time-value" id="hours">0</div>
+                            <div class="time-label">Horas</div>
+                        </div>
+                        <div class="time-unit">
+                            <div class="time-value" id="minutes">0</div>
+                            <div class="time-label">Minutos</div>
+                        </div>
+                        <div class="time-unit">
+                            <div class="time-value" id="seconds">0</div>
+                            <div class="time-label">Segundos</div>
+                        </div>
+                    </div>
+
+                    <div class="date-display">
+                        <div id="date-info"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../../../script.js"></script>
+    <script src="date-calculator.js"></script>
+</body>
+</html>
+

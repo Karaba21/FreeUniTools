@@ -2,7 +2,7 @@
 const translations = {
     es: {
         'hero-title': 'Free Uni Tools',
-        'hero-subtitle': 'Convierte, edita y transforma tus archivos con nuestras herramientas gratuitas',
+        'hero-subtitle': 'FreeUniTools nació con un solo objetivo: hacer que las herramientas digitales sean accesibles para todos — estudiantes, freelancers, desarrolladores y creadores. Sin registros. Sin muros de pago. Solo conocimiento y productividad.',
         'image-tools-title': 'Herramientas de Imágenes',
         'text-tools-title': 'Herramientas de Texto',
         'number-tools-title': 'Herramientas de Números',
@@ -10,7 +10,7 @@ const translations = {
         'theme-btn-light': 'Claro',
         'theme-btn-dark': 'Oscuro',
         'popular-tools-title': 'Herramientas Populares',
-        'stats-title': 'Counting and growing',
+        'stats-title': 'Creciendo cada día',
         'tools-label': 'Herramientas Disponibles',
         'users-label': 'Usuarios Mensuales',
         'contribute-title': 'Contribuye al Proyecto',
@@ -19,7 +19,6 @@ const translations = {
         'footer-tools-title': 'Herramientas',
         'footer-about-title': 'Acerca de',
         'footer-contribute': 'Contribuir',
-        'footer-github': 'GitHub',
         'footer-privacy': 'Privacidad',
         'footer-terms': 'Términos',
         'footer-copyright': '© 2025 FreeUniTools. Todos los derechos reservados.',

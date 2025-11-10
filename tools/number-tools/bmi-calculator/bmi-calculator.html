@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator - FreeUniTools</title>
+    <link rel="stylesheet" href="../../../styles.css">
+    <style>
+        /* Estilos específicos para la herramienta */
+        .tool-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .tool-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .tool-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tool-description {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .calculator-section {
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .unit-selector {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            background: var(--bg-primary);
+            padding: 0.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .unit-option {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            background: transparent;
+            border: none;
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .unit-option.active {
+            background: var(--accent-gradient);
+            color: white;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .input-wrapper {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .input-field {
+            flex: 1;
+            padding: 0.875rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+        }
+
+        .input-unit {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            min-width: 50px;
+        }
+
+        .imperial-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .calculate-btn {
+            width: 100%;
+            padding: 1rem 2rem;
+            background: var(--accent-gradient);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .calculate-btn:active {
+            transform: translateY(0);
+        }
+
+        .result-section {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: var(--bg-primary);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            display: none;
+        }
+
+        .result-section.show {
+            display: block;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .bmi-value {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .bmi-category {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .bmi-category.underweight {
+            color: #3b82f6;
+        }
+
+        .bmi-category.normal {
+            color: #10b981;
+        }
+
+        .bmi-category.overweight {
+            color: #f59e0b;
+        }
+
+        .bmi-category.obese {
+            color: #ef4444;
+        }
+
+        .bmi-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .bmi-scale {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .scale-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .scale-bar {
+            display: flex;
+            height: 40px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .scale-segment {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: white;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .scale-segment.underweight {
+            background: #3b82f6;
+        }
+
+        .scale-segment.normal {
+            background: #10b981;
+        }
+
+        .scale-segment.overweight {
+            background: #f59e0b;
+        }
+
+        .scale-segment.obese {
+            background: #ef4444;
+        }
+
+        .scale-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        .error-message {
+            color: #ef4444;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .tool-container {
+                padding: 1rem;
+            }
+
+            .tool-title {
+                font-size: 2rem;
+            }
+
+            .calculator-section {
+                padding: 1.5rem;
+            }
+
+            .imperial-inputs {
+                grid-template-columns: 1fr;
+            }
+
+            .bmi-value {
+                font-size: 2.5rem;
+            }
+
+            .bmi-category {
+                font-size: 1.25rem;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <!-- Logo -->
+            <div class="logo-container">
+                <a href="../../../index.html" style="text-decoration: none; display: flex; align-items: center;">
+                    <img src="../../../logo.png" alt="FreeUniTools Logo" class="logo" id="logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="logo-placeholder" style="display: none; font-size: 1.5rem; font-weight: 700; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">FreeUniTools</div>
+                </a>
+            </div>
+
+            <!-- Categorías -->
+            <div class="nav-categories">
+                <!-- Image Tools Dropdown -->
+                <div class="dropdown-container">
+                    <a href="../../../index.html#image-tools" class="nav-link" data-category="image">
+                        Image Tools
+                        <span class="dropdown-arrow">▼</span>
+                    </a>
+                    <div class="dropdown-menu" data-dropdown="image">
+                        <a href="../../image-tools/image-compressor/image-compressor.html" class="dropdown-item">Image Compressor</a>
+                        <a href="../../image-tools/image-converter/image-converter.html" class="dropdown-item">Image Converter</a>
+                        <a href="../../image-tools/image-scaling/image-scaling.html" class="dropdown-item">Image Scaling</a>
+                        <a href="../../image-tools/metadata-finder/metadata-finder.html" class="dropdown-item">EXIF Metadata Detector</a>
+                        <a href="../../image-tools/favicon-generator/favicon-generator.html" class="dropdown-item">Favicon Generator</a>
+                    </div>
+                </div>
+
+                <!-- Text Tools Dropdown -->
+                <div class="dropdown-container">
+                    <a href="../../../index.html#text-tools" class="nav-link" data-category="text">
+                        Text Tools
+                        <span class="dropdown-arrow">▼</span>
+                    </a>
+                    <div class="dropdown-menu" data-dropdown="text">
+                        <a href="../../word-tools/word-tools.html" class="dropdown-item">Word Counter</a>
+                        <a href="../../word-tools/ascii-converter/ascii-converter.html" class="dropdown-item">ASCII</a>
+                    </div>
+                </div>
+
+                <!-- Number Tools Dropdown -->
+                <div class="dropdown-container">
+                    <a href="../../../index.html#number-tools" class="nav-link" data-category="number">
+                        Number Tools
+                        <span class="dropdown-arrow">▼</span>
+                    </a>
+                    <div class="dropdown-menu" data-dropdown="number">
+                        <a href="bmi-calculator.html" class="dropdown-item">BMI Calculator</a>
+                        <a href="../date-calculator/date-calculator.html" class="dropdown-item">Date Calculator</a>
+                        <a href="../interest-calculator/interest-calculator.html" class="dropdown-item">Interests Calculator</a>
+                    </div>
+                </div>
+
+                <a href="../../qr-tools/qr-tools.html" class="nav-link" data-category="qr-generator">
+                    QR Generator
+                </a>
+            </div>
+
+            <!-- Controles -->
+            <div class="nav-controls">
+                <button class="control-btn" id="language-btn" aria-label="Cambiar idioma">
+                    <span class="btn-icon">🌐</span>
+                    <span class="btn-text">ES</span>
+                </button>
+                <button class="control-btn" id="theme-btn" aria-label="Cambiar tema">
+                    <span class="btn-icon">🌙</span>
+                    <span class="btn-text">Dark</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="tool-container">
+            <div class="tool-header">
+                <h1 class="tool-title">BMI Calculator</h1>
+                <p class="tool-description">Calcula tu Índice de Masa Corporal (BMI) para conocer tu estado de salud general.</p>
+            </div>
+
+            <div class="calculator-section">
+                <!-- Unit Selector -->
+                <div class="unit-selector">
+                    <button class="unit-option active" data-unit="metric">Métrico</button>
+                    <button class="unit-option" data-unit="imperial">Imperial</button>
+                </div>
+
+                <!-- Metric Inputs -->
+                <div id="metric-inputs">
+                    <div class="input-group">
+                        <label class="input-label">Peso</label>
+                        <div class="input-wrapper">
+                            <input 
+                                type="number" 
+                                id="weight-metric" 
+                                class="input-field" 
+                                placeholder="70"
+                                min="1"
+                                max="500"
+                                step="0.1"
+                            >
+                            <span class="input-unit">kg</span>
+                        </div>
+                        <div class="error-message" id="weight-metric-error">Por favor ingresa un peso válido</div>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label">Altura</label>
+                        <div class="input-wrapper">
+                            <input 
+                                type="number" 
+                                id="height-metric" 
+                                class="input-field" 
+                                placeholder="175"
+                                min="50"
+                                max="250"
+                                step="0.1"
+                            >
+                            <span class="input-unit">cm</span>
+                        </div>
+                        <div class="error-message" id="height-metric-error">Por favor ingresa una altura válida</div>
+                    </div>
+                </div>
+
+                <!-- Imperial Inputs -->
+                <div id="imperial-inputs" style="display: none;">
+                    <div class="input-group">
+                        <label class="input-label">Peso</label>
+                        <div class="input-wrapper">
+                            <input 
+                                type="number" 
+                                id="weight-imperial" 
+                                class="input-field" 
+                                placeholder="154"
+                                min="1"
+                                max="1100"
+                                step="0.1"
+                            >
+                            <span class="input-unit">lbs</span>
+                        </div>
+                        <div class="error-message" id="weight-imperial-error">Por favor ingresa un peso válido</div>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label">Altura</label>
+                        <div class="imperial-inputs">
+                            <div class="input-wrapper">
+                                <input 
+                                    type="number" 
+                                    id="height-feet" 
+                                    class="input-field" 
+                                    placeholder="5"
+                                    min="1"
+                                    max="8"
+                                    step="1"
+                                >
+                                <span class="input-unit">ft</span>
+                            </div>
+                            <div class="input-wrapper">
+                                <input 
+                                    type="number" 
+                                    id="height-inches" 
+                                    class="input-field" 
+                                    placeholder="9"
+                                    min="0"
+                                    max="11"
+                                    step="1"
+                                >
+                                <span class="input-unit">in</span>
+                            </div>
+                        </div>
+                        <div class="error-message" id="height-imperial-error">Por favor ingresa una altura válida</div>
+                    </div>
+                </div>
+
+                <button class="calculate-btn" id="calculate-bmi">Calcular BMI</button>
+
+                <!-- Result Section -->
+                <div class="result-section" id="result-section">
+                    <div class="bmi-value" id="bmi-value">--</div>
+                    <div class="bmi-category" id="bmi-category">--</div>
+                    <p class="bmi-description" id="bmi-description"></p>
+
+                    <div class="bmi-scale">
+                        <div class="scale-title">Escala de BMI</div>
+                        <div class="scale-bar">
+                            <div class="scale-segment underweight">Bajo peso<br>&lt;18.5</div>
+                            <div class="scale-segment normal">Normal<br>18.5-24.9</div>
+                            <div class="scale-segment overweight">Sobrepeso<br>25-29.9</div>
+                            <div class="scale-segment obese">Obesidad<br>≥30</div>
+                        </div>
+                        <div class="scale-labels">
+                            <span>Bajo peso</span>
+                            <span>Normal</span>
+                            <span>Sobrepeso</span>
+                            <span>Obesidad</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../../../script.js"></script>
+    <script src="bmi-calculator.js"></script>
+</body>
+</html>
+
