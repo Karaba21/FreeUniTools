@@ -14,6 +14,7 @@ const translations = {
         'tools-label': 'Herramientas Disponibles',
         'users-label': 'Usuarios Mensuales',
         'contribute-title': 'Contribuye al Proyecto',
+        'contribute-description': 'Ayudá a que FreeUniTools crezca — cada donación la mantiene gratuita para todos.<br><br>Un pequeño aporte puede hacer una gran diferencia 💙',
         'contribute-donate': 'Donar con PayPal',
         'footer-description': 'Herramientas gratuitas para hacer tu trabajo más fácil.',
         'footer-tools-title': 'Herramientas',
@@ -37,7 +38,7 @@ const translations = {
         'tools-label': 'Available Tools',
         'users-label': 'Monthly Users',
         'contribute-title': 'Contribute to the Project',
-        'contribute-description': 'Do you have an idea for a new tool or want to improve existing ones? Join our community and help make FreeUniTools even better!',
+        'contribute-description': 'Help FreeUniTools grow — every donation keeps it free for everyone.<br><br>A small contribution makes a big difference 💙',
         'contribute-donate': 'Donate with PayPal',
         'footer-description': 'Free and open source tools to make your work easier.',
         'footer-tools-title': 'Tools',
@@ -150,7 +151,8 @@ function applyLanguage() {
     document.querySelectorAll('[data-i18n]').forEach(element => {
         const key = element.getAttribute('data-i18n');
         if (translations[currentLanguage][key]) {
-            element.textContent = translations[currentLanguage][key];
+            // Usar innerHTML para permitir etiquetas HTML como <br>
+            element.innerHTML = translations[currentLanguage][key];
         }
     });
     
