@@ -65,6 +65,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Configurar dropdowns
     setupDropdowns();
     
+    // Configurar menú móvil
+    setupMobileMenu();
+    
     // Aplicar tema inicial
     applyTheme();
     
@@ -162,6 +165,52 @@ function applyLanguage() {
     } else {
         themeBtnText.textContent = currentLanguage === 'es' ? 'Oscuro' : 'Dark';
     }
+}
+
+// Configurar menú móvil
+function setupMobileMenu() {
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const navCategories = document.getElementById('nav-categories');
+    
+    if (!mobileMenuToggle || !navCategories) {
+        return;
+    }
+    
+    mobileMenuToggle.addEventListener('click', () => {
+        mobileMenuToggle.classList.toggle('active');
+        navCategories.classList.toggle('active');
+    });
+    
+    // Cerrar menú al hacer click fuera
+    document.addEventListener('click', (e) => {
+        const isClickInsideNav = e.target.closest('.navbar');
+        const isClickOnToggle = e.target.closest('.mobile-menu-toggle');
+        
+        if (!isClickInsideNav && navCategories.classList.contains('active')) {
+            mobileMenuToggle.classList.remove('active');
+            navCategories.classList.remove('active');
+        }
+    });
+    
+    // Cerrar menú al hacer scroll
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+        if (window.innerWidth <= 768 && navCategories.classList.contains('active')) {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                mobileMenuToggle.classList.remove('active');
+                navCategories.classList.remove('active');
+            }, 100);
+        }
+    });
+    
+    // Cerrar menú al cambiar tamaño de ventana
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            mobileMenuToggle.classList.remove('active');
+            navCategories.classList.remove('active');
+        }
+    });
 }
 
 // Configurar dropdowns
