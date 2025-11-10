@@ -1,0 +1,47 @@
+# Redirecciones a URLs profesionales y cortas
+
+# Word Tools
+/ascii-converter /tools/word-tools/ascii-converter/ascii-converter.html 200
+/ascii-converter/ /tools/word-tools/ascii-converter/ascii-converter.html 200
+/word-counter /tools/word-tools/word-tools.html 200
+/word-counter/ /tools/word-tools/word-tools.html 200
+
+# Image Tools
+/image-compressor /tools/image-tools/image-compressor/image-compressor.html 200
+/image-compressor/ /tools/image-tools/image-compressor/image-compressor.html 200
+/image-converter /tools/image-tools/image-converter/image-converter.html 200
+/image-converter/ /tools/image-tools/image-converter/image-converter.html 200
+/image-scaling /tools/image-tools/image-scaling/image-scaling.html 200
+/image-scaling/ /tools/image-tools/image-scaling/image-scaling.html 200
+/metadata-finder /tools/image-tools/metadata-finder/metadata-finder.html 200
+/metadata-finder/ /tools/image-tools/metadata-finder/metadata-finder.html 200
+/favicon-generator /tools/image-tools/favicon-generator/favicon-generator.html 200
+/favicon-generator/ /tools/image-tools/favicon-generator/favicon-generator.html 200
+
+# Number Tools
+/bmi-calculator /tools/number-tools/bmi-calculator/bmi-calculator.html 200
+/bmi-calculator/ /tools/number-tools/bmi-calculator/bmi-calculator.html 200
+/date-calculator /tools/number-tools/date-calculator/date-calculator.html 200
+/date-calculator/ /tools/number-tools/date-calculator/date-calculator.html 200
+/interest-calculator /tools/number-tools/interest-calculator/interest-calculator.html 200
+/interest-calculator/ /tools/number-tools/interest-calculator/interest-calculator.html 200
+
+# QR Tools
+/qr-generator /tools/qr-tools/qr-tools.html 200
+/qr-generator/ /tools/qr-tools/qr-tools.html 200
+
+# Redirecciones 301 desde las rutas antiguas (opcional, para mantener compatibilidad)
+/tools/word-tools/ascii-converter/ascii-converter /ascii-converter 301
+/tools/word-tools/word-tools /word-counter 301
+/tools/image-tools/image-compressor/image-compressor /image-compressor 301
+/tools/image-tools/image-converter/image-converter /image-converter 301
+/tools/image-tools/image-scaling/image-scaling /image-scaling 301
+/tools/image-tools/metadata-finder/metadata-finder /metadata-finder 301
+/tools/image-tools/favicon-generator/favicon-generator /favicon-generator 301
+/tools/number-tools/bmi-calculator/bmi-calculator /bmi-calculator 301
+/tools/number-tools/date-calculator/date-calculator /date-calculator 301
+/tools/number-tools/interest-calculator/interest-calculator /interest-calculator 301
+/tools/qr-tools/qr-tools /qr-generator 301
+
+# Redirección general para eliminar .html
+/*.html /:splat 301
