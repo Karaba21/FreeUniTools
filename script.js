@@ -23,6 +23,28 @@ const translations = {
         'footer-privacy': 'Privacidad',
         'footer-terms': 'Términos',
         'footer-copyright': '© 2025 FreeUniTools. Todos los derechos reservados.',
+        // Navbar translations
+        'nav-image-tools': 'Herramientas de Imágenes',
+        'nav-image-compressor': 'Compresor de Imágenes',
+        'nav-image-converter': 'Conversor de Imágenes',
+        'nav-image-scaling': 'Escalador de Imágenes',
+        'nav-metadata-finder': 'Detector de Metadatos EXIF',
+        'nav-favicon-generator': 'Generador de Favicon',
+        'nav-text-tools': 'Herramientas de Texto',
+        'nav-word-counter': 'Contador de Palabras',
+        'nav-ascii': 'ASCII',
+        'nav-number-tools': 'Herramientas de Números',
+        'nav-bmi-calculator': 'Calculadora de IMC',
+        'nav-date-calculator': 'Calculadora de Fechas',
+        'nav-interest-calculator': 'Calculadora de Intereses',
+        'nav-qr-generator': 'Generador QR',
+        // Popular tools descriptions
+        'popular-qr-title': 'Generador QR',
+        'popular-qr-description': 'Genera códigos QR personalizados',
+        'popular-converter-title': 'Conversor de Imágenes',
+        'popular-converter-description': 'Convierte imágenes entre formatos',
+        'popular-counter-title': 'Contador de Palabras',
+        'popular-counter-description': 'Cuenta palabras y caracteres',
     },
     en: {
         'hero-title': 'Free Uni Tools',
@@ -47,6 +69,28 @@ const translations = {
         'footer-privacy': 'Privacy',
         'footer-terms': 'Terms',
         'footer-copyright': '© 2025 FreeUniTools. All rights reserved.',
+        // Navbar translations
+        'nav-image-tools': 'Image Tools',
+        'nav-image-compressor': 'Image Compressor',
+        'nav-image-converter': 'Image Converter',
+        'nav-image-scaling': 'Image Scaling',
+        'nav-metadata-finder': 'EXIF Metadata Detector',
+        'nav-favicon-generator': 'Favicon Generator',
+        'nav-text-tools': 'Text Tools',
+        'nav-word-counter': 'Word Counter',
+        'nav-ascii': 'ASCII',
+        'nav-number-tools': 'Number Tools',
+        'nav-bmi-calculator': 'BMI Calculator',
+        'nav-date-calculator': 'Date Calculator',
+        'nav-interest-calculator': 'Interests Calculator',
+        'nav-qr-generator': 'QR Generator',
+        // Popular tools descriptions
+        'popular-qr-title': 'QR Generator',
+        'popular-qr-description': 'Generate personalized QR codes',
+        'popular-converter-title': 'Image Converter',
+        'popular-converter-description': 'Convert images between formats',
+        'popular-counter-title': 'Word Counter',
+        'popular-counter-description': 'Count words and characters',
     }
 };
 
@@ -151,8 +195,16 @@ function applyLanguage() {
     document.querySelectorAll('[data-i18n]').forEach(element => {
         const key = element.getAttribute('data-i18n');
         if (translations[currentLanguage][key]) {
-            // Usar innerHTML para permitir etiquetas HTML como <br>
-            element.innerHTML = translations[currentLanguage][key];
+            // Verificar si el elemento tiene una flecha de dropdown
+            const dropdownArrow = element.querySelector('.dropdown-arrow');
+            if (dropdownArrow) {
+                // Preservar la flecha y actualizar solo el texto
+                const arrowHTML = dropdownArrow.outerHTML;
+                element.innerHTML = translations[currentLanguage][key] + ' ' + arrowHTML;
+            } else {
+                // Usar innerHTML para permitir etiquetas HTML como <br>
+                element.innerHTML = translations[currentLanguage][key];
+            }
         }
     });
     

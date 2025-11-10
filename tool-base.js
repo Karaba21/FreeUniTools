@@ -58,15 +58,12 @@ function applyLanguage() {
             } else {
                 // Preservar elementos hijos importantes (como dropdown-arrow)
                 const dropdownArrow = element.querySelector('.dropdown-arrow');
-                let arrowClone = null;
                 if (dropdownArrow) {
-                    // Clonar la flecha antes de reemplazar el contenido
-                    arrowClone = dropdownArrow.cloneNode(true);
-                }
-                element.innerHTML = allTranslations[key];
-                // Restaurar la flecha si existía
-                if (arrowClone) {
-                    element.appendChild(arrowClone);
+                    // Preservar la flecha y actualizar solo el texto
+                    const arrowHTML = dropdownArrow.outerHTML;
+                    element.innerHTML = allTranslations[key] + ' ' + arrowHTML;
+                } else {
+                    element.innerHTML = allTranslations[key];
                 }
             }
         }
