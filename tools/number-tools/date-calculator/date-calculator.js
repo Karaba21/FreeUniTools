@@ -7,15 +7,9 @@ let isFuture = true;
 document.addEventListener('DOMContentLoaded', () => {
     setupDateInput();
     
-    // Establecer fecha por defecto (mañana a las 00:00)
-    const tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    tomorrow.setHours(0, 0, 0, 0);
-    const defaultDate = formatDateForInput(tomorrow);
-    document.getElementById('target-date').value = defaultDate;
-    
-    // Calcular inicialmente
-    calculateDate();
+    // Asegurar que los valores iniciales sean 0 y no mostrar resultados
+    hideResult();
+    resetCountdownValues();
 });
 
 // Configurar input de fecha
@@ -29,6 +23,15 @@ function setupDateInput() {
     
     dateInput.addEventListener('input', () => {
         clearErrors();
+    });
+    
+    // Permitir Enter para confirmar la fecha
+    dateInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            dateInput.blur(); // Esto activará el evento 'change'
+            calculateDate();
+        }
     });
 }
 
@@ -178,6 +181,19 @@ function hideResult() {
         clearInterval(countdownInterval);
         countdownInterval = null;
     }
+    
+    // Resetear valores a 0
+    resetCountdownValues();
+}
+
+// Resetear valores del contador a 0
+function resetCountdownValues() {
+    document.getElementById('years').textContent = '0';
+    document.getElementById('months').textContent = '0';
+    document.getElementById('days').textContent = '0';
+    document.getElementById('hours').textContent = '0';
+    document.getElementById('minutes').textContent = '0';
+    document.getElementById('seconds').textContent = '0';
 }
 
 // Mostrar error
