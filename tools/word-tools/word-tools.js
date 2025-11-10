@@ -1,5 +1,37 @@
+// Traducciones específicas de Word Counter
+const toolTranslations = {
+    es: {
+        'tool-title': 'Contador de Palabras',
+        'tool-description': 'Analiza tu texto y obtén estadísticas detalladas sobre palabras, caracteres, oraciones y más.',
+        'placeholder-text': 'Escribe o pega tu texto aquí...',
+        'stats-title': 'Estadísticas',
+        'label-words': 'Palabras',
+        'label-chars-no-spaces': 'Caracteres sin espacios',
+        'label-chars-with-spaces': 'Caracteres con espacios',
+        'label-sentences': 'Oraciones',
+        'label-paragraphs': 'Párrafos',
+        'label-reading-time': 'Tiempo de lectura',
+        'btn-clear': 'Limpiar Texto'
+    },
+    en: {
+        'tool-title': 'Word Counter',
+        'tool-description': 'Analyze your text and get detailed statistics about words, characters, sentences and more.',
+        'placeholder-text': 'Type or paste your text here...',
+        'stats-title': 'Statistics',
+        'label-words': 'Words',
+        'label-chars-no-spaces': 'Characters without spaces',
+        'label-chars-with-spaces': 'Characters with spaces',
+        'label-sentences': 'Sentences',
+        'label-paragraphs': 'Paragraphs',
+        'label-reading-time': 'Reading time',
+        'btn-clear': 'Clear Text'
+    }
+};
+
 // Word Tools - Análisis de texto
 document.addEventListener('DOMContentLoaded', function() {
+    initLanguageAndTheme();
+    
     const textInput = document.getElementById('text-input');
     const wordCount = document.getElementById('word-count');
     const charCountNoSpaces = document.getElementById('char-count-no-spaces');

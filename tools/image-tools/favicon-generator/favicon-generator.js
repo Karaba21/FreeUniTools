@@ -3,22 +3,98 @@ let originalFile = null;
 let originalImageData = null;
 let generatedFavicons = {};
 
-// Tamaños estándar de favicon
-const FAVICON_SIZES = [
-    { size: 16, label: '16x16 (Estándar)', default: true },
-    { size: 32, label: '32x32 (Alta resolución)', default: true },
-    { size: 48, label: '48x48 (Windows)', default: true },
-    { size: 64, label: '64x64', default: false },
-    { size: 96, label: '96x96', default: false },
-    { size: 128, label: '128x128', default: false },
-    { size: 180, label: '180x180 (Apple Touch)', default: false },
-    { size: 192, label: '192x192 (Android)', default: false },
-    { size: 256, label: '256x256', default: false },
-    { size: 512, label: '512x512 (PWA)', default: false }
-];
+// Traducciones específicas de Favicon Generator
+const toolTranslations = {
+    es: {
+        'tool-title': 'Generador de Favicon',
+        'tool-description': 'Genera favicons en múltiples tamaños y formatos desde tu imagen. Perfecto para sitios web y aplicaciones.',
+        'upload-text': 'Arrastra y suelta tu imagen aquí',
+        'upload-hint': 'o haz clic para seleccionar un archivo',
+        'label-sizes': 'Tamaños de Favicon',
+        'preview-original': 'Imagen Original',
+        'label-size': 'Tamaño:',
+        'label-dimensions': 'Dimensiones:',
+        'label-format-original': 'Formato:',
+        'favicons-generated': 'Favicons Generados',
+        'btn-download-all': 'Descargar Todos los Favicons',
+        'btn-reset': 'Nueva Imagen',
+        'btn-download-png': 'Descargar PNG',
+        'btn-download-ico': 'Descargar ICO',
+        'preview-label': 'Vista previa',
+        'alert-invalid-file': 'Por favor, selecciona un archivo de imagen válido.',
+        'alert-invalid-drag': 'Por favor, arrastra un archivo de imagen válido.',
+        'alert-load-error': 'Error al cargar la imagen. Por favor, intenta con otro archivo.',
+        'alert-read-error': 'Error al leer el archivo.',
+        'alert-no-sizes': 'Selecciona al menos un tamaño de favicon.',
+        'alert-no-favicons': 'No hay favicons para descargar. Selecciona al menos un tamaño.',
+        'size-16': '16x16 (Estándar)',
+        'size-32': '32x32 (Alta resolución)',
+        'size-48': '48x48 (Windows)',
+        'size-64': '64x64',
+        'size-96': '96x96',
+        'size-128': '128x128',
+        'size-180': '180x180 (Apple Touch)',
+        'size-192': '192x192 (Android)',
+        'size-256': '256x256',
+        'size-512': '512x512 (PWA)'
+    },
+    en: {
+        'tool-title': 'Favicon Generator',
+        'tool-description': 'Generate favicons in multiple sizes and formats from your image. Perfect for websites and applications.',
+        'upload-text': 'Drag and drop your image here',
+        'upload-hint': 'or click to select a file',
+        'label-sizes': 'Favicon Sizes',
+        'preview-original': 'Original Image',
+        'label-size': 'Size:',
+        'label-dimensions': 'Dimensions:',
+        'label-format-original': 'Format:',
+        'favicons-generated': 'Generated Favicons',
+        'btn-download-all': 'Download All Favicons',
+        'btn-reset': 'New Image',
+        'btn-download-png': 'Download PNG',
+        'btn-download-ico': 'Download ICO',
+        'preview-label': 'Preview',
+        'alert-invalid-file': 'Please select a valid image file.',
+        'alert-invalid-drag': 'Please drag a valid image file.',
+        'alert-load-error': 'Error loading the image. Please try another file.',
+        'alert-read-error': 'Error reading the file.',
+        'alert-no-sizes': 'Select at least one favicon size.',
+        'alert-no-favicons': 'No favicons to download. Select at least one size.',
+        'size-16': '16x16 (Standard)',
+        'size-32': '32x32 (High resolution)',
+        'size-48': '48x48 (Windows)',
+        'size-64': '64x64',
+        'size-96': '96x96',
+        'size-128': '128x128',
+        'size-180': '180x180 (Apple Touch)',
+        'size-192': '192x192 (Android)',
+        'size-256': '256x256',
+        'size-512': '512x512 (PWA)'
+    }
+};
+
+// Tamaños estándar de favicon (se actualizarán según el idioma)
+let FAVICON_SIZES = [];
+
+function updateFaviconSizes() {
+    FAVICON_SIZES = [
+        { size: 16, label: toolTranslations[currentLanguage]['size-16'], default: true },
+        { size: 32, label: toolTranslations[currentLanguage]['size-32'], default: true },
+        { size: 48, label: toolTranslations[currentLanguage]['size-48'], default: true },
+        { size: 64, label: toolTranslations[currentLanguage]['size-64'], default: false },
+        { size: 96, label: toolTranslations[currentLanguage]['size-96'], default: false },
+        { size: 128, label: toolTranslations[currentLanguage]['size-128'], default: false },
+        { size: 180, label: toolTranslations[currentLanguage]['size-180'], default: false },
+        { size: 192, label: toolTranslations[currentLanguage]['size-192'], default: false },
+        { size: 256, label: toolTranslations[currentLanguage]['size-256'], default: false },
+        { size: 512, label: toolTranslations[currentLanguage]['size-512'], default: false }
+    ];
+}
 
 // Inicialización
 document.addEventListener('DOMContentLoaded', () => {
+    initLanguageAndTheme();
+    updateFaviconSizes();
     setupUploadArea();
     setupSizeCheckboxes();
     setupButtons();
@@ -40,7 +116,7 @@ function setupUploadArea() {
         if (file && file.type.startsWith('image/')) {
             handleFile(file);
         } else {
-            alert('Por favor, selecciona un archivo de imagen válido.');
+            alert(toolTranslations[currentLanguage]['alert-invalid-file']);
         }
     });
 
@@ -62,7 +138,7 @@ function setupUploadArea() {
         if (file && file.type.startsWith('image/')) {
             handleFile(file);
         } else {
-            alert('Por favor, arrastra un archivo de imagen válido.');
+            alert(toolTranslations[currentLanguage]['alert-invalid-drag']);
         }
     });
 }
@@ -70,6 +146,8 @@ function setupUploadArea() {
 // Configurar checkboxes de tamaños
 function setupSizeCheckboxes() {
     const container = document.getElementById('size-checkboxes');
+    container.innerHTML = ''; // Limpiar antes de regenerar
+    updateFaviconSizes();
     
     FAVICON_SIZES.forEach(faviconSize => {
         const checkboxItem = document.createElement('div');
@@ -127,12 +205,12 @@ function handleFile(file) {
             generateFavicons();
         };
         image.onerror = () => {
-            alert('Error al cargar la imagen. Por favor, intenta con otro archivo.');
+            alert(toolTranslations[currentLanguage]['alert-load-error']);
         };
         image.src = e.target.result;
     };
     reader.onerror = () => {
-        alert('Error al leer el archivo.');
+        alert(toolTranslations[currentLanguage]['alert-read-error']);
     };
     reader.readAsDataURL(file);
 }
@@ -165,7 +243,7 @@ function generateFavicons() {
     const selectedSizes = getSelectedSizes();
     
     if (selectedSizes.length === 0) {
-        faviconsGrid.innerHTML = '<p style="color: var(--text-secondary); text-align: center; grid-column: 1 / -1;">Selecciona al menos un tamaño de favicon.</p>';
+        faviconsGrid.innerHTML = `<p style="color: var(--text-secondary); text-align: center; grid-column: 1 / -1;">${toolTranslations[currentLanguage]['alert-no-sizes']}</p>`;
         return;
     }
 
@@ -314,7 +392,7 @@ function displayFavicon(size, pngUrl) {
     
     const sizeLabel = document.createElement('div');
     sizeLabel.className = 'favicon-size-label';
-    sizeLabel.textContent = 'Vista previa';
+    sizeLabel.textContent = toolTranslations[currentLanguage]['preview-label'];
     
     const display = document.createElement('div');
     display.className = 'favicon-display';
@@ -333,7 +411,7 @@ function displayFavicon(size, pngUrl) {
     
     const pngBtn = document.createElement('button');
     pngBtn.className = 'btn-primary';
-    pngBtn.textContent = 'Descargar PNG';
+    pngBtn.textContent = toolTranslations[currentLanguage]['btn-download-png'];
     pngBtn.onclick = () => downloadFavicon(size, 'png');
     
     const buttonsContainer = document.createElement('div');
@@ -344,7 +422,7 @@ function displayFavicon(size, pngUrl) {
     if (size <= 256 && generatedFavicons[size]?.ico) {
         const icoBtn = document.createElement('button');
         icoBtn.className = 'btn-secondary';
-        icoBtn.textContent = 'Descargar ICO';
+        icoBtn.textContent = toolTranslations[currentLanguage]['btn-download-ico'];
         icoBtn.style.marginTop = '0.5rem';
         icoBtn.onclick = () => downloadFavicon(size, 'ico');
         buttonsContainer.appendChild(icoBtn);
@@ -381,7 +459,7 @@ function downloadAllFavicons() {
     const selectedSizes = getSelectedSizes();
     
     if (selectedSizes.length === 0) {
-        alert('No hay favicons para descargar. Selecciona al menos un tamaño.');
+        alert(toolTranslations[currentLanguage]['alert-no-favicons']);
         return;
     }
     

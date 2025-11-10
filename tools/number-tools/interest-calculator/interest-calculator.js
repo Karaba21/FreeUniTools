@@ -1,5 +1,44 @@
+// Traducciones específicas de Interest Calculator
+const toolTranslations = {
+    es: {
+        'tool-title': 'Calculadora de Intereses',
+        'tool-description': 'Calcula el valor de las cuotas y la tabla de amortización para tu préstamo.',
+        'label-capital': 'Capital Solicitado',
+        'label-rate': 'Tasa Efectiva Anual (%)',
+        'label-installments': 'Cantidad de cuotas',
+        'btn-calculate': 'Calcular',
+        'error-capital': 'Por favor ingresa un capital válido',
+        'error-rate': 'Por favor ingresa una tasa válida',
+        'error-installments': 'Por favor ingresa una cantidad de cuotas válida',
+        'label-installment': 'Cuota',
+        'label-total': 'Monto total (capital más interés)',
+        'table-installment-num': 'Cuota Nro',
+        'table-installment-value': 'Valor Cuota',
+        'table-interest': 'Intereses',
+        'table-amortization': 'Amortización'
+    },
+    en: {
+        'tool-title': 'Interest Calculator',
+        'tool-description': 'Calculate the installment value and amortization table for your loan.',
+        'label-capital': 'Requested Capital',
+        'label-rate': 'Annual Effective Rate (%)',
+        'label-installments': 'Number of installments',
+        'btn-calculate': 'Calculate',
+        'error-capital': 'Please enter a valid capital',
+        'error-rate': 'Please enter a valid rate',
+        'error-installments': 'Please enter a valid number of installments',
+        'label-installment': 'Installment',
+        'label-total': 'Total amount (capital plus interest)',
+        'table-installment-num': 'Installment No',
+        'table-installment-value': 'Installment Value',
+        'table-interest': 'Interest',
+        'table-amortization': 'Amortization'
+    }
+};
+
 // Inicialización
 document.addEventListener('DOMContentLoaded', () => {
+    initLanguageAndTheme();
     setupCalculateButton();
     setupInputValidation();
 });
@@ -158,7 +197,8 @@ function generateAmortizationTable(initialCapital, monthlyRate, installmentValue
 
 // Formatear moneda
 function formatCurrency(value) {
-    return new Intl.NumberFormat('es-ES', {
+    const locale = currentLanguage === 'es' ? 'es-ES' : 'en-US';
+    return new Intl.NumberFormat(locale, {
         style: 'currency',
         currency: 'USD',
         minimumFractionDigits: 2,

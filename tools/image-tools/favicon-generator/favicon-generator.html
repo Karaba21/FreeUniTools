@@ -354,45 +354,45 @@
             <div class="nav-categories" id="nav-categories">
                 <!-- Image Tools Dropdown -->
                 <div class="dropdown-container">
-                    <a href="/#image-tools" class="nav-link" data-category="image">
+                    <a href="/#image-tools" class="nav-link" data-category="image" data-i18n="nav-image-tools">
                         Image Tools
                         <span class="dropdown-arrow">▼</span>
                     </a>
                     <div class="dropdown-menu" data-dropdown="image">
-                        <a href="/image-compressor" class="dropdown-item">Image Compressor</a>
-                        <a href="/image-converter" class="dropdown-item">Image Converter</a>
-                        <a href="/image-scaling" class="dropdown-item">Image Scaling</a>
-                        <a href="/metadata-finder" class="dropdown-item">EXIF Metadata Detector</a>
-                        <a href="/favicon-generator" class="dropdown-item">Favicon Generator</a>
+                        <a href="/image-compressor" class="dropdown-item" data-i18n="nav-image-compressor">Image Compressor</a>
+                        <a href="/image-converter" class="dropdown-item" data-i18n="nav-image-converter">Image Converter</a>
+                        <a href="/image-scaling" class="dropdown-item" data-i18n="nav-image-scaling">Image Scaling</a>
+                        <a href="/metadata-finder" class="dropdown-item" data-i18n="nav-metadata-finder">EXIF Metadata Detector</a>
+                        <a href="/favicon-generator" class="dropdown-item" data-i18n="nav-favicon-generator">Favicon Generator</a>
                     </div>
                 </div>
 
                 <!-- Text Tools Dropdown -->
                 <div class="dropdown-container">
-                    <a href="/#text-tools" class="nav-link" data-category="text">
+                    <a href="/#text-tools" class="nav-link" data-category="text" data-i18n="nav-text-tools">
                         Text Tools
                         <span class="dropdown-arrow">▼</span>
                     </a>
                     <div class="dropdown-menu" data-dropdown="text">
-                        <a href="/word-counter" class="dropdown-item">Word Counter</a>
-                        <a href="/ascii-converter" class="dropdown-item">ASCII</a>
+                        <a href="/word-counter" class="dropdown-item" data-i18n="nav-word-counter">Word Counter</a>
+                        <a href="/ascii-converter" class="dropdown-item" data-i18n="nav-ascii">ASCII</a>
                     </div>
                 </div>
 
                 <!-- Number Tools Dropdown -->
                 <div class="dropdown-container">
-                    <a href="/#number-tools" class="nav-link" data-category="number">
+                    <a href="/#number-tools" class="nav-link" data-category="number" data-i18n="nav-number-tools">
                         Number Tools
                         <span class="dropdown-arrow">▼</span>
                     </a>
                     <div class="dropdown-menu" data-dropdown="number">
-                        <a href="/bmi-calculator" class="dropdown-item">BMI Calculator</a>
-                        <a href="/date-calculator" class="dropdown-item">Date Calculator</a>
-                        <a href="/interest-calculator" class="dropdown-item">Interests Calculator</a>
+                        <a href="/bmi-calculator" class="dropdown-item" data-i18n="nav-bmi-calculator">BMI Calculator</a>
+                        <a href="/date-calculator" class="dropdown-item" data-i18n="nav-date-calculator">Date Calculator</a>
+                        <a href="/interest-calculator" class="dropdown-item" data-i18n="nav-interest-calculator">Interests Calculator</a>
                     </div>
                 </div>
 
-                <a href="/qr-generator" class="nav-link" data-category="qr-generator">
+                <a href="/qr-generator" class="nav-link" data-category="qr-generator" data-i18n="nav-qr-generator">
                     QR Generator
                 </a>
             </div>
@@ -415,21 +415,21 @@
     <main class="main-content">
         <div class="tool-container">
             <div class="tool-header">
-                <h1 class="tool-title">Favicon Generator</h1>
-                <p class="tool-description">Genera favicons en múltiples tamaños y formatos desde tu imagen. Perfecto para sitios web y aplicaciones.</p>
+                <h1 class="tool-title" data-i18n="tool-title">Favicon Generator</h1>
+                <p class="tool-description" data-i18n="tool-description">Genera favicons en múltiples tamaños y formatos desde tu imagen. Perfecto para sitios web y aplicaciones.</p>
             </div>
 
             <!-- Upload Area -->
             <div class="upload-area" id="upload-area">
                 <div class="upload-icon">🎨</div>
-                <div class="upload-text">Arrastra y suelta tu imagen aquí</div>
-                <div class="upload-hint">o haz clic para seleccionar un archivo</div>
+                <div class="upload-text" data-i18n="upload-text">Arrastra y suelta tu imagen aquí</div>
+                <div class="upload-hint" data-i18n="upload-hint">o haz clic para seleccionar un archivo</div>
                 <input type="file" id="file-input" accept="image/*">
             </div>
 
             <!-- Size Options -->
             <div class="size-options" id="size-options" style="display: none;">
-                <div class="size-options-title">Tamaños de Favicon</div>
+                <div class="size-options-title" data-i18n="label-sizes">Tamaños de Favicon</div>
                 <div class="size-checkboxes" id="size-checkboxes">
                     <!-- Los checkboxes se generarán dinámicamente -->
                 </div>
@@ -440,19 +440,19 @@
                 <!-- Original Image Preview -->
                 <div class="preview-grid">
                     <div class="preview-card">
-                        <div class="preview-card-title">Imagen Original</div>
+                        <div class="preview-card-title" data-i18n="preview-original">Imagen Original</div>
                         <img id="original-image" class="preview-image" alt="Original">
                         <div class="image-info">
                             <div class="info-item">
-                                <span class="info-label">Tamaño:</span>
+                                <span class="info-label" data-i18n="label-size">Tamaño:</span>
                                 <span class="info-value" id="original-size">-</span>
                             </div>
                             <div class="info-item">
-                                <span class="info-label">Dimensiones:</span>
+                                <span class="info-label" data-i18n="label-dimensions">Dimensiones:</span>
                                 <span class="info-value" id="original-dimensions">-</span>
                             </div>
                             <div class="info-item">
-                                <span class="info-label">Formato:</span>
+                                <span class="info-label" data-i18n="label-format-original">Formato:</span>
                                 <span class="info-value" id="original-format">-</span>
                             </div>
                         </div>
@@ -461,7 +461,7 @@
 
                 <!-- Generated Favicons -->
                 <div id="favicons-container">
-                    <h3 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 1.5rem; color: var(--text-primary);">Favicons Generados</h3>
+                    <h3 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 1.5rem; color: var(--text-primary);" data-i18n="favicons-generated">Favicons Generados</h3>
                     <div class="favicons-grid" id="favicons-grid">
                         <!-- Los favicons se generarán dinámicamente -->
                     </div>
@@ -469,14 +469,15 @@
 
                 <!-- Action Buttons -->
                 <div class="action-buttons">
-                    <button class="btn-download-all" id="download-all-btn">Descargar Todos los Favicons</button>
-                    <button class="btn-secondary" id="reset-btn">Nueva Imagen</button>
+                    <button class="btn-download-all" id="download-all-btn" data-i18n="btn-download-all">Descargar Todos los Favicons</button>
+                    <button class="btn-secondary" id="reset-btn" data-i18n="btn-reset">Nueva Imagen</button>
                 </div>
             </div>
         </div>
     </main>
 
-    <script src="/script.js"></script>
+    <script src="/common-translations.js"></script>
+    <script src="/tool-base.js"></script>
     <script src="/tools/image-tools/favicon-generator/favicon-generator.js"></script>
 </body>
 </html>

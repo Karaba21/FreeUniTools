@@ -3,27 +3,102 @@ let originalFile = null;
 let originalImageData = null;
 let convertedBlob = null;
 
-// Información de formatos
-const formatInfo = {
-    jpeg: {
-        title: 'JPEG',
-        description: 'Ideal para fotografías y imágenes con muchos colores. Formato con pérdida que ofrece buena compresión. No soporta transparencia.'
+// Traducciones específicas de Image Converter
+const toolTranslations = {
+    es: {
+        'tool-title': 'Conversor de Imágenes',
+        'tool-description': 'Convierte tus imágenes entre diferentes formatos. Soporta JPEG, PNG, WebP y más formatos populares.',
+        'upload-text': 'Arrastra y suelta tu imagen aquí',
+        'upload-hint': 'o haz clic para seleccionar un archivo',
+        'label-format': 'Formato de salida',
+        'format-info-title': 'Información del formato',
+        'format-info-text': 'Selecciona un formato para ver información',
+        'label-quality': 'Calidad (solo para JPEG y WebP)',
+        'preview-original': 'Imagen Original',
+        'preview-converted': 'Imagen Convertida',
+        'label-size': 'Tamaño:',
+        'label-dimensions': 'Dimensiones:',
+        'label-format-original': 'Formato:',
+        'btn-download': 'Descargar Imagen Convertida',
+        'btn-reset': 'Nueva Imagen',
+        'alert-invalid-file': 'Por favor, selecciona un archivo de imagen válido.',
+        'alert-invalid-drag': 'Por favor, arrastra un archivo de imagen válido.',
+        'alert-convert-error': 'Error al convertir la imagen. Por favor, intenta de nuevo.',
+        'alert-no-converted': 'No hay imagen convertida para descargar.',
+        'format-jpeg-desc': 'Ideal para fotografías y imágenes con muchos colores. Formato con pérdida que ofrece buena compresión. No soporta transparencia.',
+        'format-png-desc': 'Formato sin pérdida ideal para imágenes con transparencia, gráficos y capturas de pantalla. Archivos generalmente más grandes que JPEG.',
+        'format-webp-desc': 'Formato moderno desarrollado por Google. Ofrece mejor compresión que JPEG y PNG, soporta transparencia y animación. Excelente para web.'
     },
-    png: {
-        title: 'PNG',
-        description: 'Formato sin pérdida ideal para imágenes con transparencia, gráficos y capturas de pantalla. Archivos generalmente más grandes que JPEG.'
-    },
-    webp: {
-        title: 'WebP',
-        description: 'Formato moderno desarrollado por Google. Ofrece mejor compresión que JPEG y PNG, soporta transparencia y animación. Excelente para web.'
+    en: {
+        'tool-title': 'Image Converter',
+        'tool-description': 'Convert your images between different formats. Supports JPEG, PNG, WebP and more popular formats.',
+        'upload-text': 'Drag and drop your image here',
+        'upload-hint': 'or click to select a file',
+        'label-format': 'Output Format',
+        'format-info-title': 'Format Information',
+        'format-info-text': 'Select a format to see information',
+        'label-quality': 'Quality (JPEG and WebP only)',
+        'preview-original': 'Original Image',
+        'preview-converted': 'Converted Image',
+        'label-size': 'Size:',
+        'label-dimensions': 'Dimensions:',
+        'label-format-original': 'Format:',
+        'btn-download': 'Download Converted Image',
+        'btn-reset': 'New Image',
+        'alert-invalid-file': 'Please select a valid image file.',
+        'alert-invalid-drag': 'Please drag a valid image file.',
+        'alert-convert-error': 'Error converting the image. Please try again.',
+        'alert-no-converted': 'No converted image to download.',
+        'format-jpeg-desc': 'Ideal for photographs and images with many colors. Lossy format that offers good compression. Does not support transparency.',
+        'format-png-desc': 'Lossless format ideal for images with transparency, graphics and screenshots. Files are generally larger than JPEG.',
+        'format-webp-desc': 'Modern format developed by Google. Offers better compression than JPEG and PNG, supports transparency and animation. Excellent for web.'
+    }
+};
+
+// Información de formatos (se actualizará según el idioma)
+let formatInfo = {};
+
+function updateFormatInfoData() {
+    formatInfo = {
+        jpeg: {
+            title: 'JPEG',
+            description: toolTranslations[currentLanguage]['format-jpeg-desc']
+        },
+        png: {
+            title: 'PNG',
+            description: toolTranslations[currentLanguage]['format-png-desc']
+        },
+        webp: {
+            title: 'WebP',
+            description: toolTranslations[currentLanguage]['format-webp-desc']
+        }
+    };
+}
+
+// Guardar referencia a applyLanguage original
+const originalApplyLanguage = applyLanguage;
+
+// Sobrescribir applyLanguage para incluir actualización de formato
+applyLanguage = function() {
+    originalApplyLanguage();
+    if (typeof formatSelect !== 'undefined' && formatSelect) {
+        updateFormatInfo(formatSelect.value);
+    } else {
+        const select = document.getElementById('format-select');
+        if (select) {
+            updateFormatInfo(select.value);
+        }
     }
 };
 
 // Inicialización
 document.addEventListener('DOMContentLoaded', () => {
+    initLanguageAndTheme();
+    updateFormatInfoData();
     setupUploadArea();
     setupControls();
-    updateFormatInfo('jpeg');
+    const formatSelect = document.getElementById('format-select');
+    updateFormatInfo(formatSelect ? formatSelect.value : 'jpeg');
 });
 
 // Configurar área de carga
@@ -42,7 +117,7 @@ function setupUploadArea() {
         if (file && file.type.startsWith('image/')) {
             handleFile(file);
         } else {
-            alert('Por favor, selecciona un archivo de imagen válido.');
+            alert(toolTranslations[currentLanguage]['alert-invalid-file']);
         }
     });
 
@@ -64,7 +139,7 @@ function setupUploadArea() {
         if (file && file.type.startsWith('image/')) {
             handleFile(file);
         } else {
-            alert('Por favor, arrastra un archivo de imagen válido.');
+            alert(toolTranslations[currentLanguage]['alert-invalid-drag']);
         }
     });
 }
@@ -177,10 +252,13 @@ function setupControls() {
 
 // Actualizar información del formato
 function updateFormatInfo(format) {
+    updateFormatInfoData();
     const info = formatInfo[format];
     if (info) {
-        document.getElementById('format-info-title').textContent = info.title;
-        document.getElementById('format-info-text').textContent = info.description;
+        const titleEl = document.getElementById('format-info-title');
+        const textEl = document.getElementById('format-info-text');
+        if (titleEl) titleEl.textContent = info.title;
+        if (textEl) textEl.textContent = info.description;
     }
 }
 
@@ -237,7 +315,7 @@ function convertImage() {
                 convertedBlob = blob;
                 displayConvertedImage(blob, format);
             } else {
-                alert('Error al convertir la imagen. Por favor, intenta de nuevo.');
+                alert(toolTranslations[currentLanguage]['alert-convert-error']);
             }
         }, `image/${format}`, options);
     }, 100);
@@ -260,7 +338,7 @@ function displayConvertedImage(blob, format) {
 // Descargar imagen convertida
 function downloadConvertedImage() {
     if (!convertedBlob) {
-        alert('No hay imagen convertida para descargar.');
+        alert(toolTranslations[currentLanguage]['alert-no-converted']);
         return;
     }
 

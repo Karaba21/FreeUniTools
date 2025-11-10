@@ -361,45 +361,45 @@
             <div class="nav-categories" id="nav-categories">
                 <!-- Image Tools Dropdown -->
                 <div class="dropdown-container">
-                    <a href="/#image-tools" class="nav-link" data-category="image">
+                    <a href="/#image-tools" class="nav-link" data-category="image" data-i18n="nav-image-tools">
                         Image Tools
                         <span class="dropdown-arrow">▼</span>
                     </a>
                     <div class="dropdown-menu" data-dropdown="image">
-                        <a href="/image-compressor" class="dropdown-item">Image Compressor</a>
-                        <a href="/image-converter" class="dropdown-item">Image Converter</a>
-                        <a href="/image-scaling" class="dropdown-item">Image Scaling</a>
-                        <a href="/metadata-finder" class="dropdown-item">EXIF Metadata Detector</a>
-                        <a href="/favicon-generator" class="dropdown-item">Favicon Generator</a>
+                        <a href="/image-compressor" class="dropdown-item" data-i18n="nav-image-compressor">Image Compressor</a>
+                        <a href="/image-converter" class="dropdown-item" data-i18n="nav-image-converter">Image Converter</a>
+                        <a href="/image-scaling" class="dropdown-item" data-i18n="nav-image-scaling">Image Scaling</a>
+                        <a href="/metadata-finder" class="dropdown-item" data-i18n="nav-metadata-finder">EXIF Metadata Detector</a>
+                        <a href="/favicon-generator" class="dropdown-item" data-i18n="nav-favicon-generator">Favicon Generator</a>
                     </div>
                 </div>
 
                 <!-- Text Tools Dropdown -->
                 <div class="dropdown-container">
-                    <a href="/#text-tools" class="nav-link" data-category="text">
+                    <a href="/#text-tools" class="nav-link" data-category="text" data-i18n="nav-text-tools">
                         Text Tools
                         <span class="dropdown-arrow">▼</span>
                     </a>
                     <div class="dropdown-menu" data-dropdown="text">
-                        <a href="/word-counter" class="dropdown-item">Word Counter</a>
-                        <a href="/ascii-converter" class="dropdown-item">ASCII</a>
+                        <a href="/word-counter" class="dropdown-item" data-i18n="nav-word-counter">Word Counter</a>
+                        <a href="/ascii-converter" class="dropdown-item" data-i18n="nav-ascii">ASCII</a>
                     </div>
                 </div>
 
                 <!-- Number Tools Dropdown -->
                 <div class="dropdown-container">
-                    <a href="/#number-tools" class="nav-link" data-category="number">
+                    <a href="/#number-tools" class="nav-link" data-category="number" data-i18n="nav-number-tools">
                         Number Tools
                         <span class="dropdown-arrow">▼</span>
                     </a>
                     <div class="dropdown-menu" data-dropdown="number">
-                        <a href="/bmi-calculator" class="dropdown-item">BMI Calculator</a>
-                        <a href="/date-calculator" class="dropdown-item">Date Calculator</a>
-                        <a href="/interest-calculator" class="dropdown-item">Interests Calculator</a>
+                        <a href="/bmi-calculator" class="dropdown-item" data-i18n="nav-bmi-calculator">BMI Calculator</a>
+                        <a href="/date-calculator" class="dropdown-item" data-i18n="nav-date-calculator">Date Calculator</a>
+                        <a href="/interest-calculator" class="dropdown-item" data-i18n="nav-interest-calculator">Interests Calculator</a>
                     </div>
                 </div>
 
-                <a href="/qr-generator" class="nav-link" data-category="qr-generator">
+                <a href="/qr-generator" class="nav-link" data-category="qr-generator" data-i18n="nav-qr-generator">
                     QR Generator
                 </a>
             </div>
@@ -422,25 +422,25 @@
     <main class="main-content">
         <div class="tool-container">
             <div class="tool-header">
-                <h1 class="tool-title">QR Generator</h1>
-                <p class="tool-description">Generate custom QR codes for URLs, text, phone numbers, emails, and more. Download as PNG or SVG.</p>
+                <h1 class="tool-title" data-i18n="tool-title">QR Generator</h1>
+                <p class="tool-description" data-i18n="tool-description">Generate custom QR codes for URLs, text, phone numbers, emails, and more. Download as PNG or SVG.</p>
             </div>
 
             <!-- Input Section -->
             <div class="input-section">
                 <div class="input-group">
-                    <label class="input-label">QR Code Content</label>
+                    <label class="input-label" data-i18n="label-content">QR Code Content</label>
                     <textarea 
                         id="qr-content" 
                         class="input-field" 
-                        placeholder="Enter the text, URL, email, phone number, etc. that you want to convert into a QR code..."
+                        data-i18n-placeholder="placeholder-content"
                     ></textarea>
                     <div class="quick-actions">
-                        <button class="quick-action-btn" data-action="url">URL</button>
-                        <button class="quick-action-btn" data-action="email">Email</button>
-                        <button class="quick-action-btn" data-action="phone">Phone</button>
-                        <button class="quick-action-btn" data-action="wifi">WiFi</button>
-                        <button class="quick-action-btn" data-action="sms">SMS</button>
+                        <button class="quick-action-btn" data-action="url" data-i18n="quick-url">URL</button>
+                        <button class="quick-action-btn" data-action="email" data-i18n="quick-email">Email</button>
+                        <button class="quick-action-btn" data-action="phone" data-i18n="quick-phone">Phone</button>
+                        <button class="quick-action-btn" data-action="wifi" data-i18n="quick-wifi">WiFi</button>
+                        <button class="quick-action-btn" data-action="sms" data-i18n="quick-sms">SMS</button>
                     </div>
                 </div>
             </div>
@@ -448,7 +448,7 @@
             <!-- Customization Section -->
             <div class="customization-section">
                 <div class="control-group">
-                    <label class="control-label">Code Size</label>
+                    <label class="control-label" data-i18n="label-size">Code Size</label>
                     <div class="slider-container">
                         <input type="range" id="size-slider" class="slider" min="200" max="1000" step="50" value="400">
                         <span class="slider-value" id="size-value">400px</span>
@@ -456,33 +456,33 @@
                 </div>
 
                 <div class="control-group">
-                    <label class="control-label">Error Correction Level</label>
+                    <label class="control-label" data-i18n="label-error-level">Error Correction Level</label>
                     <select id="error-level-select" class="quality-select">
-                        <option value="L">Low (L) - ~7%</option>
-                        <option value="M" selected>Medium (M) - ~15%</option>
-                        <option value="Q">High (Q) - ~25%</option>
-                        <option value="H">Very High (H) - ~30%</option>
+                        <option value="L" data-i18n="error-low">Low (L) - ~7%</option>
+                        <option value="M" selected data-i18n="error-medium">Medium (M) - ~15%</option>
+                        <option value="Q" data-i18n="error-high">High (Q) - ~25%</option>
+                        <option value="H" data-i18n="error-very-high">Very High (H) - ~30%</option>
                     </select>
                 </div>
 
                 <div class="control-group">
-                    <label class="control-label">Code Color</label>
+                    <label class="control-label" data-i18n="label-code-color">Code Color</label>
                     <div class="color-input-container">
                         <input type="color" id="foreground-color" class="color-input" value="#000000">
-                        <span style="color: var(--text-primary);">QR Code Color</span>
+                        <span style="color: var(--text-primary);" data-i18n="label-qr-color">QR Code Color</span>
                     </div>
                 </div>
 
                 <div class="control-group">
-                    <label class="control-label">Background Color</label>
+                    <label class="control-label" data-i18n="label-bg-color">Background Color</label>
                     <div class="color-input-container">
                         <input type="color" id="background-color" class="color-input" value="#ffffff">
-                        <span style="color: var(--text-primary);">Background Color</span>
+                        <span style="color: var(--text-primary);" data-i18n="label-bg-color-text">Background Color</span>
                     </div>
                 </div>
 
                 <div class="control-group">
-                    <label class="control-label">Margin</label>
+                    <label class="control-label" data-i18n="label-margin">Margin</label>
                     <div class="slider-container">
                         <input type="range" id="margin-slider" class="slider" min="0" max="4" step="1" value="4">
                         <span class="slider-value" id="margin-value">4</span>
@@ -491,12 +491,12 @@
             </div>
 
             <!-- Generate Button -->
-            <button class="btn-primary" id="generate-btn">Generate QR Code</button>
+            <button class="btn-primary" id="generate-btn" data-i18n="btn-generate">Generate QR Code</button>
 
             <!-- Preview Section -->
             <div class="preview-section" id="preview-section">
                 <div class="preview-card">
-                    <div class="preview-card-title">Your QR Code</div>
+                    <div class="preview-card-title" data-i18n="preview-title">Your QR Code</div>
                     <div class="qr-code-container" id="qr-code-container">
                         <canvas id="qr-code-canvas"></canvas>
                     </div>
@@ -504,16 +504,17 @@
 
                 <!-- Action Buttons -->
                 <div class="action-buttons">
-                    <button class="btn-primary" id="download-png-btn">Download PNG</button>
-                    <button class="btn-secondary" id="download-svg-btn">Download SVG</button>
-                    <button class="btn-secondary" id="reset-btn">Generate New</button>
+                    <button class="btn-primary" id="download-png-btn" data-i18n="btn-download-png">Download PNG</button>
+                    <button class="btn-secondary" id="download-svg-btn" data-i18n="btn-download-svg">Download SVG</button>
+                    <button class="btn-secondary" id="reset-btn" data-i18n="btn-reset">Generate New</button>
                 </div>
             </div>
         </div>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
-    <script src="/script.js"></script>
+    <script src="/common-translations.js"></script>
+    <script src="/tool-base.js"></script>
     <script src="/tools/qr-tools/qr-tools.js"></script>
 </body>
 </html>

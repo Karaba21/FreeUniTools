@@ -374,45 +374,45 @@
             <div class="nav-categories" id="nav-categories">
                 <!-- Image Tools Dropdown -->
                 <div class="dropdown-container">
-                    <a href="/#image-tools" class="nav-link" data-category="image">
+                    <a href="/#image-tools" class="nav-link" data-category="image" data-i18n="nav-image-tools">
                         Image Tools
                         <span class="dropdown-arrow">▼</span>
                     </a>
                     <div class="dropdown-menu" data-dropdown="image">
-                        <a href="/image-compressor" class="dropdown-item">Image Compressor</a>
-                        <a href="/image-converter" class="dropdown-item">Image Converter</a>
-                        <a href="/image-scaling" class="dropdown-item">Image Scaling</a>
-                        <a href="/metadata-finder" class="dropdown-item">EXIF Metadata Detector</a>
-                        <a href="/favicon-generator" class="dropdown-item">Favicon Generator</a>
+                        <a href="/image-compressor" class="dropdown-item" data-i18n="nav-image-compressor">Image Compressor</a>
+                        <a href="/image-converter" class="dropdown-item" data-i18n="nav-image-converter">Image Converter</a>
+                        <a href="/image-scaling" class="dropdown-item" data-i18n="nav-image-scaling">Image Scaling</a>
+                        <a href="/metadata-finder" class="dropdown-item" data-i18n="nav-metadata-finder">EXIF Metadata Detector</a>
+                        <a href="/favicon-generator" class="dropdown-item" data-i18n="nav-favicon-generator">Favicon Generator</a>
                     </div>
                 </div>
 
                 <!-- Text Tools Dropdown -->
                 <div class="dropdown-container">
-                    <a href="/#text-tools" class="nav-link" data-category="text">
+                    <a href="/#text-tools" class="nav-link" data-category="text" data-i18n="nav-text-tools">
                         Text Tools
                         <span class="dropdown-arrow">▼</span>
                     </a>
                     <div class="dropdown-menu" data-dropdown="text">
-                        <a href="/word-counter" class="dropdown-item">Word Counter</a>
-                        <a href="/ascii-converter" class="dropdown-item">ASCII</a>
+                        <a href="/word-counter" class="dropdown-item" data-i18n="nav-word-counter">Word Counter</a>
+                        <a href="/ascii-converter" class="dropdown-item" data-i18n="nav-ascii">ASCII</a>
                     </div>
                 </div>
 
                 <!-- Number Tools Dropdown -->
                 <div class="dropdown-container">
-                    <a href="/#number-tools" class="nav-link" data-category="number">
+                    <a href="/#number-tools" class="nav-link" data-category="number" data-i18n="nav-number-tools">
                         Number Tools
                         <span class="dropdown-arrow">▼</span>
                     </a>
                     <div class="dropdown-menu" data-dropdown="number">
-                        <a href="/bmi-calculator" class="dropdown-item">BMI Calculator</a>
-                        <a href="/date-calculator" class="dropdown-item">Date Calculator</a>
-                        <a href="/interest-calculator" class="dropdown-item">Interests Calculator</a>
+                        <a href="/bmi-calculator" class="dropdown-item" data-i18n="nav-bmi-calculator">BMI Calculator</a>
+                        <a href="/date-calculator" class="dropdown-item" data-i18n="nav-date-calculator">Date Calculator</a>
+                        <a href="/interest-calculator" class="dropdown-item" data-i18n="nav-interest-calculator">Interests Calculator</a>
                     </div>
                 </div>
 
-                <a href="/qr-generator" class="nav-link" data-category="qr-generator">
+                <a href="/qr-generator" class="nav-link" data-category="qr-generator" data-i18n="nav-qr-generator">
                     QR Generator
                 </a>
             </div>
@@ -435,34 +435,34 @@
     <main class="main-content">
         <div class="tool-container">
             <div class="tool-header">
-                <h1 class="tool-title">Image Scaling</h1>
-                <p class="tool-description">Escala y redimensiona tus imágenes manteniendo la calidad. Ajusta el tamaño según tus necesidades.</p>
+                <h1 class="tool-title" data-i18n="tool-title">Image Scaling</h1>
+                <p class="tool-description" data-i18n="tool-description">Escala y redimensiona tus imágenes manteniendo la calidad. Ajusta el tamaño según tus necesidades.</p>
             </div>
 
             <!-- Upload Area -->
             <div class="upload-area" id="upload-area">
                 <div class="upload-icon">📐</div>
-                <div class="upload-text">Arrastra y suelta tu imagen aquí</div>
-                <div class="upload-hint">o haz clic para seleccionar un archivo</div>
+                <div class="upload-text" data-i18n="upload-text">Arrastra y suelta tu imagen aquí</div>
+                <div class="upload-hint" data-i18n="upload-hint">o haz clic para seleccionar un archivo</div>
                 <input type="file" id="file-input" accept="image/*">
             </div>
 
             <!-- Scaling Controls -->
             <div class="scaling-controls" id="scaling-controls" style="display: none;">
                 <div class="control-group">
-                    <label class="control-label">Dimensiones</label>
+                    <label class="control-label" data-i18n="label-dimensions">Dimensiones</label>
                     <div class="input-group">
-                        <input type="number" id="width-input" class="dimension-input" placeholder="Ancho" min="1">
+                        <input type="number" id="width-input" class="dimension-input" data-i18n-placeholder="placeholder-width" placeholder="Ancho" min="1">
                         <span class="dimension-separator">×</span>
-                        <input type="number" id="height-input" class="dimension-input" placeholder="Alto" min="1">
+                        <input type="number" id="height-input" class="dimension-input" data-i18n-placeholder="placeholder-height" placeholder="Alto" min="1">
                     </div>
                     <div class="checkbox-group">
                         <input type="checkbox" id="maintain-aspect" checked>
-                        <label for="maintain-aspect">Mantener proporción</label>
+                        <label for="maintain-aspect" data-i18n="label-maintain-aspect">Mantener proporción</label>
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label">Tamaños predefinidos</label>
+                    <label class="control-label" data-i18n="label-presets">Tamaños predefinidos</label>
                     <div class="preset-buttons">
                         <button class="preset-btn" data-preset="1920x1080">1920×1080 (Full HD)</button>
                         <button class="preset-btn" data-preset="1280x720">1280×720 (HD)</button>
@@ -479,19 +479,19 @@
                 <div class="preview-grid">
                     <!-- Original Image -->
                     <div class="preview-card">
-                        <div class="preview-card-title">Imagen Original</div>
+                        <div class="preview-card-title" data-i18n="preview-original">Imagen Original</div>
                         <img id="original-image" class="preview-image" alt="Original">
                         <div class="image-info">
                             <div class="info-item">
-                                <span class="info-label">Tamaño:</span>
+                                <span class="info-label" data-i18n="label-size">Tamaño:</span>
                                 <span class="info-value" id="original-size">-</span>
                             </div>
                             <div class="info-item">
-                                <span class="info-label">Dimensiones:</span>
+                                <span class="info-label" data-i18n="label-dimensions">Dimensiones:</span>
                                 <span class="info-value" id="original-dimensions">-</span>
                             </div>
                             <div class="info-item">
-                                <span class="info-label">Formato:</span>
+                                <span class="info-label" data-i18n="label-format-original">Formato:</span>
                                 <span class="info-value" id="original-format">-</span>
                             </div>
                         </div>
@@ -499,19 +499,19 @@
 
                     <!-- Scaled Image -->
                     <div class="preview-card">
-                        <div class="preview-card-title">Imagen Escalada</div>
+                        <div class="preview-card-title" data-i18n="preview-scaled">Imagen Escalada</div>
                         <img id="scaled-image" class="preview-image" alt="Escalada">
                         <div class="image-info">
                             <div class="info-item">
-                                <span class="info-label">Tamaño:</span>
+                                <span class="info-label" data-i18n="label-size">Tamaño:</span>
                                 <span class="info-value" id="scaled-size">-</span>
                             </div>
                             <div class="info-item">
-                                <span class="info-label">Dimensiones:</span>
+                                <span class="info-label" data-i18n="label-dimensions">Dimensiones:</span>
                                 <span class="info-value" id="scaled-dimensions">-</span>
                             </div>
                             <div class="info-item">
-                                <span class="info-label">Formato:</span>
+                                <span class="info-label" data-i18n="label-format-original">Formato:</span>
                                 <span class="info-value" id="scaled-format">-</span>
                             </div>
                         </div>
@@ -522,28 +522,29 @@
                 <div class="stats-comparison">
                     <div class="stat-card">
                         <div class="stat-value" id="scale-ratio">-</div>
-                        <div class="stat-label">Escala</div>
+                        <div class="stat-label" data-i18n="label-scale">Escala</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-value" id="size-change">-</div>
-                        <div class="stat-label">Cambio de Tamaño</div>
+                        <div class="stat-label" data-i18n="label-size-change">Cambio de Tamaño</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-value" id="pixels-change">-</div>
-                        <div class="stat-label">Píxeles Totales</div>
+                        <div class="stat-label" data-i18n="label-total-pixels">Píxeles Totales</div>
                     </div>
                 </div>
 
                 <!-- Action Buttons -->
                 <div class="action-buttons">
-                    <button class="btn-primary" id="download-btn">Descargar Imagen Escalada</button>
-                    <button class="btn-secondary" id="reset-btn">Nueva Imagen</button>
+                    <button class="btn-primary" id="download-btn" data-i18n="btn-download">Descargar Imagen Escalada</button>
+                    <button class="btn-secondary" id="reset-btn" data-i18n="btn-reset">Nueva Imagen</button>
                 </div>
             </div>
         </div>
     </main>
 
-    <script src="/script.js"></script>
+    <script src="/common-translations.js"></script>
+    <script src="/tool-base.js"></script>
     <script src="/tools/image-tools/image-scaling/image-scaling.js"></script>
 </body>
 </html>

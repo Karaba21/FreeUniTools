@@ -290,45 +290,45 @@
             <div class="nav-categories" id="nav-categories">
                 <!-- Image Tools Dropdown -->
                 <div class="dropdown-container">
-                    <a href="/#image-tools" class="nav-link" data-category="image">
+                    <a href="/#image-tools" class="nav-link" data-category="image" data-i18n="nav-image-tools">
                         Image Tools
                         <span class="dropdown-arrow">▼</span>
                     </a>
                     <div class="dropdown-menu" data-dropdown="image">
-                        <a href="/image-compressor" class="dropdown-item">Image Compressor</a>
-                        <a href="/image-converter" class="dropdown-item">Image Converter</a>
-                        <a href="/image-scaling" class="dropdown-item">Image Scaling</a>
-                        <a href="/metadata-finder" class="dropdown-item">EXIF Metadata Detector</a>
-                        <a href="/favicon-generator" class="dropdown-item">Favicon Generator</a>
+                        <a href="/image-compressor" class="dropdown-item" data-i18n="nav-image-compressor">Image Compressor</a>
+                        <a href="/image-converter" class="dropdown-item" data-i18n="nav-image-converter">Image Converter</a>
+                        <a href="/image-scaling" class="dropdown-item" data-i18n="nav-image-scaling">Image Scaling</a>
+                        <a href="/metadata-finder" class="dropdown-item" data-i18n="nav-metadata-finder">EXIF Metadata Detector</a>
+                        <a href="/favicon-generator" class="dropdown-item" data-i18n="nav-favicon-generator">Favicon Generator</a>
                     </div>
                 </div>
 
                 <!-- Text Tools Dropdown -->
                 <div class="dropdown-container">
-                    <a href="/#text-tools" class="nav-link" data-category="text">
+                    <a href="/#text-tools" class="nav-link" data-category="text" data-i18n="nav-text-tools">
                         Text Tools
                         <span class="dropdown-arrow">▼</span>
                     </a>
                     <div class="dropdown-menu" data-dropdown="text">
-                        <a href="/word-counter" class="dropdown-item">Word Counter</a>
-                        <a href="/ascii-converter" class="dropdown-item">ASCII</a>
+                        <a href="/word-counter" class="dropdown-item" data-i18n="nav-word-counter">Word Counter</a>
+                        <a href="/ascii-converter" class="dropdown-item" data-i18n="nav-ascii">ASCII</a>
                     </div>
                 </div>
 
                 <!-- Number Tools Dropdown -->
                 <div class="dropdown-container">
-                    <a href="/#number-tools" class="nav-link" data-category="number">
+                    <a href="/#number-tools" class="nav-link" data-category="number" data-i18n="nav-number-tools">
                         Number Tools
                         <span class="dropdown-arrow">▼</span>
                     </a>
                     <div class="dropdown-menu" data-dropdown="number">
-                        <a href="/bmi-calculator" class="dropdown-item">BMI Calculator</a>
-                        <a href="/date-calculator" class="dropdown-item">Date Calculator</a>
-                        <a href="/interest-calculator" class="dropdown-item">Interests Calculator</a>
+                        <a href="/bmi-calculator" class="dropdown-item" data-i18n="nav-bmi-calculator">BMI Calculator</a>
+                        <a href="/date-calculator" class="dropdown-item" data-i18n="nav-date-calculator">Date Calculator</a>
+                        <a href="/interest-calculator" class="dropdown-item" data-i18n="nav-interest-calculator">Interests Calculator</a>
                     </div>
                 </div>
 
-                <a href="/qr-generator" class="nav-link" data-category="qr-generator">
+                <a href="/qr-generator" class="nav-link" data-category="qr-generator" data-i18n="nav-qr-generator">
                     QR Generator
                 </a>
             </div>
@@ -351,41 +351,43 @@
     <main class="main-content">
         <div class="tool-container">
             <div class="tool-header">
-                <h1 class="tool-title">ASCII Converter</h1>
-                <p class="tool-description">Convierte entre texto, códigos ASCII, binario y crea arte ASCII estilo terminal.</p>
+                <h1 class="tool-title" data-i18n="tool-title">ASCII Converter</h1>
+                <p class="tool-description" data-i18n="tool-description">Convierte entre texto, códigos ASCII, binario y crea arte ASCII estilo terminal.</p>
             </div>
 
             <!-- Tabs -->
             <div class="tabs-container">
-                <button class="tab-button active" data-tab="ascii-codes">ASCII Codes</button>
-                <button class="tab-button" data-tab="binary">Binary</button>
-                <button class="tab-button" data-tab="ascii-art">ASCII Art</button>
+                <button class="tab-button active" data-tab="ascii-codes" data-i18n="tab-ascii-codes">ASCII Codes</button>
+                <button class="tab-button" data-tab="binary" data-i18n="tab-binary">Binary</button>
+                <button class="tab-button" data-tab="ascii-art" data-i18n="tab-ascii-art">ASCII Art</button>
             </div>
 
             <!-- ASCII Codes Tab -->
             <div class="tab-content active" id="ascii-codes-tab">
                 <div class="converter-section">
                     <div class="converter-box">
-                        <label class="converter-label">Texto → Códigos ASCII</label>
+                        <label class="converter-label" data-i18n="label-text-to-ascii">Texto → Códigos ASCII</label>
                         <textarea 
                             id="text-to-ascii-input" 
                             class="converter-input" 
+                            data-i18n-placeholder="placeholder-text"
                             placeholder="Escribe tu texto aquí..."
                         ></textarea>
                     </div>
                     <div class="converter-box">
-                        <label class="converter-label">Códigos ASCII → Texto</label>
+                        <label class="converter-label" data-i18n="label-ascii-to-text">Códigos ASCII → Texto</label>
                         <textarea 
                             id="ascii-to-text-input" 
                             class="converter-input" 
+                            data-i18n-placeholder="placeholder-ascii"
                             placeholder="Escribe los códigos ASCII separados por espacios (ej: 72 101 108 108 111)..."
                         ></textarea>
                     </div>
                 </div>
                 <div class="action-buttons">
-                    <button class="btn-primary" id="convert-text-to-ascii">Convertir Texto → ASCII</button>
-                    <button class="btn-primary" id="convert-ascii-to-text">Convertir ASCII → Texto</button>
-                    <button class="btn-secondary" id="clear-ascii">Limpiar</button>
+                    <button class="btn-primary" id="convert-text-to-ascii" data-i18n="btn-text-to-ascii">Convertir Texto → ASCII</button>
+                    <button class="btn-primary" id="convert-ascii-to-text" data-i18n="btn-ascii-to-text">Convertir ASCII → Texto</button>
+                    <button class="btn-secondary" id="clear-ascii" data-i18n="btn-clear">Limpiar</button>
                 </div>
             </div>
 
@@ -393,26 +395,28 @@
             <div class="tab-content" id="binary-tab">
                 <div class="converter-section">
                     <div class="converter-box">
-                        <label class="converter-label">Texto → Binario</label>
+                        <label class="converter-label" data-i18n="label-text-to-binary">Texto → Binario</label>
                         <textarea 
                             id="text-to-binary-input" 
                             class="converter-input" 
+                            data-i18n-placeholder="placeholder-text"
                             placeholder="Escribe tu texto aquí..."
                         ></textarea>
                     </div>
                     <div class="converter-box">
-                        <label class="converter-label">Binario → Texto</label>
+                        <label class="converter-label" data-i18n="label-binary-to-text">Binario → Texto</label>
                         <textarea 
                             id="binary-to-text-input" 
                             class="converter-input" 
+                            data-i18n-placeholder="placeholder-binary"
                             placeholder="Escribe el binario separado por espacios (ej: 01001000 01100101 01101100 01101100 01101111)..."
                         ></textarea>
                     </div>
                 </div>
                 <div class="action-buttons">
-                    <button class="btn-primary" id="convert-text-to-binary">Convertir Texto → Binario</button>
-                    <button class="btn-primary" id="convert-binary-to-text">Convertir Binario → Texto</button>
-                    <button class="btn-secondary" id="clear-binary">Limpiar</button>
+                    <button class="btn-primary" id="convert-text-to-binary" data-i18n="btn-text-to-binary">Convertir Texto → Binario</button>
+                    <button class="btn-primary" id="convert-binary-to-text" data-i18n="btn-binary-to-text">Convertir Binario → Texto</button>
+                    <button class="btn-secondary" id="clear-binary" data-i18n="btn-clear">Limpiar</button>
                 </div>
             </div>
 
@@ -421,17 +425,18 @@
                 <div class="ascii-art-section">
                     <div class="ascii-art-controls">
                         <div class="control-group">
-                            <label class="control-label">Texto</label>
+                            <label class="control-label" data-i18n="label-text">Texto</label>
                             <input 
                                 type="text" 
                                 id="ascii-art-text" 
                                 class="control-input" 
+                                data-i18n-placeholder="placeholder-ascii-art"
                                 placeholder="Escribe el texto para convertir a ASCII art..."
                                 value="Hello"
                             >
                         </div>
                         <div class="control-group">
-                            <label class="control-label">Fuente</label>
+                            <label class="control-label" data-i18n="label-font">Fuente</label>
                             <select id="ascii-art-font" class="control-input">
                                 <option value="Standard">Standard</option>
                                 <option value="3D-ASCII">3D-ASCII</option>
@@ -457,12 +462,12 @@
                         </div>
                     </div>
                     <div class="action-buttons">
-                        <button class="btn-primary" id="generate-ascii-art">Generar ASCII Art</button>
-                        <button class="btn-secondary" id="copy-ascii-art">Copiar</button>
-                        <button class="btn-secondary" id="clear-ascii-art">Limpiar</button>
+                        <button class="btn-primary" id="generate-ascii-art" data-i18n="btn-generate-art">Generar ASCII Art</button>
+                        <button class="btn-secondary" id="copy-ascii-art" data-i18n="btn-copy">Copiar</button>
+                        <button class="btn-secondary" id="clear-ascii-art" data-i18n="btn-clear">Limpiar</button>
                     </div>
-                    <label class="converter-label" style="margin-top: 1.5rem; margin-bottom: 0.75rem;">Resultado</label>
-                    <div style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+                    <label class="converter-label" style="margin-top: 1.5rem; margin-bottom: 0.75rem;" data-i18n="label-result">Resultado</label>
+                    <div style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 0.5rem;" data-i18n="hint-monospace">
                         💡 Para que se vea correcto al pegar, usa un editor con fuente monospace (VS Code, Notepad, Terminal, etc.)
                     </div>
                     <pre id="ascii-art-output" class="ascii-art-output"></pre>
@@ -471,7 +476,8 @@
         </div>
     </main>
 
-    <script src="/script.js"></script>
+    <script src="/common-translations.js"></script>
+    <script src="/tool-base.js"></script>
     <script src="/tools/word-tools/ascii-converter/ascii-converter.js"></script>
 </body>
 </html>

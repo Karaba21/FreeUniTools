@@ -1,3 +1,37 @@
+// Traducciones específicas de Date Calculator
+const toolTranslations = {
+    es: {
+        'tool-title': 'Calculador de Fechas',
+        'tool-description': 'Calcula cuánto tiempo falta para una fecha futura o cuánto tiempo ha pasado desde una fecha pasada.',
+        'label-select-date': 'Selecciona una fecha y hora',
+        'error-date': 'Por favor selecciona una fecha válida',
+        'label-years': 'Años',
+        'label-months': 'Meses',
+        'label-days': 'Días',
+        'label-hours': 'Horas',
+        'label-minutes': 'Minutos',
+        'label-seconds': 'Segundos',
+        'status-future': '⏳ Tiempo restante',
+        'status-past': '⏰ Tiempo transcurrido',
+        'date-selected': 'Fecha seleccionada:'
+    },
+    en: {
+        'tool-title': 'Date Calculator',
+        'tool-description': 'Calculate how much time is left until a future date or how much time has passed since a past date.',
+        'label-select-date': 'Select a date and time',
+        'error-date': 'Please select a valid date',
+        'label-years': 'Years',
+        'label-months': 'Months',
+        'label-days': 'Days',
+        'label-hours': 'Hours',
+        'label-minutes': 'Minutes',
+        'label-seconds': 'Seconds',
+        'status-future': '⏳ Time remaining',
+        'status-past': '⏰ Time elapsed',
+        'date-selected': 'Selected date:'
+    }
+};
+
 // Estado del calculador
 let targetDate = null;
 let countdownInterval = null;
@@ -5,6 +39,7 @@ let isFuture = true;
 
 // Inicialización
 document.addEventListener('DOMContentLoaded', () => {
+    initLanguageAndTheme();
     setupDateInput();
     
     // Asegurar que los valores iniciales sean 0 y no mostrar resultados
@@ -141,14 +176,15 @@ function displayResult() {
     
     // Actualizar estado
     if (isFuture) {
-        resultStatus.textContent = '⏳ Tiempo restante';
+        resultStatus.textContent = toolTranslations[currentLanguage]['status-future'];
         resultStatus.className = 'result-status future';
     } else {
-        resultStatus.textContent = '⏰ Tiempo transcurrido';
+        resultStatus.textContent = toolTranslations[currentLanguage]['status-past'];
         resultStatus.className = 'result-status past';
     }
     
     // Formatear fecha objetivo
+    const locale = currentLanguage === 'es' ? 'es-ES' : 'en-US';
     const dateOptions = { 
         year: 'numeric', 
         month: 'long', 
@@ -156,10 +192,10 @@ function displayResult() {
         hour: '2-digit',
         minute: '2-digit'
     };
-    const formattedDate = targetDate.toLocaleDateString('es-ES', dateOptions);
+    const formattedDate = targetDate.toLocaleDateString(locale, dateOptions);
     
     dateInfo.innerHTML = `
-        <strong>Fecha seleccionada:</strong> ${formattedDate}
+        <strong>${toolTranslations[currentLanguage]['date-selected']}</strong> ${formattedDate}
     `;
     
     // Mostrar sección de resultados

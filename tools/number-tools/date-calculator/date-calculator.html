@@ -238,45 +238,45 @@
             <div class="nav-categories" id="nav-categories">
                 <!-- Image Tools Dropdown -->
                 <div class="dropdown-container">
-                    <a href="/#image-tools" class="nav-link" data-category="image">
+                    <a href="/#image-tools" class="nav-link" data-category="image" data-i18n="nav-image-tools">
                         Image Tools
                         <span class="dropdown-arrow">▼</span>
                     </a>
                     <div class="dropdown-menu" data-dropdown="image">
-                        <a href="/image-compressor" class="dropdown-item">Image Compressor</a>
-                        <a href="/image-converter" class="dropdown-item">Image Converter</a>
-                        <a href="/image-scaling" class="dropdown-item">Image Scaling</a>
-                        <a href="/metadata-finder" class="dropdown-item">EXIF Metadata Detector</a>
-                        <a href="/favicon-generator" class="dropdown-item">Favicon Generator</a>
+                        <a href="/image-compressor" class="dropdown-item" data-i18n="nav-image-compressor">Image Compressor</a>
+                        <a href="/image-converter" class="dropdown-item" data-i18n="nav-image-converter">Image Converter</a>
+                        <a href="/image-scaling" class="dropdown-item" data-i18n="nav-image-scaling">Image Scaling</a>
+                        <a href="/metadata-finder" class="dropdown-item" data-i18n="nav-metadata-finder">EXIF Metadata Detector</a>
+                        <a href="/favicon-generator" class="dropdown-item" data-i18n="nav-favicon-generator">Favicon Generator</a>
                     </div>
                 </div>
 
                 <!-- Text Tools Dropdown -->
                 <div class="dropdown-container">
-                    <a href="/#text-tools" class="nav-link" data-category="text">
+                    <a href="/#text-tools" class="nav-link" data-category="text" data-i18n="nav-text-tools">
                         Text Tools
                         <span class="dropdown-arrow">▼</span>
                     </a>
                     <div class="dropdown-menu" data-dropdown="text">
-                        <a href="/word-counter" class="dropdown-item">Word Counter</a>
-                        <a href="/ascii-converter" class="dropdown-item">ASCII</a>
+                        <a href="/word-counter" class="dropdown-item" data-i18n="nav-word-counter">Word Counter</a>
+                        <a href="/ascii-converter" class="dropdown-item" data-i18n="nav-ascii">ASCII</a>
                     </div>
                 </div>
 
                 <!-- Number Tools Dropdown -->
                 <div class="dropdown-container">
-                    <a href="/#number-tools" class="nav-link" data-category="number">
+                    <a href="/#number-tools" class="nav-link" data-category="number" data-i18n="nav-number-tools">
                         Number Tools
                         <span class="dropdown-arrow">▼</span>
                     </a>
                     <div class="dropdown-menu" data-dropdown="number">
-                        <a href="/bmi-calculator" class="dropdown-item">BMI Calculator</a>
-                        <a href="/date-calculator" class="dropdown-item">Date Calculator</a>
-                        <a href="/interest-calculator" class="dropdown-item">Interests Calculator</a>
+                        <a href="/bmi-calculator" class="dropdown-item" data-i18n="nav-bmi-calculator">BMI Calculator</a>
+                        <a href="/date-calculator" class="dropdown-item" data-i18n="nav-date-calculator">Date Calculator</a>
+                        <a href="/interest-calculator" class="dropdown-item" data-i18n="nav-interest-calculator">Interests Calculator</a>
                     </div>
                 </div>
 
-                <a href="/qr-generator" class="nav-link" data-category="qr-generator">
+                <a href="/qr-generator" class="nav-link" data-category="qr-generator" data-i18n="nav-qr-generator">
                     QR Generator
                 </a>
             </div>
@@ -299,19 +299,19 @@
     <main class="main-content">
         <div class="tool-container">
             <div class="tool-header">
-                <h1 class="tool-title">Calculador de Fechas</h1>
-                <p class="tool-description">Calcula cuánto tiempo falta para una fecha futura o cuánto tiempo ha pasado desde una fecha pasada.</p>
+                <h1 class="tool-title" data-i18n="tool-title">Calculador de Fechas</h1>
+                <p class="tool-description" data-i18n="tool-description">Calcula cuánto tiempo falta para una fecha futura o cuánto tiempo ha pasado desde una fecha pasada.</p>
             </div>
 
             <div class="calculator-section">
                 <div class="input-group">
-                    <label class="input-label" for="target-date">Selecciona una fecha y hora</label>
+                    <label class="input-label" for="target-date" data-i18n="label-select-date">Selecciona una fecha y hora</label>
                     <input 
                         type="datetime-local" 
                         id="target-date" 
                         class="input-field"
                     >
-                    <div class="error-message" id="date-error">Por favor selecciona una fecha válida</div>
+                    <div class="error-message" id="date-error" data-i18n="error-date">Por favor selecciona una fecha válida</div>
                 </div>
 
                 <!-- Result Section -->
@@ -321,27 +321,27 @@
                     <div class="countdown-container">
                         <div class="time-unit">
                             <div class="time-value" id="years">0</div>
-                            <div class="time-label">Años</div>
+                            <div class="time-label" data-i18n="label-years">Años</div>
                         </div>
                         <div class="time-unit">
                             <div class="time-value" id="months">0</div>
-                            <div class="time-label">Meses</div>
+                            <div class="time-label" data-i18n="label-months">Meses</div>
                         </div>
                         <div class="time-unit">
                             <div class="time-value" id="days">0</div>
-                            <div class="time-label">Días</div>
+                            <div class="time-label" data-i18n="label-days">Días</div>
                         </div>
                         <div class="time-unit">
                             <div class="time-value" id="hours">0</div>
-                            <div class="time-label">Horas</div>
+                            <div class="time-label" data-i18n="label-hours">Horas</div>
                         </div>
                         <div class="time-unit">
                             <div class="time-value" id="minutes">0</div>
-                            <div class="time-label">Minutos</div>
+                            <div class="time-label" data-i18n="label-minutes">Minutos</div>
                         </div>
                         <div class="time-unit">
                             <div class="time-value" id="seconds">0</div>
-                            <div class="time-label">Segundos</div>
+                            <div class="time-label" data-i18n="label-seconds">Segundos</div>
                         </div>
                     </div>
 
@@ -353,7 +353,8 @@
         </div>
     </main>
 
-    <script src="/script.js"></script>
+    <script src="/common-translations.js"></script>
+    <script src="/tool-base.js"></script>
     <script src="/tools/number-tools/date-calculator/date-calculator.js"></script>
 </body>
 </html>

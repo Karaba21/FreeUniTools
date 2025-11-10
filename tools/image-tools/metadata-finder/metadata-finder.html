@@ -317,45 +317,45 @@
             <div class="nav-categories" id="nav-categories">
                 <!-- Image Tools Dropdown -->
                 <div class="dropdown-container">
-                    <a href="/#image-tools" class="nav-link" data-category="image">
+                    <a href="/#image-tools" class="nav-link" data-category="image" data-i18n="nav-image-tools">
                         Image Tools
                         <span class="dropdown-arrow">▼</span>
                     </a>
                     <div class="dropdown-menu" data-dropdown="image">
-                        <a href="/image-compressor" class="dropdown-item">Image Compressor</a>
-                        <a href="/image-converter" class="dropdown-item">Image Converter</a>
-                        <a href="/image-scaling" class="dropdown-item">Image Scaling</a>
-                        <a href="/metadata-finder" class="dropdown-item">EXIF Metadata Detector</a>
-                        <a href="/favicon-generator" class="dropdown-item">Favicon Generator</a>
+                        <a href="/image-compressor" class="dropdown-item" data-i18n="nav-image-compressor">Image Compressor</a>
+                        <a href="/image-converter" class="dropdown-item" data-i18n="nav-image-converter">Image Converter</a>
+                        <a href="/image-scaling" class="dropdown-item" data-i18n="nav-image-scaling">Image Scaling</a>
+                        <a href="/metadata-finder" class="dropdown-item" data-i18n="nav-metadata-finder">EXIF Metadata Detector</a>
+                        <a href="/favicon-generator" class="dropdown-item" data-i18n="nav-favicon-generator">Favicon Generator</a>
                     </div>
                 </div>
 
                 <!-- Text Tools Dropdown -->
                 <div class="dropdown-container">
-                    <a href="/#text-tools" class="nav-link" data-category="text">
+                    <a href="/#text-tools" class="nav-link" data-category="text" data-i18n="nav-text-tools">
                         Text Tools
                         <span class="dropdown-arrow">▼</span>
                     </a>
                     <div class="dropdown-menu" data-dropdown="text">
-                        <a href="/word-counter" class="dropdown-item">Word Counter</a>
-                        <a href="/ascii-converter" class="dropdown-item">ASCII</a>
+                        <a href="/word-counter" class="dropdown-item" data-i18n="nav-word-counter">Word Counter</a>
+                        <a href="/ascii-converter" class="dropdown-item" data-i18n="nav-ascii">ASCII</a>
                     </div>
                 </div>
 
                 <!-- Number Tools Dropdown -->
                 <div class="dropdown-container">
-                    <a href="/#number-tools" class="nav-link" data-category="number">
+                    <a href="/#number-tools" class="nav-link" data-category="number" data-i18n="nav-number-tools">
                         Number Tools
                         <span class="dropdown-arrow">▼</span>
                     </a>
                     <div class="dropdown-menu" data-dropdown="number">
-                        <a href="/bmi-calculator" class="dropdown-item">BMI Calculator</a>
-                        <a href="/date-calculator" class="dropdown-item">Date Calculator</a>
-                        <a href="/interest-calculator" class="dropdown-item">Interests Calculator</a>
+                        <a href="/bmi-calculator" class="dropdown-item" data-i18n="nav-bmi-calculator">BMI Calculator</a>
+                        <a href="/date-calculator" class="dropdown-item" data-i18n="nav-date-calculator">Date Calculator</a>
+                        <a href="/interest-calculator" class="dropdown-item" data-i18n="nav-interest-calculator">Interests Calculator</a>
                     </div>
                 </div>
 
-                <a href="/qr-generator" class="nav-link" data-category="qr-generator">
+                <a href="/qr-generator" class="nav-link" data-category="qr-generator" data-i18n="nav-qr-generator">
                     QR Generator
                 </a>
             </div>
@@ -378,15 +378,15 @@
     <main class="main-content">
         <div class="tool-container">
             <div class="tool-header">
-                <h1 class="tool-title">EXIF Metadata Detector</h1>
-                <p class="tool-description">Extrae y visualiza todos los metadatos EXIF de tus imágenes. Descubre información oculta como fecha, ubicación, cámara y más.</p>
+                <h1 class="tool-title" data-i18n="tool-title">EXIF Metadata Detector</h1>
+                <p class="tool-description" data-i18n="tool-description">Extrae y visualiza todos los metadatos EXIF de tus imágenes. Descubre información oculta como fecha, ubicación, cámara y más.</p>
             </div>
 
             <!-- Upload Area -->
             <div class="upload-area" id="upload-area">
                 <div class="upload-icon">📸</div>
-                <div class="upload-text">Arrastra y suelta tu imagen aquí</div>
-                <div class="upload-hint">o haz clic para seleccionar un archivo</div>
+                <div class="upload-text" data-i18n="upload-text">Arrastra y suelta tu imagen aquí</div>
+                <div class="upload-hint" data-i18n="upload-hint">o haz clic para seleccionar un archivo</div>
                 <input type="file" id="file-input" accept="image/*">
             </div>
 
@@ -395,19 +395,19 @@
                 <div class="preview-grid">
                     <!-- Image Preview -->
                     <div class="preview-card">
-                        <div class="preview-card-title">Vista Previa</div>
+                        <div class="preview-card-title" data-i18n="preview-title">Vista Previa</div>
                         <img id="preview-image" class="preview-image" alt="Vista previa">
                         <div class="image-info">
                             <div class="info-item">
-                                <span class="info-label">Tamaño:</span>
+                                <span class="info-label" data-i18n="label-size">Tamaño:</span>
                                 <span class="info-value" id="file-size">-</span>
                             </div>
                             <div class="info-item">
-                                <span class="info-label">Dimensiones:</span>
+                                <span class="info-label" data-i18n="label-dimensions">Dimensiones:</span>
                                 <span class="info-value" id="image-dimensions">-</span>
                             </div>
                             <div class="info-item">
-                                <span class="info-label">Formato:</span>
+                                <span class="info-label" data-i18n="label-format-original">Formato:</span>
                                 <span class="info-value" id="image-format">-</span>
                             </div>
                         </div>
@@ -416,17 +416,17 @@
 
                 <!-- Metadata Section -->
                 <div class="metadata-section" id="metadata-section">
-                    <div class="metadata-title">Metadatos EXIF</div>
-                    <div class="loading" id="loading-metadata">Cargando metadatos...</div>
+                    <div class="metadata-title" data-i18n="metadata-title">Metadatos EXIF</div>
+                    <div class="loading" id="loading-metadata" data-i18n="loading-metadata">Cargando metadatos...</div>
                     <div class="metadata-grid" id="metadata-grid" style="display: none;"></div>
-                    <div class="no-metadata" id="no-metadata" style="display: none;">
+                    <div class="no-metadata" id="no-metadata" style="display: none;" data-i18n="no-metadata">
                         No se encontraron metadatos EXIF en esta imagen.
                     </div>
                 </div>
 
                 <!-- Action Buttons -->
                 <div class="action-buttons">
-                    <button class="btn-secondary" id="reset-btn">Nueva Imagen</button>
+                    <button class="btn-secondary" id="reset-btn" data-i18n="btn-reset">Nueva Imagen</button>
                 </div>
             </div>
         </div>
@@ -443,7 +443,8 @@
             }
         });
     </script>
-    <script src="/script.js"></script>
+    <script src="/common-translations.js"></script>
+    <script src="/tool-base.js"></script>
     <script src="/tools/image-tools/metadata-finder/metadata-finder.js"></script>
 </body>
 </html>

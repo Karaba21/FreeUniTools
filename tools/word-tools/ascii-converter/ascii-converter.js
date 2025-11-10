@@ -1,5 +1,88 @@
+// Traducciones específicas de ASCII Converter
+const toolTranslations = {
+    es: {
+        'tool-title': 'Conversor ASCII',
+        'tool-description': 'Convierte entre texto, códigos ASCII, binario y crea arte ASCII estilo terminal.',
+        'tab-ascii-codes': 'Códigos ASCII',
+        'tab-binary': 'Binario',
+        'tab-ascii-art': 'Arte ASCII',
+        'label-text-to-ascii': 'Texto → Códigos ASCII',
+        'label-ascii-to-text': 'Códigos ASCII → Texto',
+        'label-text-to-binary': 'Texto → Binario',
+        'label-binary-to-text': 'Binario → Texto',
+        'label-text': 'Texto',
+        'label-font': 'Fuente',
+        'label-result': 'Resultado',
+        'placeholder-text': 'Escribe tu texto aquí...',
+        'placeholder-ascii': 'Escribe los códigos ASCII separados por espacios (ej: 72 101 108 108 111)...',
+        'placeholder-binary': 'Escribe el binario separado por espacios (ej: 01001000 01100101 01101100 01101100 01101111)...',
+        'placeholder-ascii-art': 'Escribe el texto para convertir a ASCII art...',
+        'btn-text-to-ascii': 'Convertir Texto → ASCII',
+        'btn-ascii-to-text': 'Convertir ASCII → Texto',
+        'btn-text-to-binary': 'Convertir Texto → Binario',
+        'btn-binary-to-text': 'Convertir Binario → Texto',
+        'btn-generate-art': 'Generar ASCII Art',
+        'btn-copy': 'Copiar',
+        'btn-clear': 'Limpiar',
+        'hint-monospace': '💡 Para que se vea correcto al pegar, usa un editor con fuente monospace (VS Code, Notepad, Terminal, etc.)',
+        'alert-no-text': 'Por favor, ingresa algún texto',
+        'alert-no-ascii': 'Por favor, ingresa códigos ASCII',
+        'alert-invalid-ascii': 'No se encontraron códigos ASCII válidos',
+        'alert-ascii-error': 'Error al convertir los códigos ASCII: ',
+        'alert-no-binary': 'Por favor, ingresa código binario',
+        'alert-invalid-binary': 'No se pudo convertir el binario. Asegúrate de que sea válido.',
+        'alert-binary-error': 'Error al convertir el binario: ',
+        'alert-library-error': 'Error: La librería de ASCII art no está cargada. Por favor, recarga la página.',
+        'alert-generating': 'Generando ASCII art...',
+        'alert-no-art': 'No hay ASCII art para copiar. Genera uno primero.',
+        'alert-copy-error': 'Error al copiar: ',
+        'alert-copied': '¡Copiado!',
+        'simple-mode': '(Modo simple - fuente no disponible)'
+    },
+    en: {
+        'tool-title': 'ASCII Converter',
+        'tool-description': 'Convert between text, ASCII codes, binary and create terminal-style ASCII art.',
+        'tab-ascii-codes': 'ASCII Codes',
+        'tab-binary': 'Binary',
+        'tab-ascii-art': 'ASCII Art',
+        'label-text-to-ascii': 'Text → ASCII Codes',
+        'label-ascii-to-text': 'ASCII Codes → Text',
+        'label-text-to-binary': 'Text → Binary',
+        'label-binary-to-text': 'Binary → Text',
+        'label-text': 'Text',
+        'label-font': 'Font',
+        'label-result': 'Result',
+        'placeholder-text': 'Type your text here...',
+        'placeholder-ascii': 'Enter ASCII codes separated by spaces (e.g.: 72 101 108 108 111)...',
+        'placeholder-binary': 'Enter binary separated by spaces (e.g.: 01001000 01100101 01101100 01101100 01101111)...',
+        'placeholder-ascii-art': 'Enter text to convert to ASCII art...',
+        'btn-text-to-ascii': 'Convert Text → ASCII',
+        'btn-ascii-to-text': 'Convert ASCII → Text',
+        'btn-text-to-binary': 'Convert Text → Binary',
+        'btn-binary-to-text': 'Convert Binary → Text',
+        'btn-generate-art': 'Generate ASCII Art',
+        'btn-copy': 'Copy',
+        'btn-clear': 'Clear',
+        'hint-monospace': '💡 To display correctly when pasting, use an editor with monospace font (VS Code, Notepad, Terminal, etc.)',
+        'alert-no-text': 'Please enter some text',
+        'alert-no-ascii': 'Please enter ASCII codes',
+        'alert-invalid-ascii': 'No valid ASCII codes found',
+        'alert-ascii-error': 'Error converting ASCII codes: ',
+        'alert-no-binary': 'Please enter binary code',
+        'alert-invalid-binary': 'Could not convert binary. Make sure it is valid.',
+        'alert-binary-error': 'Error converting binary: ',
+        'alert-library-error': 'Error: ASCII art library is not loaded. Please reload the page.',
+        'alert-generating': 'Generating ASCII art...',
+        'alert-no-art': 'No ASCII art to copy. Generate one first.',
+        'alert-copy-error': 'Error copying: ',
+        'alert-copied': 'Copied!',
+        'simple-mode': '(Simple mode - font not available)'
+    }
+};
+
 // Tab switching functionality
 document.addEventListener('DOMContentLoaded', function() {
+    initLanguageAndTheme();
     const tabButtons = document.querySelectorAll('.tab-button');
     const tabContents = document.querySelectorAll('.tab-content');
 
@@ -28,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function() {
     convertTextToAsciiBtn.addEventListener('click', () => {
         const text = textToAsciiInput.value;
         if (!text) {
-            alert('Por favor, ingresa algún texto');
+            alert(toolTranslations[currentLanguage]['alert-no-text']);
             return;
         }
 
@@ -43,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function() {
     convertAsciiToTextBtn.addEventListener('click', () => {
         const asciiString = asciiToTextInput.value.trim();
         if (!asciiString) {
-            alert('Por favor, ingresa códigos ASCII');
+            alert(toolTranslations[currentLanguage]['alert-no-ascii']);
             return;
         }
 
@@ -53,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 .filter(code => !isNaN(code) && code >= 0 && code <= 255);
 
             if (asciiCodes.length === 0) {
-                alert('No se encontraron códigos ASCII válidos');
+                alert(toolTranslations[currentLanguage]['alert-invalid-ascii']);
                 return;
             }
 
@@ -63,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             textToAsciiInput.value = text;
         } catch (error) {
-            alert('Error al convertir los códigos ASCII: ' + error.message);
+            alert(toolTranslations[currentLanguage]['alert-ascii-error'] + error.message);
         }
     });
 
@@ -84,7 +167,7 @@ document.addEventListener('DOMContentLoaded', function() {
     convertTextToBinaryBtn.addEventListener('click', () => {
         const text = textToBinaryInput.value;
         if (!text) {
-            alert('Por favor, ingresa algún texto');
+            alert(toolTranslations[currentLanguage]['alert-no-text']);
             return;
         }
 
@@ -103,7 +186,7 @@ document.addEventListener('DOMContentLoaded', function() {
     convertBinaryToTextBtn.addEventListener('click', () => {
         const binaryString = binaryToTextInput.value.trim();
         if (!binaryString) {
-            alert('Por favor, ingresa código binario');
+            alert(toolTranslations[currentLanguage]['alert-no-binary']);
             return;
         }
 
@@ -127,13 +210,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 .join('');
 
             if (text.length === 0) {
-                alert('No se pudo convertir el binario. Asegúrate de que sea válido.');
+                alert(toolTranslations[currentLanguage]['alert-invalid-binary']);
                 return;
             }
 
             textToBinaryInput.value = text;
         } catch (error) {
-            alert('Error al convertir el binario: ' + error.message);
+            alert(toolTranslations[currentLanguage]['alert-binary-error'] + error.message);
         }
     });
 
@@ -155,7 +238,7 @@ document.addEventListener('DOMContentLoaded', function() {
     generateAsciiArtBtn.addEventListener('click', () => {
         const text = asciiArtText.value.trim();
         if (!text) {
-            alert('Por favor, ingresa algún texto');
+            alert(toolTranslations[currentLanguage]['alert-no-text']);
             return;
         }
 
@@ -163,12 +246,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Check if figlet is loaded
         if (typeof figlet === 'undefined') {
-            alert('Error: La librería de ASCII art no está cargada. Por favor, recarga la página.');
+            alert(toolTranslations[currentLanguage]['alert-library-error']);
             return;
         }
 
         // Show loading state
-        asciiArtOutput.textContent = 'Generando ASCII art...';
+        asciiArtOutput.textContent = toolTranslations[currentLanguage]['alert-generating'];
         generateAsciiArtBtn.disabled = true;
 
         // Use a CORS proxy or direct font loading
@@ -327,7 +410,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 lines.push(line);
             }
             
-            asciiArtOutput.textContent = lines.join('\n') + '\n\n(Modo simple - fuente no disponible)';
+            asciiArtOutput.textContent = lines.join('\n') + '\n\n' + toolTranslations[currentLanguage]['simple-mode'];
         }
     });
 
@@ -335,7 +418,7 @@ document.addEventListener('DOMContentLoaded', function() {
     copyAsciiArtBtn.addEventListener('click', () => {
         const text = asciiArtOutput.textContent;
         if (!text || text.trim() === '') {
-            alert('No hay ASCII art para copiar. Genera uno primero.');
+            alert(toolTranslations[currentLanguage]['alert-no-art']);
             return;
         }
 
@@ -382,7 +465,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (successful) {
                 // Visual feedback
                 const originalText = copyAsciiArtBtn.textContent;
-                copyAsciiArtBtn.textContent = '¡Copiado!';
+                copyAsciiArtBtn.textContent = toolTranslations[currentLanguage]['alert-copied'];
                 copyAsciiArtBtn.style.background = 'var(--accent-primary)';
                 copyAsciiArtBtn.style.color = 'white';
                 
@@ -395,7 +478,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Fallback to clipboard API
                 navigator.clipboard.writeText(textToCopy).then(() => {
                     const originalText = copyAsciiArtBtn.textContent;
-                    copyAsciiArtBtn.textContent = '¡Copiado!';
+                    copyAsciiArtBtn.textContent = toolTranslations[currentLanguage]['alert-copied'];
                     copyAsciiArtBtn.style.background = 'var(--accent-primary)';
                     copyAsciiArtBtn.style.color = 'white';
                     
@@ -405,7 +488,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         copyAsciiArtBtn.style.color = '';
                     }, 2000);
                 }).catch(err => {
-                    alert('Error al copiar: ' + err.message);
+                    alert(toolTranslations[currentLanguage]['alert-copy-error'] + err.message);
                 });
             }
         } catch (err) {
@@ -413,7 +496,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Fallback to clipboard API
             navigator.clipboard.writeText(textToCopy).then(() => {
                 const originalText = copyAsciiArtBtn.textContent;
-                copyAsciiArtBtn.textContent = '¡Copiado!';
+                copyAsciiArtBtn.textContent = toolTranslations[currentLanguage]['alert-copied'];
                 copyAsciiArtBtn.style.background = 'var(--accent-primary)';
                 copyAsciiArtBtn.style.color = 'white';
                 

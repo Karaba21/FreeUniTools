@@ -4,8 +4,61 @@ let originalImageData = null;
 let scaledBlob = null;
 let aspectRatio = 1;
 
+// Traducciones específicas de Image Scaling
+const toolTranslations = {
+    es: {
+        'tool-title': 'Escalado de Imágenes',
+        'tool-description': 'Escala y redimensiona tus imágenes manteniendo la calidad. Ajusta el tamaño según tus necesidades.',
+        'upload-text': 'Arrastra y suelta tu imagen aquí',
+        'upload-hint': 'o haz clic para seleccionar un archivo',
+        'label-dimensions': 'Dimensiones',
+        'placeholder-width': 'Ancho',
+        'placeholder-height': 'Alto',
+        'label-maintain-aspect': 'Mantener proporción',
+        'label-presets': 'Tamaños predefinidos',
+        'preview-original': 'Imagen Original',
+        'preview-scaled': 'Imagen Escalada',
+        'label-size': 'Tamaño:',
+        'label-format-original': 'Formato:',
+        'label-scale': 'Escala',
+        'label-size-change': 'Cambio de Tamaño',
+        'label-total-pixels': 'Píxeles Totales',
+        'btn-download': 'Descargar Imagen Escalada',
+        'btn-reset': 'Nueva Imagen',
+        'alert-invalid-file': 'Por favor, selecciona un archivo de imagen válido.',
+        'alert-invalid-drag': 'Por favor, arrastra un archivo de imagen válido.',
+        'alert-scale-error': 'Error al escalar la imagen. Por favor, intenta de nuevo.',
+        'alert-no-scaled': 'No hay imagen escalada para descargar.'
+    },
+    en: {
+        'tool-title': 'Image Scaling',
+        'tool-description': 'Scale and resize your images while maintaining quality. Adjust the size according to your needs.',
+        'upload-text': 'Drag and drop your image here',
+        'upload-hint': 'or click to select a file',
+        'label-dimensions': 'Dimensions',
+        'placeholder-width': 'Width',
+        'placeholder-height': 'Height',
+        'label-maintain-aspect': 'Maintain aspect ratio',
+        'label-presets': 'Preset sizes',
+        'preview-original': 'Original Image',
+        'preview-scaled': 'Scaled Image',
+        'label-size': 'Size:',
+        'label-format-original': 'Format:',
+        'label-scale': 'Scale',
+        'label-size-change': 'Size Change',
+        'label-total-pixels': 'Total Pixels',
+        'btn-download': 'Download Scaled Image',
+        'btn-reset': 'New Image',
+        'alert-invalid-file': 'Please select a valid image file.',
+        'alert-invalid-drag': 'Please drag a valid image file.',
+        'alert-scale-error': 'Error scaling the image. Please try again.',
+        'alert-no-scaled': 'No scaled image to download.'
+    }
+};
+
 // Inicialización
 document.addEventListener('DOMContentLoaded', () => {
+    initLanguageAndTheme();
     setupUploadArea();
     setupControls();
 });
@@ -26,7 +79,7 @@ function setupUploadArea() {
         if (file && file.type.startsWith('image/')) {
             handleFile(file);
         } else {
-            alert('Por favor, selecciona un archivo de imagen válido.');
+            alert(toolTranslations[currentLanguage]['alert-invalid-file']);
         }
     });
 
@@ -48,7 +101,7 @@ function setupUploadArea() {
         if (file && file.type.startsWith('image/')) {
             handleFile(file);
         } else {
-            alert('Por favor, arrastra un archivo de imagen válido.');
+            alert(toolTranslations[currentLanguage]['alert-invalid-drag']);
         }
     });
 }
@@ -237,7 +290,7 @@ function scaleImage() {
             displayScaledImage(blob, newWidth, newHeight);
             updateStats(newWidth, newHeight, blob.size);
         } else {
-            alert('Error al escalar la imagen. Por favor, intenta de nuevo.');
+            alert(toolTranslations[currentLanguage]['alert-scale-error']);
         }
     }, originalImageData.type, 0.95);
 }
@@ -296,7 +349,7 @@ function updateStats(newWidth, newHeight, scaledSize) {
 // Descargar imagen escalada
 function downloadScaledImage() {
     if (!scaledBlob) {
-        alert('No hay imagen escalada para descargar.');
+        alert(toolTranslations[currentLanguage]['alert-no-scaled']);
         return;
     }
 

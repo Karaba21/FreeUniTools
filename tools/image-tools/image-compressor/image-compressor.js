@@ -3,8 +3,57 @@ let originalFile = null;
 let originalImageData = null;
 let compressedBlob = null;
 
+// Traducciones específicas de Image Compressor
+const toolTranslations = {
+    es: {
+        'tool-title': 'Compresor de Imágenes',
+        'tool-description': 'Comprime tus imágenes sin perder calidad. Reduce el tamaño de archivo manteniendo una excelente resolución visual.',
+        'upload-text': 'Arrastra y suelta tu imagen aquí',
+        'upload-hint': 'o haz clic para seleccionar un archivo',
+        'label-quality': 'Calidad de compresión',
+        'label-format': 'Formato de salida',
+        'preview-original': 'Imagen Original',
+        'preview-compressed': 'Imagen Comprimida',
+        'label-size': 'Tamaño:',
+        'label-dimensions': 'Dimensiones:',
+        'label-format-original': 'Formato:',
+        'label-reduction': 'Reducción',
+        'label-space-saved': 'Espacio Ahorrado',
+        'label-compressed': '% Comprimido',
+        'btn-download': 'Descargar Imagen Comprimida',
+        'btn-reset': 'Nueva Imagen',
+        'alert-invalid-file': 'Por favor, selecciona un archivo de imagen válido.',
+        'alert-invalid-drag': 'Por favor, arrastra un archivo de imagen válido.',
+        'alert-compress-error': 'Error al comprimir la imagen. Por favor, intenta de nuevo.',
+        'alert-no-compressed': 'No hay imagen comprimida para descargar.'
+    },
+    en: {
+        'tool-title': 'Image Compressor',
+        'tool-description': 'Compress your images without losing quality. Reduce file size while maintaining excellent visual resolution.',
+        'upload-text': 'Drag and drop your image here',
+        'upload-hint': 'or click to select a file',
+        'label-quality': 'Compression Quality',
+        'label-format': 'Output Format',
+        'preview-original': 'Original Image',
+        'preview-compressed': 'Compressed Image',
+        'label-size': 'Size:',
+        'label-dimensions': 'Dimensions:',
+        'label-format-original': 'Format:',
+        'label-reduction': 'Reduction',
+        'label-space-saved': 'Space Saved',
+        'label-compressed': '% Compressed',
+        'btn-download': 'Download Compressed Image',
+        'btn-reset': 'New Image',
+        'alert-invalid-file': 'Please select a valid image file.',
+        'alert-invalid-drag': 'Please drag a valid image file.',
+        'alert-compress-error': 'Error compressing the image. Please try again.',
+        'alert-no-compressed': 'No compressed image to download.'
+    }
+};
+
 // Inicialización
 document.addEventListener('DOMContentLoaded', () => {
+    initLanguageAndTheme();
     setupUploadArea();
     setupControls();
 });
@@ -25,7 +74,7 @@ function setupUploadArea() {
         if (file && file.type.startsWith('image/')) {
             handleFile(file);
         } else {
-            alert('Por favor, selecciona un archivo de imagen válido.');
+            alert(toolTranslations[currentLanguage]['alert-invalid-file']);
         }
     });
 
@@ -47,7 +96,7 @@ function setupUploadArea() {
         if (file && file.type.startsWith('image/')) {
             handleFile(file);
         } else {
-            alert('Por favor, arrastra un archivo de imagen válido.');
+            alert(toolTranslations[currentLanguage]['alert-invalid-drag']);
         }
     });
 }
@@ -232,7 +281,7 @@ function compressImage() {
                     updateStats(blob.size);
                 }
             } else {
-                alert('Error al comprimir la imagen. Por favor, intenta de nuevo.');
+                alert(toolTranslations[currentLanguage]['alert-compress-error']);
             }
         }, `image/${format}`, compressionQuality);
     }, 100);
@@ -281,7 +330,7 @@ function updateStats(compressedSize) {
 // Descargar imagen comprimida
 function downloadCompressedImage() {
     if (!compressedBlob) {
-        alert('No hay imagen comprimida para descargar.');
+        alert(toolTranslations[currentLanguage]['alert-no-compressed']);
         return;
     }
 

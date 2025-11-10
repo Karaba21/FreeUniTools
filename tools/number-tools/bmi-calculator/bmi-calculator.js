@@ -1,8 +1,55 @@
+// Traducciones específicas de BMI Calculator
+const toolTranslations = {
+    es: {
+        'tool-title': 'Calculadora de IMC',
+        'tool-description': 'Calcula tu Índice de Masa Corporal (BMI) para conocer tu estado de salud general.',
+        'unit-metric': 'Métrico',
+        'unit-imperial': 'Imperial',
+        'label-weight': 'Peso',
+        'label-height': 'Altura',
+        'btn-calculate': 'Calcular BMI',
+        'error-weight': 'Por favor ingresa un peso válido',
+        'error-height': 'Por favor ingresa una altura válida',
+        'scale-title': 'Escala de BMI',
+        'category-underweight': 'Bajo peso',
+        'category-normal': 'Normal',
+        'category-overweight': 'Sobrepeso',
+        'category-obese': 'Obesidad',
+        'category-normal-weight': 'Peso normal',
+        'desc-underweight': 'Tu BMI indica que estás por debajo del peso normal. Considera consultar con un profesional de la salud para asegurar una nutrición adecuada.',
+        'desc-normal': '¡Excelente! Tu BMI está dentro del rango normal. Mantén un estilo de vida saludable con ejercicio regular y una dieta balanceada.',
+        'desc-overweight': 'Tu BMI indica sobrepeso. Considera adoptar hábitos más saludables como ejercicio regular y una dieta equilibrada. Consulta con un profesional de la salud.',
+        'desc-obese': 'Tu BMI indica obesidad. Es recomendable consultar con un profesional de la salud para desarrollar un plan de pérdida de peso seguro y efectivo.'
+    },
+    en: {
+        'tool-title': 'BMI Calculator',
+        'tool-description': 'Calculate your Body Mass Index (BMI) to know your general health status.',
+        'unit-metric': 'Metric',
+        'unit-imperial': 'Imperial',
+        'label-weight': 'Weight',
+        'label-height': 'Height',
+        'btn-calculate': 'Calculate BMI',
+        'error-weight': 'Please enter a valid weight',
+        'error-height': 'Please enter a valid height',
+        'scale-title': 'BMI Scale',
+        'category-underweight': 'Underweight',
+        'category-normal': 'Normal',
+        'category-overweight': 'Overweight',
+        'category-obese': 'Obesity',
+        'category-normal-weight': 'Normal weight',
+        'desc-underweight': 'Your BMI indicates you are below normal weight. Consider consulting with a health professional to ensure adequate nutrition.',
+        'desc-normal': 'Excellent! Your BMI is within the normal range. Maintain a healthy lifestyle with regular exercise and a balanced diet.',
+        'desc-overweight': 'Your BMI indicates overweight. Consider adopting healthier habits such as regular exercise and a balanced diet. Consult with a health professional.',
+        'desc-obese': 'Your BMI indicates obesity. It is recommended to consult with a health professional to develop a safe and effective weight loss plan.'
+    }
+};
+
 // Estado de la calculadora
 let currentUnit = 'metric';
 
 // Inicialización
 document.addEventListener('DOMContentLoaded', () => {
+    initLanguageAndTheme();
     setupUnitSelector();
     setupCalculateButton();
     setupInputValidation();
@@ -151,21 +198,21 @@ function displayResult(bmi) {
     let category, categoryClass, description;
     
     if (bmi < 18.5) {
-        category = 'Bajo peso';
+        category = toolTranslations[currentLanguage]['category-underweight'];
         categoryClass = 'underweight';
-        description = 'Tu BMI indica que estás por debajo del peso normal. Considera consultar con un profesional de la salud para asegurar una nutrición adecuada.';
+        description = toolTranslations[currentLanguage]['desc-underweight'];
     } else if (bmi < 25) {
-        category = 'Peso normal';
+        category = toolTranslations[currentLanguage]['category-normal-weight'];
         categoryClass = 'normal';
-        description = '¡Excelente! Tu BMI está dentro del rango normal. Mantén un estilo de vida saludable con ejercicio regular y una dieta balanceada.';
+        description = toolTranslations[currentLanguage]['desc-normal'];
     } else if (bmi < 30) {
-        category = 'Sobrepeso';
+        category = toolTranslations[currentLanguage]['category-overweight'];
         categoryClass = 'overweight';
-        description = 'Tu BMI indica sobrepeso. Considera adoptar hábitos más saludables como ejercicio regular y una dieta equilibrada. Consulta con un profesional de la salud.';
+        description = toolTranslations[currentLanguage]['desc-overweight'];
     } else {
-        category = 'Obesidad';
+        category = toolTranslations[currentLanguage]['category-obese'];
         categoryClass = 'obese';
-        description = 'Tu BMI indica obesidad. Es recomendable consultar con un profesional de la salud para desarrollar un plan de pérdida de peso seguro y efectivo.';
+        description = toolTranslations[currentLanguage]['desc-obese'];
     }
     
     // Actualizar UI

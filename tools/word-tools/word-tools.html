@@ -220,45 +220,45 @@
             <div class="nav-categories" id="nav-categories">
                 <!-- Image Tools Dropdown -->
                 <div class="dropdown-container">
-                    <a href="/#image-tools" class="nav-link" data-category="image">
+                    <a href="/#image-tools" class="nav-link" data-category="image" data-i18n="nav-image-tools">
                         Image Tools
                         <span class="dropdown-arrow">▼</span>
                     </a>
                     <div class="dropdown-menu" data-dropdown="image">
-                        <a href="/image-compressor" class="dropdown-item">Image Compressor</a>
-                        <a href="/image-converter" class="dropdown-item">Image Converter</a>
-                        <a href="/image-scaling" class="dropdown-item">Image Scaling</a>
-                        <a href="/metadata-finder" class="dropdown-item">EXIF Metadata Detector</a>
-                        <a href="/favicon-generator" class="dropdown-item">Favicon Generator</a>
+                        <a href="/image-compressor" class="dropdown-item" data-i18n="nav-image-compressor">Image Compressor</a>
+                        <a href="/image-converter" class="dropdown-item" data-i18n="nav-image-converter">Image Converter</a>
+                        <a href="/image-scaling" class="dropdown-item" data-i18n="nav-image-scaling">Image Scaling</a>
+                        <a href="/metadata-finder" class="dropdown-item" data-i18n="nav-metadata-finder">EXIF Metadata Detector</a>
+                        <a href="/favicon-generator" class="dropdown-item" data-i18n="nav-favicon-generator">Favicon Generator</a>
                     </div>
                 </div>
 
                 <!-- Text Tools Dropdown -->
                 <div class="dropdown-container">
-                    <a href="/#text-tools" class="nav-link" data-category="text">
+                    <a href="/#text-tools" class="nav-link" data-category="text" data-i18n="nav-text-tools">
                         Text Tools
                         <span class="dropdown-arrow">▼</span>
                     </a>
                     <div class="dropdown-menu" data-dropdown="text">
-                        <a href="/word-counter" class="dropdown-item">Word Counter</a>
-                        <a href="/ascii-converter" class="dropdown-item">ASCII</a>
+                        <a href="/word-counter" class="dropdown-item" data-i18n="nav-word-counter">Word Counter</a>
+                        <a href="/ascii-converter" class="dropdown-item" data-i18n="nav-ascii">ASCII</a>
                     </div>
                 </div>
 
                 <!-- Number Tools Dropdown -->
                 <div class="dropdown-container">
-                    <a href="/#number-tools" class="nav-link" data-category="number">
+                    <a href="/#number-tools" class="nav-link" data-category="number" data-i18n="nav-number-tools">
                         Number Tools
                         <span class="dropdown-arrow">▼</span>
                     </a>
                     <div class="dropdown-menu" data-dropdown="number">
-                        <a href="/bmi-calculator" class="dropdown-item">BMI Calculator</a>
-                        <a href="/date-calculator" class="dropdown-item">Date Calculator</a>
-                        <a href="/interest-calculator" class="dropdown-item">Interests Calculator</a>
+                        <a href="/bmi-calculator" class="dropdown-item" data-i18n="nav-bmi-calculator">BMI Calculator</a>
+                        <a href="/date-calculator" class="dropdown-item" data-i18n="nav-date-calculator">Date Calculator</a>
+                        <a href="/interest-calculator" class="dropdown-item" data-i18n="nav-interest-calculator">Interests Calculator</a>
                     </div>
                 </div>
 
-                <a href="/qr-generator" class="nav-link" data-category="qr-generator">
+                <a href="/qr-generator" class="nav-link" data-category="qr-generator" data-i18n="nav-qr-generator">
                     QR Generator
                 </a>
             </div>
@@ -281,8 +281,8 @@
     <main class="main-content">
         <div class="tool-container">
             <div class="tool-header">
-                <h1 class="tool-title">Word Counter</h1>
-                <p class="tool-description">Analiza tu texto y obtén estadísticas detalladas sobre palabras, caracteres, oraciones y más.</p>
+                <h1 class="tool-title" data-i18n="tool-title">Word Counter</h1>
+                <p class="tool-description" data-i18n="tool-description">Analiza tu texto y obtén estadísticas detalladas sobre palabras, caracteres, oraciones y más.</p>
             </div>
 
             <!-- Contenedor de análisis de texto -->
@@ -292,6 +292,7 @@
                     <textarea 
                         id="text-input" 
                         class="text-input-area" 
+                        data-i18n-placeholder="placeholder-text"
                         placeholder="Escribe o pega tu texto aquí..."
                     ></textarea>
                 </div>
@@ -299,45 +300,46 @@
                 <!-- Panel de estadísticas -->
                 <div class="stats-panel">
                     <div class="stats-header">
-                        <h2 class="stats-title">Estadísticas</h2>
+                        <h2 class="stats-title" data-i18n="stats-title">Estadísticas</h2>
                     </div>
 
                     <div class="stats-list">
                         <div class="stat-item">
-                            <span class="stat-label">Palabras</span>
+                            <span class="stat-label" data-i18n="label-words">Palabras</span>
                             <span class="stat-value" id="word-count">0</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-label">Caracteres sin espacios</span>
+                            <span class="stat-label" data-i18n="label-chars-no-spaces">Caracteres sin espacios</span>
                             <span class="stat-value" id="char-count-no-spaces">0</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-label">Caracteres con espacios</span>
+                            <span class="stat-label" data-i18n="label-chars-with-spaces">Caracteres con espacios</span>
                             <span class="stat-value" id="char-count-with-spaces">0</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-label">Oraciones</span>
+                            <span class="stat-label" data-i18n="label-sentences">Oraciones</span>
                             <span class="stat-value" id="sentence-count">0</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-label">Párrafos</span>
+                            <span class="stat-label" data-i18n="label-paragraphs">Párrafos</span>
                             <span class="stat-value" id="paragraph-count">0</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-label">Tiempo de lectura</span>
+                            <span class="stat-label" data-i18n="label-reading-time">Tiempo de lectura</span>
                             <span class="stat-value highlighted" id="reading-time">0m 0s</span>
                         </div>
                     </div>
 
                     <div class="stats-footer">
-                        <button class="btn-primary" id="clear-btn">Limpiar Texto</button>
+                        <button class="btn-primary" id="clear-btn" data-i18n="btn-clear">Limpiar Texto</button>
                     </div>
                 </div>
             </div>
         </div>
     </main>
 
-    <script src="/script.js"></script>
+    <script src="/common-translations.js"></script>
+    <script src="/tool-base.js"></script>
     <script src="/tools/word-tools/word-tools.js"></script>
 </body>
 </html>

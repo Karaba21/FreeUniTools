@@ -1,6 +1,74 @@
 // Variables globales
 let currentQRData = null;
 
+// Traducciones específicas de QR Tools
+const toolTranslations = {
+    es: {
+        'tool-title': 'Generador QR',
+        'tool-description': 'Genera códigos QR personalizados para URLs, texto, números de teléfono, correos electrónicos y más. Descarga como PNG o SVG.',
+        'label-content': 'Contenido del Código QR',
+        'placeholder-content': 'Ingresa el texto, URL, correo electrónico, número de teléfono, etc. que quieres convertir en un código QR...',
+        'quick-url': 'URL',
+        'quick-email': 'Email',
+        'quick-phone': 'Teléfono',
+        'quick-wifi': 'WiFi',
+        'quick-sms': 'SMS',
+        'label-size': 'Tamaño del Código',
+        'label-error-level': 'Nivel de Corrección de Errores',
+        'error-low': 'Bajo (L) - ~7%',
+        'error-medium': 'Medio (M) - ~15%',
+        'error-high': 'Alto (Q) - ~25%',
+        'error-very-high': 'Muy Alto (H) - ~30%',
+        'label-code-color': 'Color del Código',
+        'label-qr-color': 'Color del Código QR',
+        'label-bg-color': 'Color de Fondo',
+        'label-bg-color-text': 'Color de Fondo',
+        'label-margin': 'Margen',
+        'btn-generate': 'Generar Código QR',
+        'preview-title': 'Tu Código QR',
+        'btn-download-png': 'Descargar PNG',
+        'btn-download-svg': 'Descargar SVG',
+        'btn-reset': 'Generar Nuevo',
+        'alert-empty-content': 'Por favor, ingresa algún contenido para generar el código QR.',
+        'alert-library-error': 'La librería QRCode no se ha cargado. Por favor, recarga la página.',
+        'alert-generate-error': 'Error al generar el código QR. Por favor, intenta de nuevo.',
+        'alert-svg-error': 'Error al generar el SVG. Por favor, intenta de nuevo.'
+    },
+    en: {
+        'tool-title': 'QR Generator',
+        'tool-description': 'Generate custom QR codes for URLs, text, phone numbers, emails, and more. Download as PNG or SVG.',
+        'label-content': 'QR Code Content',
+        'placeholder-content': 'Enter the text, URL, email, phone number, etc. that you want to convert into a QR code...',
+        'quick-url': 'URL',
+        'quick-email': 'Email',
+        'quick-phone': 'Phone',
+        'quick-wifi': 'WiFi',
+        'quick-sms': 'SMS',
+        'label-size': 'Code Size',
+        'label-error-level': 'Error Correction Level',
+        'error-low': 'Low (L) - ~7%',
+        'error-medium': 'Medium (M) - ~15%',
+        'error-high': 'High (Q) - ~25%',
+        'error-very-high': 'Very High (H) - ~30%',
+        'label-code-color': 'Code Color',
+        'label-qr-color': 'QR Code Color',
+        'label-bg-color': 'Background Color',
+        'label-bg-color-text': 'Background Color',
+        'label-margin': 'Margin',
+        'btn-generate': 'Generate QR Code',
+        'preview-title': 'Your QR Code',
+        'btn-download-png': 'Download PNG',
+        'btn-download-svg': 'Download SVG',
+        'btn-reset': 'Generate New',
+        'alert-empty-content': 'Please enter some content to generate the QR code.',
+        'alert-library-error': 'The QRCode library has not loaded. Please reload the page.',
+        'alert-generate-error': 'Error generating the QR code. Please try again.',
+        'alert-svg-error': 'Error generating the SVG. Please try again.'
+    }
+};
+
+// Las funciones de idioma y tema están en tool-base.js
+
 // Función para esperar a que QRCode esté disponible
 function waitForQRCode(callback) {
     if (typeof QRCode !== 'undefined') {
@@ -12,6 +80,8 @@ function waitForQRCode(callback) {
 
 // Inicialización
 document.addEventListener('DOMContentLoaded', () => {
+    initLanguageAndTheme();
+    
     waitForQRCode(() => {
         setupControls();
         setupQuickActions();
@@ -68,7 +138,7 @@ function setupControls() {
     generateBtn.addEventListener('click', () => {
         const content = document.getElementById('qr-content').value.trim();
         if (!content) {
-            alert('Please enter some content to generate the QR code.');
+            alert(toolTranslations[currentLanguage]['alert-empty-content']);
             return;
         }
         generateQR();
@@ -141,7 +211,7 @@ function setupQuickActions() {
 function generateQR() {
     // Verificar que la librería esté cargada
     if (typeof QRCode === 'undefined') {
-        alert('The QRCode library has not loaded. Please reload the page.');
+        alert(toolTranslations[currentLanguage]['alert-library-error']);
         console.error('QRCode library not loaded');
         return;
     }
@@ -149,7 +219,7 @@ function generateQR() {
     const content = document.getElementById('qr-content').value.trim();
     
     if (!content) {
-        alert('Please enter some content to generate the QR code.');
+        alert(toolTranslations[currentLanguage]['alert-empty-content']);
         return;
     }
 
@@ -183,7 +253,7 @@ function generateQR() {
     QRCode.toCanvas(newCanvas, content, options, (error) => {
         if (error) {
             console.error('Error generating QR:', error);
-            alert('Error generating the QR code. Please try again.');
+            alert(toolTranslations[currentLanguage]['alert-generate-error']);
             return;
         }
 
@@ -208,7 +278,7 @@ function generateQR() {
 function downloadQR(format) {
     // Verificar que la librería esté cargada
     if (typeof QRCode === 'undefined') {
-        alert('The QRCode library has not loaded. Please reload the page.');
+        alert(toolTranslations[currentLanguage]['alert-library-error']);
         console.error('QRCode library not loaded');
         return;
     }
@@ -254,7 +324,7 @@ function downloadQR(format) {
         }, (error, string) => {
             if (error) {
                 console.error('Error generating SVG:', error);
-                alert('Error generating the SVG. Please try again.');
+                alert(toolTranslations[currentLanguage]['alert-svg-error']);
                 return;
             }
 

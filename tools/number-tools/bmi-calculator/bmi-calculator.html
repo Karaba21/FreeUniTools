@@ -326,45 +326,45 @@
             <div class="nav-categories" id="nav-categories">
                 <!-- Image Tools Dropdown -->
                 <div class="dropdown-container">
-                    <a href="/#image-tools" class="nav-link" data-category="image">
+                    <a href="/#image-tools" class="nav-link" data-category="image" data-i18n="nav-image-tools">
                         Image Tools
                         <span class="dropdown-arrow">▼</span>
                     </a>
                     <div class="dropdown-menu" data-dropdown="image">
-                        <a href="/image-compressor" class="dropdown-item">Image Compressor</a>
-                        <a href="/image-converter" class="dropdown-item">Image Converter</a>
-                        <a href="/image-scaling" class="dropdown-item">Image Scaling</a>
-                        <a href="/metadata-finder" class="dropdown-item">EXIF Metadata Detector</a>
-                        <a href="/favicon-generator" class="dropdown-item">Favicon Generator</a>
+                        <a href="/image-compressor" class="dropdown-item" data-i18n="nav-image-compressor">Image Compressor</a>
+                        <a href="/image-converter" class="dropdown-item" data-i18n="nav-image-converter">Image Converter</a>
+                        <a href="/image-scaling" class="dropdown-item" data-i18n="nav-image-scaling">Image Scaling</a>
+                        <a href="/metadata-finder" class="dropdown-item" data-i18n="nav-metadata-finder">EXIF Metadata Detector</a>
+                        <a href="/favicon-generator" class="dropdown-item" data-i18n="nav-favicon-generator">Favicon Generator</a>
                     </div>
                 </div>
 
                 <!-- Text Tools Dropdown -->
                 <div class="dropdown-container">
-                    <a href="/#text-tools" class="nav-link" data-category="text">
+                    <a href="/#text-tools" class="nav-link" data-category="text" data-i18n="nav-text-tools">
                         Text Tools
                         <span class="dropdown-arrow">▼</span>
                     </a>
                     <div class="dropdown-menu" data-dropdown="text">
-                        <a href="/word-counter" class="dropdown-item">Word Counter</a>
-                        <a href="/ascii-converter" class="dropdown-item">ASCII</a>
+                        <a href="/word-counter" class="dropdown-item" data-i18n="nav-word-counter">Word Counter</a>
+                        <a href="/ascii-converter" class="dropdown-item" data-i18n="nav-ascii">ASCII</a>
                     </div>
                 </div>
 
                 <!-- Number Tools Dropdown -->
                 <div class="dropdown-container">
-                    <a href="/#number-tools" class="nav-link" data-category="number">
+                    <a href="/#number-tools" class="nav-link" data-category="number" data-i18n="nav-number-tools">
                         Number Tools
                         <span class="dropdown-arrow">▼</span>
                     </a>
                     <div class="dropdown-menu" data-dropdown="number">
-                        <a href="/bmi-calculator" class="dropdown-item">BMI Calculator</a>
-                        <a href="/date-calculator" class="dropdown-item">Date Calculator</a>
-                        <a href="/interest-calculator" class="dropdown-item">Interests Calculator</a>
+                        <a href="/bmi-calculator" class="dropdown-item" data-i18n="nav-bmi-calculator">BMI Calculator</a>
+                        <a href="/date-calculator" class="dropdown-item" data-i18n="nav-date-calculator">Date Calculator</a>
+                        <a href="/interest-calculator" class="dropdown-item" data-i18n="nav-interest-calculator">Interests Calculator</a>
                     </div>
                 </div>
 
-                <a href="/qr-generator" class="nav-link" data-category="qr-generator">
+                <a href="/qr-generator" class="nav-link" data-category="qr-generator" data-i18n="nav-qr-generator">
                     QR Generator
                 </a>
             </div>
@@ -387,21 +387,21 @@
     <main class="main-content">
         <div class="tool-container">
             <div class="tool-header">
-                <h1 class="tool-title">BMI Calculator</h1>
-                <p class="tool-description">Calcula tu Índice de Masa Corporal (BMI) para conocer tu estado de salud general.</p>
+                <h1 class="tool-title" data-i18n="tool-title">BMI Calculator</h1>
+                <p class="tool-description" data-i18n="tool-description">Calcula tu Índice de Masa Corporal (BMI) para conocer tu estado de salud general.</p>
             </div>
 
             <div class="calculator-section">
                 <!-- Unit Selector -->
                 <div class="unit-selector">
-                    <button class="unit-option active" data-unit="metric">Métrico</button>
-                    <button class="unit-option" data-unit="imperial">Imperial</button>
+                    <button class="unit-option active" data-unit="metric" data-i18n="unit-metric">Métrico</button>
+                    <button class="unit-option" data-unit="imperial" data-i18n="unit-imperial">Imperial</button>
                 </div>
 
                 <!-- Metric Inputs -->
                 <div id="metric-inputs">
                     <div class="input-group">
-                        <label class="input-label">Peso</label>
+                        <label class="input-label" data-i18n="label-weight">Peso</label>
                         <div class="input-wrapper">
                             <input 
                                 type="number" 
@@ -414,11 +414,11 @@
                             >
                             <span class="input-unit">kg</span>
                         </div>
-                        <div class="error-message" id="weight-metric-error">Por favor ingresa un peso válido</div>
+                        <div class="error-message" id="weight-metric-error" data-i18n="error-weight">Por favor ingresa un peso válido</div>
                     </div>
 
                     <div class="input-group">
-                        <label class="input-label">Altura</label>
+                        <label class="input-label" data-i18n="label-height">Altura</label>
                         <div class="input-wrapper">
                             <input 
                                 type="number" 
@@ -431,14 +431,14 @@
                             >
                             <span class="input-unit">cm</span>
                         </div>
-                        <div class="error-message" id="height-metric-error">Por favor ingresa una altura válida</div>
+                        <div class="error-message" id="height-metric-error" data-i18n="error-height">Por favor ingresa una altura válida</div>
                     </div>
                 </div>
 
                 <!-- Imperial Inputs -->
                 <div id="imperial-inputs" style="display: none;">
                     <div class="input-group">
-                        <label class="input-label">Peso</label>
+                        <label class="input-label" data-i18n="label-weight">Peso</label>
                         <div class="input-wrapper">
                             <input 
                                 type="number" 
@@ -451,11 +451,11 @@
                             >
                             <span class="input-unit">lbs</span>
                         </div>
-                        <div class="error-message" id="weight-imperial-error">Por favor ingresa un peso válido</div>
+                        <div class="error-message" id="weight-imperial-error" data-i18n="error-weight">Por favor ingresa un peso válido</div>
                     </div>
 
                     <div class="input-group">
-                        <label class="input-label">Altura</label>
+                        <label class="input-label" data-i18n="label-height">Altura</label>
                         <div class="imperial-inputs">
                             <div class="input-wrapper">
                                 <input 
@@ -482,11 +482,11 @@
                                 <span class="input-unit">in</span>
                             </div>
                         </div>
-                        <div class="error-message" id="height-imperial-error">Por favor ingresa una altura válida</div>
+                        <div class="error-message" id="height-imperial-error" data-i18n="error-height">Por favor ingresa una altura válida</div>
                     </div>
                 </div>
 
-                <button class="calculate-btn" id="calculate-bmi">Calcular BMI</button>
+                <button class="calculate-btn" id="calculate-bmi" data-i18n="btn-calculate">Calcular BMI</button>
 
                 <!-- Result Section -->
                 <div class="result-section" id="result-section">
@@ -495,18 +495,18 @@
                     <p class="bmi-description" id="bmi-description"></p>
 
                     <div class="bmi-scale">
-                        <div class="scale-title">Escala de BMI</div>
+                        <div class="scale-title" data-i18n="scale-title">Escala de BMI</div>
                         <div class="scale-bar">
-                            <div class="scale-segment underweight">Bajo peso<br>&lt;18.5</div>
-                            <div class="scale-segment normal">Normal<br>18.5-24.9</div>
-                            <div class="scale-segment overweight">Sobrepeso<br>25-29.9</div>
-                            <div class="scale-segment obese">Obesidad<br>≥30</div>
+                            <div class="scale-segment underweight" data-i18n="category-underweight">Bajo peso<br>&lt;18.5</div>
+                            <div class="scale-segment normal" data-i18n="category-normal">Normal<br>18.5-24.9</div>
+                            <div class="scale-segment overweight" data-i18n="category-overweight">Sobrepeso<br>25-29.9</div>
+                            <div class="scale-segment obese" data-i18n="category-obese">Obesidad<br>≥30</div>
                         </div>
                         <div class="scale-labels">
-                            <span>Bajo peso</span>
-                            <span>Normal</span>
-                            <span>Sobrepeso</span>
-                            <span>Obesidad</span>
+                            <span data-i18n="category-underweight">Bajo peso</span>
+                            <span data-i18n="category-normal">Normal</span>
+                            <span data-i18n="category-overweight">Sobrepeso</span>
+                            <span data-i18n="category-obese">Obesidad</span>
                         </div>
                     </div>
                 </div>
@@ -514,7 +514,8 @@
         </div>
     </main>
 
-    <script src="/script.js"></script>
+    <script src="/common-translations.js"></script>
+    <script src="/tool-base.js"></script>
     <script src="/tools/number-tools/bmi-calculator/bmi-calculator.js"></script>
 </body>
 </html>

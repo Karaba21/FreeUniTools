@@ -262,45 +262,45 @@
             <div class="nav-categories" id="nav-categories">
                 <!-- Image Tools Dropdown -->
                 <div class="dropdown-container">
-                    <a href="/#image-tools" class="nav-link" data-category="image">
+                    <a href="/#image-tools" class="nav-link" data-category="image" data-i18n="nav-image-tools">
                         Image Tools
                         <span class="dropdown-arrow">▼</span>
                     </a>
                     <div class="dropdown-menu" data-dropdown="image">
-                        <a href="/image-compressor" class="dropdown-item">Image Compressor</a>
-                        <a href="/image-converter" class="dropdown-item">Image Converter</a>
-                        <a href="/image-scaling" class="dropdown-item">Image Scaling</a>
-                        <a href="/metadata-finder" class="dropdown-item">EXIF Metadata Detector</a>
-                        <a href="/favicon-generator" class="dropdown-item">Favicon Generator</a>
+                        <a href="/image-compressor" class="dropdown-item" data-i18n="nav-image-compressor">Image Compressor</a>
+                        <a href="/image-converter" class="dropdown-item" data-i18n="nav-image-converter">Image Converter</a>
+                        <a href="/image-scaling" class="dropdown-item" data-i18n="nav-image-scaling">Image Scaling</a>
+                        <a href="/metadata-finder" class="dropdown-item" data-i18n="nav-metadata-finder">EXIF Metadata Detector</a>
+                        <a href="/favicon-generator" class="dropdown-item" data-i18n="nav-favicon-generator">Favicon Generator</a>
                     </div>
                 </div>
 
                 <!-- Text Tools Dropdown -->
                 <div class="dropdown-container">
-                    <a href="/#text-tools" class="nav-link" data-category="text">
+                    <a href="/#text-tools" class="nav-link" data-category="text" data-i18n="nav-text-tools">
                         Text Tools
                         <span class="dropdown-arrow">▼</span>
                     </a>
                     <div class="dropdown-menu" data-dropdown="text">
-                        <a href="/word-counter" class="dropdown-item">Word Counter</a>
-                        <a href="/ascii-converter" class="dropdown-item">ASCII</a>
+                        <a href="/word-counter" class="dropdown-item" data-i18n="nav-word-counter">Word Counter</a>
+                        <a href="/ascii-converter" class="dropdown-item" data-i18n="nav-ascii">ASCII</a>
                     </div>
                 </div>
 
                 <!-- Number Tools Dropdown -->
                 <div class="dropdown-container">
-                    <a href="/#number-tools" class="nav-link" data-category="number">
+                    <a href="/#number-tools" class="nav-link" data-category="number" data-i18n="nav-number-tools">
                         Number Tools
                         <span class="dropdown-arrow">▼</span>
                     </a>
                     <div class="dropdown-menu" data-dropdown="number">
-                        <a href="/bmi-calculator" class="dropdown-item">BMI Calculator</a>
-                        <a href="/date-calculator" class="dropdown-item">Date Calculator</a>
-                        <a href="/interest-calculator" class="dropdown-item">Interests Calculator</a>
+                        <a href="/bmi-calculator" class="dropdown-item" data-i18n="nav-bmi-calculator">BMI Calculator</a>
+                        <a href="/date-calculator" class="dropdown-item" data-i18n="nav-date-calculator">Date Calculator</a>
+                        <a href="/interest-calculator" class="dropdown-item" data-i18n="nav-interest-calculator">Interests Calculator</a>
                     </div>
                 </div>
 
-                <a href="/qr-generator" class="nav-link" data-category="qr-generator">
+                <a href="/qr-generator" class="nav-link" data-category="qr-generator" data-i18n="nav-qr-generator">
                     QR Generator
                 </a>
             </div>
@@ -323,13 +323,13 @@
     <main class="main-content">
         <div class="tool-container">
             <div class="tool-header">
-                <h1 class="tool-title">Calcular Cuotas</h1>
-                <p class="tool-description">Calcula el valor de las cuotas y la tabla de amortización para tu préstamo.</p>
+                <h1 class="tool-title" data-i18n="tool-title">Calcular Cuotas</h1>
+                <p class="tool-description" data-i18n="tool-description">Calcula el valor de las cuotas y la tabla de amortización para tu préstamo.</p>
             </div>
 
             <div class="calculator-section">
                 <div class="input-group">
-                    <label class="input-label" for="capital">Capital Solicitado</label>
+                    <label class="input-label" for="capital" data-i18n="label-capital">Capital Solicitado</label>
                     <input 
                         type="number" 
                         id="capital" 
@@ -338,11 +338,11 @@
                         min="1"
                         step="0.01"
                     >
-                    <div class="error-message" id="capital-error">Por favor ingresa un capital válido</div>
+                    <div class="error-message" id="capital-error" data-i18n="error-capital">Por favor ingresa un capital válido</div>
                 </div>
 
                 <div class="input-group">
-                    <label class="input-label" for="rate">Tasa Efectiva Anual (%)</label>
+                    <label class="input-label" for="rate" data-i18n="label-rate">Tasa Efectiva Anual (%)</label>
                     <input 
                         type="number" 
                         id="rate" 
@@ -352,11 +352,11 @@
                         max="100"
                         step="0.01"
                     >
-                    <div class="error-message" id="rate-error">Por favor ingresa una tasa válida</div>
+                    <div class="error-message" id="rate-error" data-i18n="error-rate">Por favor ingresa una tasa válida</div>
                 </div>
 
                 <div class="input-group">
-                    <label class="input-label" for="installments">Cantidad de cuotas</label>
+                    <label class="input-label" for="installments" data-i18n="label-installments">Cantidad de cuotas</label>
                     <input 
                         type="number" 
                         id="installments" 
@@ -365,20 +365,20 @@
                         min="1"
                         step="1"
                     >
-                    <div class="error-message" id="installments-error">Por favor ingresa una cantidad de cuotas válida</div>
+                    <div class="error-message" id="installments-error" data-i18n="error-installments">Por favor ingresa una cantidad de cuotas válida</div>
                 </div>
 
-                <button class="calculate-btn" id="calculate-btn">Calcular</button>
+                <button class="calculate-btn" id="calculate-btn" data-i18n="btn-calculate">Calcular</button>
 
                 <!-- Result Section -->
                 <div class="result-section" id="result-section">
                     <div class="result-summary">
                         <div class="result-item">
-                            <div class="result-label">Cuota</div>
+                            <div class="result-label" data-i18n="label-installment">Cuota</div>
                             <div class="result-value" id="installment-value">--</div>
                         </div>
                         <div class="result-item">
-                            <div class="result-label">Monto total (capital más interés)</div>
+                            <div class="result-label" data-i18n="label-total">Monto total (capital más interés)</div>
                             <div class="result-value" id="total-value">--</div>
                         </div>
                     </div>
@@ -387,10 +387,10 @@
                         <table class="amortization-table">
                             <thead>
                                 <tr>
-                                    <th class="table-number">Cuota Nro</th>
-                                    <th class="table-amount">Valor Cuota</th>
-                                    <th class="table-amount">Intereses</th>
-                                    <th class="table-amount">Amortización</th>
+                                    <th class="table-number" data-i18n="table-installment-num">Cuota Nro</th>
+                                    <th class="table-amount" data-i18n="table-installment-value">Valor Cuota</th>
+                                    <th class="table-amount" data-i18n="table-interest">Intereses</th>
+                                    <th class="table-amount" data-i18n="table-amortization">Amortización</th>
                                 </tr>
                             </thead>
                             <tbody id="amortization-table-body">
@@ -403,7 +403,8 @@
         </div>
     </main>
 
-    <script src="/script.js"></script>
+    <script src="/common-translations.js"></script>
+    <script src="/tool-base.js"></script>
     <script src="/tools/number-tools/interest-calculator/interest-calculator.js"></script>
 </body>
 </html>

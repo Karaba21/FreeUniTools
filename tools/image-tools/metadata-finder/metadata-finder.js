@@ -2,8 +2,53 @@
 let currentFile = null;
 let currentImage = null;
 
+// Traducciones específicas de Metadata Finder
+const toolTranslations = {
+    es: {
+        'tool-title': 'Detector de Metadatos EXIF',
+        'tool-description': 'Extrae y visualiza todos los metadatos EXIF de tus imágenes. Descubre información oculta como fecha, ubicación, cámara y más.',
+        'upload-text': 'Arrastra y suelta tu imagen aquí',
+        'upload-hint': 'o haz clic para seleccionar un archivo',
+        'preview-title': 'Vista Previa',
+        'label-size': 'Tamaño:',
+        'label-dimensions': 'Dimensiones:',
+        'label-format-original': 'Formato:',
+        'metadata-title': 'Metadatos EXIF',
+        'loading-metadata': 'Cargando metadatos...',
+        'no-metadata': 'No se encontraron metadatos EXIF en esta imagen.',
+        'btn-reset': 'Nueva Imagen',
+        'alert-invalid-file': 'Por favor, selecciona un archivo de imagen válido.',
+        'alert-invalid-drag': 'Por favor, arrastra un archivo de imagen válido.',
+        'error-exif-library': 'Error: La biblioteca EXIF no se cargó correctamente. Por favor, verifica tu conexión a internet.',
+        'error-reading-metadata': 'Error al leer los metadatos: ',
+        'error-processing': 'Error al procesar la imagen: ',
+        'no-metadata-note': 'No se encontraron metadatos EXIF en esta imagen.<br><small>Nota: Algunos servicios como WhatsApp eliminan los metadatos EXIF al enviar imágenes.</small>'
+    },
+    en: {
+        'tool-title': 'EXIF Metadata Detector',
+        'tool-description': 'Extract and visualize all EXIF metadata from your images. Discover hidden information like date, location, camera and more.',
+        'upload-text': 'Drag and drop your image here',
+        'upload-hint': 'or click to select a file',
+        'preview-title': 'Preview',
+        'label-size': 'Size:',
+        'label-dimensions': 'Dimensions:',
+        'label-format-original': 'Format:',
+        'metadata-title': 'EXIF Metadata',
+        'loading-metadata': 'Loading metadata...',
+        'no-metadata': 'No EXIF metadata found in this image.',
+        'btn-reset': 'New Image',
+        'alert-invalid-file': 'Please select a valid image file.',
+        'alert-invalid-drag': 'Please drag a valid image file.',
+        'error-exif-library': 'Error: EXIF library failed to load correctly. Please check your internet connection.',
+        'error-reading-metadata': 'Error reading metadata: ',
+        'error-processing': 'Error processing image: ',
+        'no-metadata-note': 'No EXIF metadata found in this image.<br><small>Note: Some services like WhatsApp remove EXIF metadata when sending images.</small>'
+    }
+};
+
 // Inicialización
 document.addEventListener('DOMContentLoaded', () => {
+    initLanguageAndTheme();
     setupUploadArea();
     setupControls();
 });
@@ -24,7 +69,7 @@ function setupUploadArea() {
         if (file && file.type.startsWith('image/')) {
             handleFile(file);
         } else {
-            alert('Por favor, selecciona un archivo de imagen válido.');
+            alert(toolTranslations[currentLanguage]['alert-invalid-file']);
         }
     });
 
@@ -46,7 +91,7 @@ function setupUploadArea() {
         if (file && file.type.startsWith('image/')) {
             handleFile(file);
         } else {
-            alert('Por favor, arrastra un archivo de imagen válido.');
+            alert(toolTranslations[currentLanguage]['alert-invalid-drag']);
         }
     });
 }
@@ -103,7 +148,7 @@ function extractMetadata(file) {
     // Verificar que EXIF esté disponible
     if (typeof EXIF === 'undefined') {
         loadingElement.style.display = 'none';
-        noMetadataElement.innerHTML = 'Error: La biblioteca EXIF no se cargó correctamente. Por favor, verifica tu conexión a internet.';
+        noMetadataElement.innerHTML = toolTranslations[currentLanguage]['error-exif-library'];
         noMetadataElement.style.display = 'block';
         console.error('EXIF library not loaded');
         return;
@@ -119,7 +164,7 @@ function extractMetadata(file) {
                 console.log('Metadatos encontrados:', allMetaData);
                 
                 if (Object.keys(allMetaData).length === 0) {
-                    noMetadataElement.innerHTML = 'No se encontraron metadatos EXIF en esta imagen.<br><small>Nota: Algunos servicios como WhatsApp eliminan los metadatos EXIF al enviar imágenes.</small>';
+                    noMetadataElement.innerHTML = toolTranslations[currentLanguage]['no-metadata-note'];
                     noMetadataElement.style.display = 'block';
                     return;
                 }
@@ -131,14 +176,14 @@ function extractMetadata(file) {
                 displayMetadata(metadataGroups);
             } catch (error) {
                 loadingElement.style.display = 'none';
-                noMetadataElement.innerHTML = 'Error al leer los metadatos: ' + error.message;
+                noMetadataElement.innerHTML = toolTranslations[currentLanguage]['error-reading-metadata'] + error.message;
                 noMetadataElement.style.display = 'block';
                 console.error('Error reading metadata:', error);
             }
         });
     } catch (error) {
         loadingElement.style.display = 'none';
-        noMetadataElement.innerHTML = 'Error al procesar la imagen: ' + error.message;
+        noMetadataElement.innerHTML = toolTranslations[currentLanguage]['error-processing'] + error.message;
         noMetadataElement.style.display = 'block';
         console.error('Error processing file:', error);
     }
@@ -146,14 +191,22 @@ function extractMetadata(file) {
 
 // Organizar metadatos por categorías
 function organizeMetadata(metadata) {
-    const groups = {
+    const groupNames = currentLanguage === 'es' ? {
         'Información de Cámara': {},
         'Configuración de Cámara': {},
         'Información de Imagen': {},
         'GPS y Ubicación': {},
         'Fecha y Hora': {},
         'Otros': {}
+    } : {
+        'Camera Information': {},
+        'Camera Settings': {},
+        'Image Information': {},
+        'GPS and Location': {},
+        'Date and Time': {},
+        'Other': {}
     };
+    const groups = groupNames;
 
     // Mapeo de campos EXIF a categorías
     const cameraInfo = [
@@ -184,25 +237,32 @@ function organizeMetadata(metadata) {
     for (const [key, value] of Object.entries(metadata)) {
         let categorized = false;
 
+        const cameraGroup = currentLanguage === 'es' ? 'Información de Cámara' : 'Camera Information';
+        const settingsGroup = currentLanguage === 'es' ? 'Configuración de Cámara' : 'Camera Settings';
+        const imageGroup = currentLanguage === 'es' ? 'Información de Imagen' : 'Image Information';
+        const gpsGroup = currentLanguage === 'es' ? 'GPS y Ubicación' : 'GPS and Location';
+        const dateGroup = currentLanguage === 'es' ? 'Fecha y Hora' : 'Date and Time';
+        const otherGroup = currentLanguage === 'es' ? 'Otros' : 'Other';
+        
         if (cameraInfo.includes(key)) {
-            groups['Información de Cámara'][key] = value;
+            groups[cameraGroup][key] = value;
             categorized = true;
         } else if (cameraSettings.includes(key)) {
-            groups['Configuración de Cámara'][key] = value;
+            groups[settingsGroup][key] = value;
             categorized = true;
         } else if (imageInfo.includes(key)) {
-            groups['Información de Imagen'][key] = value;
+            groups[imageGroup][key] = value;
             categorized = true;
         } else if (gpsInfo.includes(key)) {
-            groups['GPS y Ubicación'][key] = value;
+            groups[gpsGroup][key] = value;
             categorized = true;
         } else if (dateInfo.includes(key)) {
-            groups['Fecha y Hora'][key] = value;
+            groups[dateGroup][key] = value;
             categorized = true;
         }
 
         if (!categorized) {
-            groups['Otros'][key] = value;
+            groups[otherGroup][key] = value;
         }
     }
 

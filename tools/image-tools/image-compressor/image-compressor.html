@@ -371,45 +371,45 @@
             <div class="nav-categories" id="nav-categories">
                 <!-- Image Tools Dropdown -->
                 <div class="dropdown-container">
-                    <a href="/#image-tools" class="nav-link" data-category="image">
+                    <a href="/#image-tools" class="nav-link" data-category="image" data-i18n="nav-image-tools">
                         Image Tools
                         <span class="dropdown-arrow">▼</span>
                     </a>
                     <div class="dropdown-menu" data-dropdown="image">
-                        <a href="/image-compressor" class="dropdown-item">Image Compressor</a>
-                        <a href="/image-converter" class="dropdown-item">Image Converter</a>
-                        <a href="/image-scaling" class="dropdown-item">Image Scaling</a>
-                        <a href="/metadata-finder" class="dropdown-item">EXIF Metadata Detector</a>
-                        <a href="/favicon-generator" class="dropdown-item">Favicon Generator</a>
+                        <a href="/image-compressor" class="dropdown-item" data-i18n="nav-image-compressor">Image Compressor</a>
+                        <a href="/image-converter" class="dropdown-item" data-i18n="nav-image-converter">Image Converter</a>
+                        <a href="/image-scaling" class="dropdown-item" data-i18n="nav-image-scaling">Image Scaling</a>
+                        <a href="/metadata-finder" class="dropdown-item" data-i18n="nav-metadata-finder">EXIF Metadata Detector</a>
+                        <a href="/favicon-generator" class="dropdown-item" data-i18n="nav-favicon-generator">Favicon Generator</a>
                     </div>
                 </div>
 
                 <!-- Text Tools Dropdown -->
                 <div class="dropdown-container">
-                    <a href="/#text-tools" class="nav-link" data-category="text">
+                    <a href="/#text-tools" class="nav-link" data-category="text" data-i18n="nav-text-tools">
                         Text Tools
                         <span class="dropdown-arrow">▼</span>
                     </a>
                     <div class="dropdown-menu" data-dropdown="text">
-                        <a href="/word-counter" class="dropdown-item">Word Counter</a>
-                        <a href="/ascii-converter" class="dropdown-item">ASCII</a>
+                        <a href="/word-counter" class="dropdown-item" data-i18n="nav-word-counter">Word Counter</a>
+                        <a href="/ascii-converter" class="dropdown-item" data-i18n="nav-ascii">ASCII</a>
                     </div>
                 </div>
 
                 <!-- Number Tools Dropdown -->
                 <div class="dropdown-container">
-                    <a href="/#number-tools" class="nav-link" data-category="number">
+                    <a href="/#number-tools" class="nav-link" data-category="number" data-i18n="nav-number-tools">
                         Number Tools
                         <span class="dropdown-arrow">▼</span>
                     </a>
                     <div class="dropdown-menu" data-dropdown="number">
-                        <a href="/bmi-calculator" class="dropdown-item">BMI Calculator</a>
-                        <a href="/date-calculator" class="dropdown-item">Date Calculator</a>
-                        <a href="/interest-calculator" class="dropdown-item">Interests Calculator</a>
+                        <a href="/bmi-calculator" class="dropdown-item" data-i18n="nav-bmi-calculator">BMI Calculator</a>
+                        <a href="/date-calculator" class="dropdown-item" data-i18n="nav-date-calculator">Date Calculator</a>
+                        <a href="/interest-calculator" class="dropdown-item" data-i18n="nav-interest-calculator">Interests Calculator</a>
                     </div>
                 </div>
 
-                <a href="/qr-generator" class="nav-link" data-category="qr-generator">
+                <a href="/qr-generator" class="nav-link" data-category="qr-generator" data-i18n="nav-qr-generator">
                     QR Generator
                 </a>
             </div>
@@ -432,29 +432,29 @@
     <main class="main-content">
         <div class="tool-container">
             <div class="tool-header">
-                <h1 class="tool-title">Image Compressor</h1>
-                <p class="tool-description">Comprime tus imágenes sin perder calidad. Reduce el tamaño de archivo manteniendo una excelente resolución visual.</p>
+                <h1 class="tool-title" data-i18n="tool-title">Image Compressor</h1>
+                <p class="tool-description" data-i18n="tool-description">Comprime tus imágenes sin perder calidad. Reduce el tamaño de archivo manteniendo una excelente resolución visual.</p>
             </div>
 
             <!-- Upload Area -->
             <div class="upload-area" id="upload-area">
                 <div class="upload-icon">📷</div>
-                <div class="upload-text">Arrastra y suelta tu imagen aquí</div>
-                <div class="upload-hint">o haz clic para seleccionar un archivo</div>
+                <div class="upload-text" data-i18n="upload-text">Arrastra y suelta tu imagen aquí</div>
+                <div class="upload-hint" data-i18n="upload-hint">o haz clic para seleccionar un archivo</div>
                 <input type="file" id="file-input" accept="image/*">
             </div>
 
             <!-- Compression Controls -->
             <div class="compression-controls" id="compression-controls" style="display: none;">
                 <div class="control-group">
-                    <label class="control-label">Calidad de compresión</label>
+                    <label class="control-label" data-i18n="label-quality">Calidad de compresión</label>
                     <div class="slider-container">
                         <input type="range" id="quality-slider" class="slider" min="0.1" max="1" step="0.05" value="0.8">
                         <span class="slider-value" id="quality-value">80%</span>
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label">Formato de salida</label>
+                    <label class="control-label" data-i18n="label-format">Formato de salida</label>
                     <select id="format-select" class="quality-select">
                         <option value="jpeg">JPEG</option>
                         <option value="png">PNG</option>
@@ -471,19 +471,19 @@
                 <div class="preview-grid">
                     <!-- Original Image -->
                     <div class="preview-card">
-                        <div class="preview-card-title">Imagen Original</div>
+                        <div class="preview-card-title" data-i18n="preview-original">Imagen Original</div>
                         <img id="original-image" class="preview-image" alt="Original">
                         <div class="image-info">
                             <div class="info-item">
-                                <span class="info-label">Tamaño:</span>
+                                <span class="info-label" data-i18n="label-size">Tamaño:</span>
                                 <span class="info-value" id="original-size">-</span>
                             </div>
                             <div class="info-item">
-                                <span class="info-label">Dimensiones:</span>
+                                <span class="info-label" data-i18n="label-dimensions">Dimensiones:</span>
                                 <span class="info-value" id="original-dimensions">-</span>
                             </div>
                             <div class="info-item">
-                                <span class="info-label">Formato:</span>
+                                <span class="info-label" data-i18n="label-format-original">Formato:</span>
                                 <span class="info-value" id="original-format">-</span>
                             </div>
                         </div>
@@ -491,19 +491,19 @@
 
                     <!-- Compressed Image -->
                     <div class="preview-card">
-                        <div class="preview-card-title">Imagen Comprimida</div>
+                        <div class="preview-card-title" data-i18n="preview-compressed">Imagen Comprimida</div>
                         <img id="compressed-image" class="preview-image" alt="Comprimida">
                         <div class="image-info">
                             <div class="info-item">
-                                <span class="info-label">Tamaño:</span>
+                                <span class="info-label" data-i18n="label-size">Tamaño:</span>
                                 <span class="info-value" id="compressed-size">-</span>
                             </div>
                             <div class="info-item">
-                                <span class="info-label">Dimensiones:</span>
+                                <span class="info-label" data-i18n="label-dimensions">Dimensiones:</span>
                                 <span class="info-value" id="compressed-dimensions">-</span>
                             </div>
                             <div class="info-item">
-                                <span class="info-label">Formato:</span>
+                                <span class="info-label" data-i18n="label-format-original">Formato:</span>
                                 <span class="info-value" id="compressed-format">-</span>
                             </div>
                         </div>
@@ -514,28 +514,29 @@
                 <div class="stats-comparison">
                     <div class="stat-card">
                         <div class="stat-value" id="compression-ratio">-</div>
-                        <div class="stat-label">Reducción</div>
+                        <div class="stat-label" data-i18n="label-reduction">Reducción</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-value" id="size-saved">-</div>
-                        <div class="stat-label">Espacio Ahorrado</div>
+                        <div class="stat-label" data-i18n="label-space-saved">Espacio Ahorrado</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-value" id="compression-percentage">-</div>
-                        <div class="stat-label">% Comprimido</div>
+                        <div class="stat-label" data-i18n="label-compressed">% Comprimido</div>
                     </div>
                 </div>
 
                 <!-- Action Buttons -->
                 <div class="action-buttons">
-                    <button class="btn-primary" id="download-btn">Descargar Imagen Comprimida</button>
-                    <button class="btn-secondary" id="reset-btn">Nueva Imagen</button>
+                    <button class="btn-primary" id="download-btn" data-i18n="btn-download">Descargar Imagen Comprimida</button>
+                    <button class="btn-secondary" id="reset-btn" data-i18n="btn-reset">Nueva Imagen</button>
                 </div>
             </div>
         </div>
     </main>
 
-    <script src="/script.js"></script>
+    <script src="/common-translations.js"></script>
+    <script src="/tool-base.js"></script>
     <script src="/tools/image-tools/image-compressor/image-compressor.js"></script>
 </body>
 </html>
