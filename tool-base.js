@@ -122,6 +122,151 @@ function setupThemeButton() {
     });
 }
 
+// Configurar menú móvil
+function setupMobileMenu() {
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const navCategories = document.getElementById('nav-categories');
+    
+    if (!mobileMenuToggle || !navCategories) {
+        return;
+    }
+    
+    mobileMenuToggle.addEventListener('click', () => {
+        mobileMenuToggle.classList.toggle('active');
+        navCategories.classList.toggle('active');
+    });
+    
+    // Cerrar menú al hacer click fuera
+    document.addEventListener('click', (e) => {
+        const isClickInsideNav = e.target.closest('.navbar');
+        const isClickOnToggle = e.target.closest('.mobile-menu-toggle');
+        
+        if (!isClickInsideNav && navCategories.classList.contains('active')) {
+            mobileMenuToggle.classList.remove('active');
+            navCategories.classList.remove('active');
+        }
+    });
+    
+    // Cerrar menú al hacer scroll
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+        if (window.innerWidth <= 768 && navCategories.classList.contains('active')) {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                mobileMenuToggle.classList.remove('active');
+                navCategories.classList.remove('active');
+            }, 100);
+        }
+    });
+    
+    // Cerrar menú al cambiar tamaño de ventana
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            mobileMenuToggle.classList.remove('active');
+            navCategories.classList.remove('active');
+        }
+    });
+}
+
+// Configurar dropdowns
+function setupDropdowns() {
+    const dropdownContainers = document.querySelectorAll('.dropdown-container');
+    
+    dropdownContainers.forEach(container => {
+        const navLink = container.querySelector('.nav-link');
+        const dropdownMenu = container.querySelector('.dropdown-menu');
+        
+        // Mantener el dropdown abierto cuando el mouse está sobre el menú (solo desktop)
+        if (dropdownMenu) {
+            dropdownMenu.addEventListener('mouseenter', () => {
+                if (window.innerWidth > 768) {
+                    container.classList.add('hover-active');
+                }
+            });
+            
+            dropdownMenu.addEventListener('mouseleave', () => {
+                if (window.innerWidth > 768) {
+                    container.classList.remove('hover-active');
+                }
+            });
+        }
+        
+        // Para móviles: toggle con click
+        navLink.addEventListener('click', (e) => {
+            const isMobile = window.innerWidth <= 768;
+            
+            if (isMobile) {
+                // En móviles, siempre toggle
+                e.preventDefault();
+                e.stopPropagation();
+                
+                // Cerrar otros dropdowns
+                dropdownContainers.forEach(other => {
+                    if (other !== container) {
+                        other.classList.remove('active');
+                    }
+                });
+                
+                // Toggle del dropdown actual
+                container.classList.toggle('active');
+            } else {
+                // En desktop, solo navegar si no hay hover (click directo)
+                // El hover maneja el dropdown en desktop
+            }
+        });
+        
+        // Manejar clicks en items del dropdown
+        const dropdownItems = container.querySelectorAll('.dropdown-item');
+        dropdownItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                // Scroll suave al destino
+                const href = item.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+                
+                // Cerrar dropdown después de un pequeño delay para permitir la navegación
+                setTimeout(() => {
+                    container.classList.remove('active');
+                }, 200);
+            });
+        });
+    });
+    
+    // Cerrar dropdowns al hacer click fuera
+    document.addEventListener('click', (e) => {
+        // No cerrar si el click fue en un item del dropdown (el item maneja su propio cierre)
+        if (e.target.closest('.dropdown-item')) {
+            return;
+        }
+        
+        // Verificar si el click fue dentro de algún dropdown-container
+        const clickedInsideDropdown = e.target.closest('.dropdown-container');
+        
+        // Solo cerrar si el click NO fue dentro de ningún dropdown
+        if (!clickedInsideDropdown) {
+            dropdownContainers.forEach(container => {
+                container.classList.remove('active');
+            });
+        }
+    });
+    
+    // Cerrar dropdowns al hacer scroll
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+            dropdownContainers.forEach(container => {
+                container.classList.remove('active');
+            });
+        }, 100);
+    });
+}
+
 // Inicializar sistema de idioma y tema
 function initLanguageAndTheme() {
     loadPreferences();
@@ -129,5 +274,8 @@ function initLanguageAndTheme() {
     setupThemeButton();
     applyTheme();
     applyLanguage();
+    // Configurar menú móvil y dropdowns
+    setupMobileMenu();
+    setupDropdowns();
 }
 
