@@ -150,10 +150,12 @@
         .amortization-table-container {
             overflow-x: auto;
             margin-top: 2rem;
+            -webkit-overflow-scrolling: touch; /* Scroll suave en iOS */
         }
 
         .amortization-table {
             width: 100%;
+            min-width: 600px; /* Ancho mínimo para que todas las columnas se vean */
             border-collapse: collapse;
             font-size: 0.9rem;
         }
@@ -169,12 +171,14 @@
             font-weight: 600;
             color: var(--text-primary);
             border-bottom: 2px solid var(--border-color);
+            white-space: nowrap; /* Evita que los headers se corten */
         }
 
         .amortization-table td {
             padding: 0.875rem 1rem;
             border-bottom: 1px solid var(--border-color);
             color: var(--text-primary);
+            white-space: nowrap; /* Evita que los valores se corten */
         }
 
         .amortization-table tbody tr:hover {
@@ -193,6 +197,15 @@
         .table-amount {
             text-align: right;
             font-family: 'Courier New', monospace;
+        }
+
+        /* Asegurar que los headers también tengan la misma alineación */
+        .amortization-table th.table-number {
+            text-align: center;
+        }
+
+        .amortization-table th.table-amount {
+            text-align: right;
         }
 
         .error-message {
@@ -224,13 +237,64 @@
                 grid-template-columns: 1fr;
             }
 
-            .amortization-table {
-                font-size: 0.8rem;
+            .amortization-table-container {
+                overflow-x: visible; /* Sin scroll horizontal en móvil */
+                margin-top: 2rem;
             }
 
-            .amortization-table th,
+            .amortization-table {
+                width: 100%;
+                min-width: unset; /* Sin ancho mínimo, se ajusta al contenedor */
+                font-size: 0.7rem;
+                table-layout: fixed; /* Distribución fija de columnas */
+            }
+
+            .amortization-table th {
+                padding: 0.5rem 0.25rem;
+                font-size: 0.7rem;
+                white-space: normal; /* Permite que el texto se ajuste */
+                word-wrap: break-word;
+            }
+
+            /* Mantener la alineación correcta en móvil también */
+            .amortization-table th.table-number {
+                text-align: center;
+            }
+
+            .amortization-table th.table-amount {
+                text-align: right;
+            }
+
             .amortization-table td {
-                padding: 0.5rem;
+                padding: 0.5rem 0.25rem;
+                font-size: 0.7rem;
+                white-space: normal; /* Permite que el texto se ajuste */
+                word-wrap: break-word;
+            }
+
+            /* Anchos específicos para cada columna en móvil */
+            .amortization-table th:first-child,
+            .amortization-table td:first-child {
+                width: 15%; /* Cuota Nro - más estrecha */
+            }
+
+            .amortization-table th:nth-child(2),
+            .amortization-table td:nth-child(2) {
+                width: 28%; /* Valor Cuota */
+            }
+
+            .amortization-table th:nth-child(3),
+            .amortization-table td:nth-child(3) {
+                width: 28%; /* Intereses */
+            }
+
+            .amortization-table th:nth-child(4),
+            .amortization-table td:nth-child(4) {
+                width: 29%; /* Amortización */
+            }
+
+            .table-amount {
+                font-size: 0.7rem;
             }
         }
 
