@@ -124,6 +124,7 @@ function calculateInstallments() {
 // Mostrar resultados y tabla de amortización
 function displayResults(installmentValue, totalAmount, capital, monthlyRate, numInstallments) {
     const resultSection = document.getElementById('result-section');
+    const tableWrapper = document.getElementById('amortization-table-wrapper');
     const installmentValueEl = document.getElementById('installment-value');
     const totalValueEl = document.getElementById('total-value');
     const tableBody = document.getElementById('amortization-table-body');
@@ -135,8 +136,9 @@ function displayResults(installmentValue, totalAmount, capital, monthlyRate, num
     // Generar tabla de amortización
     generateAmortizationTable(capital, monthlyRate, installmentValue, numInstallments, tableBody);
     
-    // Mostrar sección de resultados
+    // Mostrar sección de resultados y tabla
     resultSection.classList.add('show');
+    tableWrapper.classList.add('show');
     
     // Scroll suave al resultado
     setTimeout(() => {

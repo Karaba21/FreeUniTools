@@ -48,7 +48,7 @@
             padding: 2rem;
             border: 1px solid var(--border-color);
             max-width: 900px;
-            margin: 0 auto;
+            margin: 0 auto 0 auto;
         }
 
         .input-group {
@@ -121,7 +121,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1.5rem;
-            margin-bottom: 2rem;
+            margin-bottom: 0;
         }
 
         .result-item {
@@ -147,10 +147,26 @@
             background-clip: text;
         }
 
-        .amortization-table-container {
-            overflow-x: auto;
+        .amortization-table-wrapper {
             margin-top: 2rem;
+            display: none;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .amortization-table-wrapper.show {
+            display: block;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .amortization-table-container {
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            overflow-x: auto;
             -webkit-overflow-scrolling: touch; /* Scroll suave en iOS */
+            width: 100%;
         }
 
         .amortization-table {
@@ -158,6 +174,7 @@
             min-width: 600px; /* Ancho mínimo para que todas las columnas se vean */
             border-collapse: collapse;
             font-size: 0.9rem;
+            margin: 0;
         }
 
         .amortization-table thead {
@@ -237,9 +254,13 @@
                 grid-template-columns: 1fr;
             }
 
+            .amortization-table-wrapper {
+                margin-top: 1.5rem;
+            }
+
             .amortization-table-container {
+                padding: 1rem;
                 overflow-x: visible; /* Sin scroll horizontal en móvil */
-                margin-top: 2rem;
             }
 
             .amortization-table {
@@ -457,22 +478,26 @@
                             <div class="result-value" id="total-value">--</div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="amortization-table-container">
-                        <table class="amortization-table">
-                            <thead>
-                                <tr>
-                                    <th class="table-number" data-i18n="table-installment-num">Cuota Nro</th>
-                                    <th class="table-amount" data-i18n="table-installment-value">Valor Cuota</th>
-                                    <th class="table-amount" data-i18n="table-interest">Intereses</th>
-                                    <th class="table-amount" data-i18n="table-amortization">Amortización</th>
-                                </tr>
-                            </thead>
-                            <tbody id="amortization-table-body">
-                                <!-- La tabla se llenará dinámicamente -->
-                            </tbody>
-                        </table>
-                    </div>
+            </div>
+
+            <!-- Amortization Table Wrapper -->
+            <div class="amortization-table-wrapper" id="amortization-table-wrapper">
+                <div class="amortization-table-container">
+                    <table class="amortization-table">
+                        <thead>
+                            <tr>
+                                <th class="table-number" data-i18n="table-installment-num">Cuota Nro</th>
+                                <th class="table-amount" data-i18n="table-installment-value">Valor Cuota</th>
+                                <th class="table-amount" data-i18n="table-interest">Intereses</th>
+                                <th class="table-amount" data-i18n="table-amortization">Amortización</th>
+                            </tr>
+                        </thead>
+                        <tbody id="amortization-table-body">
+                            <!-- La tabla se llenará dinámicamente -->
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
