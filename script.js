@@ -445,7 +445,7 @@ function initCounters() {
     const totalTools = 11;
     
     // Número ficticio de usuarios mensuales
-    const monthlyUsers = 12500;
+    const monthlyUsers = 1000;
     
     // Usar Intersection Observer para animar cuando la sección sea visible
     const observerOptions = {
